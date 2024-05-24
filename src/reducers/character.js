@@ -1,45 +1,50 @@
 const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
-  const newState = { ...state };
-  switch (action.type) {
+    switch (action.type) {
       case "CHARACTER_ADD":
-          // Increment maxId and use it as the new character's ID
-          newState.maxId += 1;
-          newState.Characters[newState.maxId] = {
-              // complete: false,
-              characterInfo: action.payload,
-              progression:{
-                symbols: {
-                    arcaneRiver: {
-                        isActive: false,
-                        regions: {
-                            oblivion: {
-                                name:"Oblivion",
-                                class:"oblivion",
-                                isActive: false,
-                                completion: {
-                                    daily: false,
-                                    weekly: false
-                                }
-                            },
-                            chuChu: {
-                                name:"Chu Chu",
-                                class:"chuchu",
-                                isActive: false,
-                                completion: {
-                                    daily: false,
-                                    weekly: false
-                                }
-                            },
-                        }
+        // Increment maxId and use it as the new character's ID
+        const newMaxId = state.maxId + 1;
+        const newCharacters = {
+          ...state.Characters,
+          [newMaxId]: {
+            characterInfo: action.payload,
+            progression: {
+              symbols: {
+                arcaneRiver: {
+                  isActive: false,
+                  regions: {
+                    oblivion: {
+                      name: "Oblivion",
+                      class: "oblivion",
+                      isActive: false,
+                      completion: {
+                        daily: false,
+                        weekly: false,
+                      },
                     },
-                }
-              }
-          };
-          break;
+                    chuChu: {
+                      name: "Chu Chu",
+                      class: "chuchu",
+                      isActive: false,
+                      completion: {
+                        daily: false,
+                        weekly: false,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        };
+        return { Characters: newCharacters, maxId: newMaxId };
+      case 'LOAD_CHARACTERS':
+        return {
+          ...state,
+          characters: action.payload,
+        };
       default:
-          break;
-  }
-  return newState;
-};
-
-export default characterReducer;
+        return state;
+    }
+  };
+  
+  export default characterReducer;

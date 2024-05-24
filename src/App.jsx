@@ -25,7 +25,7 @@ const App = () => {
 const Navigation = () => {
 
   return (
-    <div>
+    <div className='App'>
       <nav>
         <ul className='appMenu'>
           <li className='menuElement'>

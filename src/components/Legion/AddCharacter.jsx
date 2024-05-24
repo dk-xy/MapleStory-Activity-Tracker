@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCharacter } from '../redux/actions/addCharacter'; // Import your actions
+import { addCharacter } from '../../redux/actions/characters'; // Import your actions
 
 function AddCharacter() {
     const dispatch = useDispatch();
