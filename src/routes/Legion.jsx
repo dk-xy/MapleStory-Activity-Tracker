@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import AddCharacter from '../components/Legion/AddCharacter';
 import CharacterItem from '../components/Legion/CharacterItem';
+import ResetLegion from '../components/Legion/ResetLegion';
 
 
 function Legion() {
@@ -18,9 +19,10 @@ function Legion() {
     return (
         <div>
             <h1>Legion</h1>
+            <ResetLegion />
             <AddCharacter />
             <div className='legionGrid'>
-                {Object.keys(characters).map(key => (
+            {characters && Object.keys(characters).map(key => (
                     <CharacterItem key={key} character={characters[key].characterInfo} />
                 ))}
                 {/* {Object.keys(characters).forEach(key => {
