@@ -1,5 +1,13 @@
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-Regular.ttf') format('truetype'),
+      url('/fonts/OpenSans-Bold.ttf') format('truetype'),
+      url('/fonts/OpenSans-Italic.ttf') format('truetype');
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -17,6 +25,7 @@
   --secondary: #6E4732;
 
   background-color: var(--primary);
+
 }
 
 a {
@@ -39,6 +48,14 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+h5{
+  color: var(--Dark, #2D2D2D);
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
 }
 
 button {

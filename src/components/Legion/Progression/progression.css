@@ -1,0 +1,90 @@
+/* SHOW PROG---------------------------------- */
+
+.itemContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    gap: 16px;
+}
+
+.regionProgression {
+    width: 112px;
+    padding: 8px;
+    flex-shrink: 0;
+    border-radius: 4px;
+}
+
+.regionProgression h5{
+    text-align: left;
+    margin: 6px;
+}
+
+.completionBoxes {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    gap: 4px;
+    padding: 4px;
+    text-align: left;
+}
+
+.regionCheckBox {
+    display: flex;
+    background: linear-gradient(to right, #e0e0e0b2 0%, #eeeeeed8 100%);
+    /* background-color: #2d2d2d4d; */
+
+    padding: 4px 8px;
+    justify-content: space-between;
+    align-items: left;
+    gap: 8px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid #ffffff;
+}
+.regionCheckBox label{
+    width: 100px;
+}
+
+.regionCheckBox input{
+    justify-content: flex-end;
+}
+
+.regionProgression.oblivion {
+    background: linear-gradient(to right, #98e0ff86 0%, #b9eaff75 100%);
+}
+
+.regionProgression.chuchu {
+    background: linear-gradient(to right, #ffccff77 0%, #bf4dbf59 100%);
+}
+
+
+.regionProgression.lachelein {
+    background: linear-gradient(to right, #fa61cf7c 0%, #ff7b4385 100%);
+}
+
+.regionProgression.arcana {
+    background: linear-gradient(to right, #9E96FF 0%, #57A4 100%);
+}
+
+.regionProgression.morass {
+    background: linear-gradient(to right, #EE4C5D4D 0%, #F3BCAA4D 100%);
+}
+
+.regionProgression.esfera {
+    background: linear-gradient(to right, #98e0ff6b 0%, #b9eaff7c 100%);
+}
+
+.regionProgression.tenebris {
+    background: linear-gradient(to right, #98E0FF33 0%, #B9EAFF2A 100%);
+}
+
+
+
+
+
+
+
+/* edit prog-------------------------------------------- */
