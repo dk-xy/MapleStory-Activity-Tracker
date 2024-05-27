@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
@@ -9,8 +9,16 @@ import Checklists from './routes/Checklists';
 import Character from './routes/Character';
 import EditCharacter from './routes/Character/EditCharacter';
 
+import { useDispatch } from 'react-redux';
+import { resetCompletionStatuses } from './redux/actions/characters';
+
 const App = () => {
   const [count, setCount] = useState(0)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      dispatch(resetCompletionStatuses());
+  }, [dispatch]);
 
   return (
     <>

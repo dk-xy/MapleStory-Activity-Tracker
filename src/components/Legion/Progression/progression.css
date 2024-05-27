@@ -52,7 +52,80 @@
     justify-content: flex-end;
 }
 
+
+
+:root {
+    --oblivion-gradient: linear-gradient(to right, #98e0ff86 0%, #b9eaff75 100%);
+    --chuchu-gradient: linear-gradient(to right, #ffccff77 0%, #bf4dbf59 100%);
+    --lachelein-gradient: linear-gradient(to right, #fa61cf7c 0%, #ff7b4385 100%);
+    --arcana-gradient: linear-gradient(to right, #9E96FF 0%, #57A4 100%);
+    --morass-gradient: linear-gradient(to right, #EE4C5D4D 0%, #F3BCAA4D 100%);
+    --esfera-gradient: linear-gradient(to right, #98e0ff6b 0%, #b9eaff7c 100%);
+    --tenebris-gradient: linear-gradient(to right, #98E0FF33 0%, #B9EAFF2A 100%);
+    --cernium-gradient: linear-gradient(to right, #A887FD4D 0%, #BBDDFF4D 100%);
+    --arcus-gradient: linear-gradient(to right, #fcb57369 0%, #bbddff71 100%);
+    --odium-gradient: linear-gradient(to right, #e6b22462 0%, #6BC9C966 100%);
+    --shangrila-gradient: linear-gradient(to right, #ffddddd8 0%, #FFBBCC66 100%);
+    --arteria-gradient: linear-gradient(to right, #bb77ff5b 0%, #33558866 100%);
+    --carcion-gradient: linear-gradient(to right, #7789ee5b 0%, #66bb6671 100%);
+}
+
 .regionProgression.oblivion {
+    background: var(--oblivion-gradient);
+}
+
+.regionProgression.chuchu {
+    background: var(--chuchu-gradient);
+}
+
+.regionProgression.lachelein {
+    background: var(--lachelein-gradient);
+}
+
+.regionProgression.arcana {
+    background: var(--arcana-gradient);
+}
+
+.regionProgression.morass {
+    background: var(--morass-gradient);
+}
+
+.regionProgression.esfera {
+    background: var(--esfera-gradient);
+}
+
+.regionProgression.tenebris {
+    background: var(--tenebris-gradient);
+}
+
+.regionProgression.cernium {
+    background: var(--cernium-gradient);
+}
+
+.regionProgression.arcus {
+    background: var(--arcus-gradient);
+}
+
+.regionProgression.odium {
+    background: var(--odium-gradient);
+}
+
+.regionProgression.shangrila {
+    background: var(--shangrila-gradient);
+}
+
+.regionProgression.arteria {
+    background: var(--arteria-gradient);
+}
+.regionProgression.carcion {
+    background: var(--carcion-gradient);
+}
+
+
+
+
+
+/* .regionProgression.oblivion {
     background: linear-gradient(to right, #98e0ff86 0%, #b9eaff75 100%);
 }
 
@@ -79,7 +152,7 @@
 
 .regionProgression.tenebris {
     background: linear-gradient(to right, #98E0FF33 0%, #B9EAFF2A 100%);
-}
+} */
 
 
 

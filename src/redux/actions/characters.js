@@ -13,3 +13,8 @@ export const addCharacter = payload => {
         payload: characters,
     };
 };
+
+
+export function resetCompletionStatuses() {
+  return { type: 'RESET_COMPLETION_STATUSES' };
+}
