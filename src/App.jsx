@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Dashboard from './routes/Dashboard';
 import Legion from './routes/Legion';
 import Checklists from './routes/Checklists';
+import Character from './routes/Character';
 
 const App = () => {
   const [count, setCount] = useState(0)
@@ -62,7 +63,7 @@ const Navigation = () => {
       <Routes>
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="legion" element={<Legion />} ></Route>
-        {/* <Route path="legion/:id" element={<Character />} /> */}
+        <Route path="legion/:id" element={<Character />} />
         {/* <Route path="legion/:id/edit-progression" element={<EditProgression />} /> */}
         <Route path="checklists" element={<Checklists />} />
       </Routes>

@@ -23,7 +23,7 @@ function Legion() {
             <AddCharacter />
             <div className='legionGrid'>
             {characters && Object.keys(characters).map(key => (
-                    <CharacterItem key={key} character={characters[key].characterInfo} />
+                    <CharacterItem key={key} character={characters[key]} />
                 ))}
                 {/* {Object.keys(characters).forEach(key => {
                     console.log(characters[key].characterInfo);
