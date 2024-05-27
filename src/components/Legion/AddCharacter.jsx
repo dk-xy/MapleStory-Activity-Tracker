@@ -5,6 +5,7 @@ import { addCharacter } from '../../redux/actions/characters'; // Import your ac
 
 function AddCharacter() {
     const dispatch = useDispatch();
+    const state = useSelector(state => state); // Access state with useSelector
     const characters = useSelector(state => state.characters); // Access state with useSelector
     const {
         register,
@@ -14,20 +15,25 @@ function AddCharacter() {
 
     const onSubmit = (data) => {
         // Find the maximum existing ID
-        
-        
+        let maxId = 0;
+        console.log(state.Legion.Characters)
+        // console.log(characters)
+        if (state.Legion.Characters) {
+             maxId = Object.keys(state.Legion.Characters).length;
+        } 
         // Generate a new character with an incremented ID
         const newCharacter = {
+            id: maxId + 1,
             characterName: data.characterName,
             characterClass: data.characterClass,
         };
-    
+
         // Always ensure characters is an array
         const updatedCharacters = Array.isArray(characters)
             ? [...characters, newCharacter]
             : [newCharacter];
 
-            dispatch(addCharacter(newCharacter));
+        dispatch(addCharacter(newCharacter));
 
         // // Retrieve existing progression from localstorage
         // const existingProgression = JSON.parse(localStorage.getItem('Progression')) || {};
@@ -63,7 +69,7 @@ function AddCharacter() {
         //     ...existingProgression,
         //     ...newProgression
         // };
-    
+
         // // Store updated progression back to localstorage
         // localStorage.setItem('Progression', JSON.stringify(updatedProgression));
     };
