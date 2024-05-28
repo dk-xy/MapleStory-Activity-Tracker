@@ -1,16 +1,33 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import EditCharacter from './Character/EditCharacter';
 import RegionCompletion from '../components/Legion/Progression/RegionCompletion';
 import GrandisCompletion from '../components/Legion/Progression/GrandisCompletion';
+import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses } from '../redux/actions/characters';
 
 export default function Character() {
+    const dispatch = useDispatch();
     const { id } = useParams();
     const legionData = useSelector(state => state.Legion);
     const character = legionData.Characters[id];
+    const characters = useSelector(state => state.Characters);
     // const character = location.state.character;
-
+    useEffect(() => {
+        // Dispatch the actions immediately on component mount
+        dispatch(resetDailyCompletionStatuses());
+        dispatch(resetWeeklyCompletionStatuses());
+    
+        // Set up a timer to dispatch the actions every minute
+        const timer = setInterval(() => {
+          dispatch(resetDailyCompletionStatuses());
+          dispatch(resetWeeklyCompletionStatuses());
+        }, 60000); // 60000 milliseconds = 1 minute
+    
+        // Clean up function
+        return () => clearInterval(timer);
+      }, [dispatch, characters]);
 
 
     return (

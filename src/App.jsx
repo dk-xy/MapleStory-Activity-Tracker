@@ -10,15 +10,14 @@ import Character from './routes/Character';
 import EditCharacter from './routes/Character/EditCharacter';
 
 import { useDispatch } from 'react-redux';
-import { resetCompletionStatuses } from './redux/actions/characters';
+import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses } from './redux/actions/characters';
 
 const App = () => {
   const [count, setCount] = useState(0)
-  const dispatch = useDispatch();
+ 
 
-  useEffect(() => {
-      dispatch(resetCompletionStatuses());
-  }, [dispatch]);
+  
+  ;
 
   return (
     <>

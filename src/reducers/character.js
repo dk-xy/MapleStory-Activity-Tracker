@@ -1,3 +1,7 @@
+import { RESET_DAILY_COMPLETION_STATUSES, RESET_WEEKLY_COMPLETION_STATUSES } from '../redux/actions/characters';
+
+
+
 const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
     switch (action.type) {
         case "CHARACTER_ADD":
@@ -19,7 +23,9 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         isActive: false,
                                         completion: {
                                             daily: false,
+                                            dailyDate: null,
                                             weekly: false,
+                                            weeklyDate: null,
                                         },
                                     },
                                     chuChu: {
@@ -29,7 +35,9 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         isActive: false,
                                         completion: {
                                             daily: false,
+                                            dailyDate: null,
                                             weekly: false,
+                                            weeklyDate: null,
                                         },
                                     },
                                     lachelein: {
@@ -49,7 +57,9 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         isActive: false,
                                         completion: {
                                             daily: false,
+                                            dailyDate: null,
                                             weekly: false,
+                                            weeklyDate: null,
                                         },
                                     },
                                     morass: {
@@ -59,7 +69,9 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         isActive: false,
                                         completion: {
                                             daily: false,
+                                            dailyDate: null,
                                             weekly: false,
+                                            weeklyDate: null,
                                         },
                                     },
                                     esfera: {
@@ -69,7 +81,9 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         isActive: false,
                                         completion: {
                                             daily: false,
+                                            dailyDate: null,
                                             weekly: false,
+                                            weeklyDate: null,
                                         },
                                     },
                                 },
@@ -84,6 +98,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         isActive: false,
                                         completion: {
                                             daily: false,
+                                            dailyDate: null,
                                         },
                                     },
                                     arcus: {
@@ -93,6 +108,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         isActive: false,
                                         completion: {
                                             daily: false,
+                                            dailyDate: null,
                                         },
                                     },
                                     odium: {
@@ -102,6 +118,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         isActive: false,
                                         completion: {
                                             daily: false,
+                                            dailyDate: null,
                                         },
                                     },
                                     shangriLa: {
@@ -111,6 +128,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         isActive: false,
                                         completion: {
                                             daily: false,
+                                            dailyDate: null,
                                         },
                                     },
                                     arteria: {
@@ -120,6 +138,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         isActive: false,
                                         completion: {
                                             daily: false,
+                                            dailyDate: null,
                                         },
                                     },
                                     carcion: {
@@ -129,9 +148,10 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         isActive: false,
                                         completion: {
                                             daily: false,
+                                            dailyDate: null,
                                         },
                                     },
-                                
+
                                 },
                             },
                         },
@@ -148,33 +168,33 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             return { characters: {}, maxId: 0 };
         default:
             return state;
-            case 'TOGGLE_REGION': {
-                const { id, regionName } = action.payload;
-                const character = state.Characters[id];
-                let region;
-                let place;
-                // Check if region exists in arcaneRiver
-                if (character.progression.symbols.arcaneRiver.regions[regionName]) {
-                    place = character.progression.symbols.arcaneRiver
-                    region = character.progression.symbols.arcaneRiver.regions[regionName];
-                }
-                // If not found, check if region exists in grandis
-                else if (character.progression.symbols.grandis.regions[regionName]) {
-                    place = character.progression.symbols.grandis
-                    region = character.progression.symbols.grandis.regions[regionName];
-                }
-            
-                // If region is found, toggle its isActive property
-                if (region) {
-                    region.isActive = !region.isActive;
-                    place.isActive = Object.values(place.regions).some(region => region.isActive);
-                    
-                } else {
-                    console.error(`Region ${regionName} not found for character ${id}`);
-                }
-            
-                return { ...state };
+        case 'TOGGLE_REGION': {
+            const { id, regionName } = action.payload;
+            const character = state.Characters[id];
+            let region;
+            let place;
+            // Check if region exists in arcaneRiver
+            if (character.progression.symbols.arcaneRiver.regions[regionName]) {
+                place = character.progression.symbols.arcaneRiver
+                region = character.progression.symbols.arcaneRiver.regions[regionName];
             }
+            // If not found, check if region exists in grandis
+            else if (character.progression.symbols.grandis.regions[regionName]) {
+                place = character.progression.symbols.grandis
+                region = character.progression.symbols.grandis.regions[regionName];
+            }
+
+            // If region is found, toggle its isActive property
+            if (region) {
+                region.isActive = !region.isActive;
+                place.isActive = Object.values(place.regions).some(region => region.isActive);
+
+            } else {
+                console.error(`Region ${regionName} not found for character ${id}`);
+            }
+
+            return { ...state };
+        }
         // case 'TOGGLE_REGION_ARCANE': 
         //     const { id, regionName } = action.payload;
         //     const character = state.Characters[id];
@@ -191,83 +211,123 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
         //     character.progression.symbols.arcaneRiver.isActive = region.isActive || character.progression.symbols.arcaneRiver.regions.oblivion.isActive || character.progression.symbols.arcaneRiver.regions.chuChu.isActive;
         //     return { ...state };
 
-        case 'TOGGLE_COMPLETION': 
-        const { characterId, regionNameC, completionType } = action.payload;
-        const characterC = state.Characters[characterId];
-        let regionC;
-        let placeC;
-    
-        // Check if region exists in arcaneRiver
-        if (characterC.progression.symbols.arcaneRiver.regions[regionNameC]) {
-            placeC = characterC.progression.symbols.arcaneRiver;
-            regionC = characterC.progression.symbols.arcaneRiver.regions[regionNameC];
-        }
-        // If not found, check if region exists in grandis
-        else if (characterC.progression.symbols.grandis.regions[regionNameC]) {
-            placeC = characterC.progression.symbols.grandis;
-            regionC = characterC.progression.symbols.grandis.regions[regionNameC];
-        }
-    
-        // If region is found, toggle its completion property
-        if (regionC) {
-            regionC.completion[completionType] = !regionC.completion[completionType];
-    
-            // Check if at least one region is active
-            placeC.isActive = Object.values(placeC.regions).some(region => region.isActive);
-        } else {
-            console.error(`Region ${regionNameC} not found for character ${characterId}`);
-        }
-    
-        return { ...state };
-            
-        // HANDLE RESETS HERE @@@@!!
-        case 'RESET_COMPLETION_STATUSES':
-            // Get the last reset time from localStorage
-            let lastReset = localStorage.getItem('lastReset');
-            if (lastReset) {
-                lastReset = new Date(lastReset);
-            } else {
-                // If there's no last reset time, set it to now
-                lastReset = new Date();
-                localStorage.setItem('lastReset', lastReset.toISOString());
+        case 'TOGGLE_COMPLETION':
+            const { characterId, regionNameC, completionType } = action.payload;
+            const characterC = state.Characters[characterId];
+            let regionC;
+            let placeC;
+
+            // Check if region exists in arcaneRiver
+            if (characterC.progression.symbols.arcaneRiver.regions[regionNameC]) {
+                placeC = characterC.progression.symbols.arcaneRiver;
+                regionC = characterC.progression.symbols.arcaneRiver.regions[regionNameC];
+            }
+            // If not found, check if region exists in grandis
+            else if (characterC.progression.symbols.grandis.regions[regionNameC]) {
+                placeC = characterC.progression.symbols.grandis;
+                regionC = characterC.progression.symbols.grandis.regions[regionNameC];
             }
 
-            // Get the current date and time
-            const now = new Date();
-
-            // Calculate the difference in days
-            const diffInDays = Math.floor((now - lastReset) / (1000 * 60 * 60 * 24));
-
-            // If it's been at least one day since the last reset, reset daily.isCompleted
-            if (diffInDays >= 1) {
-                // Reset daily.isCompleted for all regions
-                for (const character of Object.values(state.Legion.Characters)) {
-                    for (const region of Object.values(character.progression.symbols.arcaneRiver.regions)) {
-                        region.completion.daily = false;
-                    }
-                    for (const region of Object.values(character.progression.symbols.grandis.regions)) {
-                        region.completion.daily = false;
+            // If region is found, toggle its completion property
+            if (regionC) {
+                regionC.completion[completionType] = !regionC.completion[completionType];
+                // If the completion status is being set to true, also set the date
+                if (regionC.completion[completionType]) {
+                    if (completionType === 'daily') {
+                        regionC.completion.dailyDate = new Date().toISOString();
+                    } else if (completionType === 'weekly') {
+                        regionC.completion.weeklyDate = new Date().toISOString();
                     }
                 }
 
-                // Update the last reset time
-                localStorage.setItem('lastReset', now.toISOString());
+                // Check if at least one region is active
+                placeC.isActive = Object.values(placeC.regions).some(region => region.isActive);
+            } else {
+                console.error(`Region ${regionNameC} not found for character ${characterId}`);
+            }
+            // If the completion status is being set to true, also set the date
+            if (action.payload.completionStatus) {
+                if (action.payload.completionType === 'daily') {
+                    state.Legion.Characters[action.payload.characterId].progression.symbols[action.payload.symbolType].regions[action.payload.regionKey].completion.dailyDate = new Date().toISOString();
+                } else if (action.payload.completionType === 'weekly') {
+                    state.Legion.Characters[action.payload.characterId].progression.symbols[action.payload.symbolType].regions[action.payload.regionKey].completion.weeklyDate = new Date().toISOString();
+                }
             }
 
-            // Calculate the difference in weeks
-            const diffInWeeks = Math.floor(diffInDays / 7);
+            return { ...state };
 
-            // If it's been at least one week since the last reset, reset weekly.isCompleted
-            if (diffInWeeks >= 1) {
-                // Reset weekly.isCompleted for all regions
-                for (const character of Object.values(state.Legion.Characters)) {
-                    for (const region of Object.values(character.progression.symbols.arcaneRiver.regions)) {
+        // HANDLE RESETS HERE @@@@!!
+
+
+        case RESET_DAILY_COMPLETION_STATUSES:
+            // Get the current date and convert to UTC
+            const now = new Date();
+            const nowUTC = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+
+            // Reset daily.isCompleted for all regions where the completion date is not today
+            for (const character of Object.values(state.Characters)) {
+                for (const region of Object.values(character.progression.symbols.arcaneRiver.regions)) {
+                    const completionDate = new Date(region.completion.dailyDate);
+                    if (completionDate.getUTCDate() !== nowUTC.getDate() || completionDate.getUTCMonth() !== nowUTC.getMonth() || completionDate.getUTCFullYear() !== nowUTC.getFullYear()) {
+                        region.completion.daily = false;
+                    }
+                }
+                for (const region of Object.values(character.progression.symbols.grandis.regions)) {
+                    const completionDate = new Date(region.completion.dailyDate);
+                    if (completionDate.getUTCDate() !== nowUTC.getDate() || completionDate.getUTCMonth() !== nowUTC.getMonth() || completionDate.getUTCFullYear() !== nowUTC.getFullYear()) {
+                        region.completion.daily = false;
+                    }
+                }
+            }
+
+            return { ...state };
+        // case RESET_DAILY_COMPLETION_STATUSES:
+            
+        //     // Get the current date and convert to UTC
+        //     const now = new Date();
+        //     const nowUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes()));
+
+        //     // Reset daily.isCompleted for all regions where the completion date is not today
+        //     for (const character of Object.values(state.Characters)) {
+        //         for (const region of Object.values(character.progression.symbols.arcaneRiver.regions)) {
+        //             const completionDate = new Date(region.completion.dailyDate);
+        //             completionDate.setUTCMinutes(completionDate.getUTCMinutes() + 1); // Add 1 minute to completion date
+        //             if (nowUTC >= completionDate) {
+        //                 region.completion.daily = false;
+        //             }
+        //         }
+        //         for (const region of Object.values(character.progression.symbols.grandis.regions)) {
+        //             const completionDate = new Date(region.completion.dailyDate);
+        //             completionDate.setUTCMinutes(completionDate.getUTCMinutes() + 1); // Add 1 minute to completion date
+        //             if (nowUTC >= completionDate) {
+        //                 region.completion.daily = false;
+        //             }
+        //         }
+        //     }
+
+  
+            return { ...state };
+
+
+        case RESET_WEEKLY_COMPLETION_STATUSES:
+            // Get the current date and the date of last Sunday
+            const nowWeekly = new Date();
+            const lastSunday = new Date(Date.UTC(nowWeekly.getUTCFullYear(), nowWeekly.getUTCMonth(), nowWeekly.getUTCDate() - nowWeekly.getUTCDay()));
+
+            // Reset weekly.isCompleted for all regions where the completion date is not in the last week
+            for (const character of Object.values(state.Characters)) {
+                for (const region of Object.values(character.progression.symbols.arcaneRiver.regions)) {
+                    const completionDate = new Date(region.completion.weeklyDate);
+                    if (completionDate < lastSunday) {
                         region.completion.weekly = false;
                     }
                 }
-
-                // Update the last reset time
-                localStorage.setItem('lastReset', now.toISOString());
+                for (const region of Object.values(character.progression.symbols.grandis.regions)) {
+                    const completionDate = new Date(region.completion.weeklyDate);
+                    if (completionDate < lastSunday) {
+                        region.completion.weekly = false;
+                    }
+                }
             }
 
             return { ...state };
