@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import EditCharacter from './Character/EditCharacter';
 import RegionCompletion from '../components/Legion/Progression/RegionCompletion';
 import GrandisCompletion from '../components/Legion/Progression/GrandisCompletion';
@@ -13,62 +13,72 @@ export default function Character() {
     const legionData = useSelector(state => state.Legion);
     const character = legionData.Characters[id];
     const characters = useSelector(state => state.Characters);
+
+    const [selectedTab, setSelectedTab] = useState('progression');
     // const character = location.state.character;
     useEffect(() => {
         // Dispatch the actions immediately on component mount
         dispatch(resetDailyCompletionStatuses());
         dispatch(resetWeeklyCompletionStatuses());
-    
+
         // Set up a timer to dispatch the actions every minute
         const timer = setInterval(() => {
-          dispatch(resetDailyCompletionStatuses());
-          dispatch(resetWeeklyCompletionStatuses());
+            dispatch(resetDailyCompletionStatuses());
+            dispatch(resetWeeklyCompletionStatuses());
         }, 60000); // 60000 milliseconds = 1 minute
-    
+
         // Clean up function
         return () => clearInterval(timer);
-      }, [dispatch, characters]);
+    }, [dispatch, characters]);
 
 
     return (
         <div className="character-page">
             <div>character</div>
             {/* link to edit character */}
-            {<Link to={`/legion/${id}/edit`}>EDIT</Link>}
-            {<div>{character.characterInfo.characterName}</div>}
-            {<div>{character.characterInfo.characterClass}</div>}
-            {/* ARCANE RIVER---------------------------- */}
-            {character.progression.symbols.arcaneRiver.isActive && (
-                <div>
-                    <h3>Arcane River</h3>
-                </div>
-            )}
-            {/* <Link to={linkName} state={{character: character, progression: progression } }>EDIT</Link> */}
-            {character.progression.symbols.arcaneRiver.isActive && (
-                <div className='arcaneRiver itemContainer'>
-                    {Object.values(character.progression.symbols.arcaneRiver.regions).map((region, index) => (
-                        region && region.isActive && <RegionCompletion key={index} region={region} characterId={id} />
-                    ))}
-                </div>
-            )}
+            <Link to={`/legion/${id}/edit`}>EDIT</Link>
+            <div>{character.characterInfo.characterName}</div>
+            <div>{character.characterInfo.characterClass}</div>
 
-            {/* GRANDIS-------------------------------- */}
-            {character.progression.symbols.arcaneRiver.isActive && (
-                <div>
-                    <h3>Grandis</h3>
-                </div>
-            )}
+            {/* Tab buttons */}
+            <button className={`tabNav ${selectedTab === 'progression' ? 'active' : ''}`} onClick={() => setSelectedTab('progression')}>Progression</button>
+            <button className={`tabNav ${selectedTab === 'bosses' ? 'active' : ''}`} onClick={() => setSelectedTab('bosses')}>Bosses</button>
 
-            {character.progression.symbols.grandis.isActive && (
-                <div className='arcaneRiver itemContainer'>
-                    {Object.values(character.progression.symbols.grandis.regions).map((region, index) => (
-                        region && region.isActive && <GrandisCompletion key={index} region={region} characterId={id} />
-                    ))}
+            {/* Tab content */}
+            {selectedTab === 'progression' ? (
+                // Progression content...
+                <>
+                    {/* ARCANE RIVER---------------------------- */}
+                    {character.progression.symbols.arcaneRiver.isActive && (
+                        <div>
+                            <h3>Arcane River</h3>
+                            <div className='arcaneRiver itemContainer'>
+                                {Object.values(character.progression.symbols.arcaneRiver.regions).map((region, index) => (
+                                    region && region.isActive && <RegionCompletion key={index} region={region} characterId={id} />
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* GRANDIS-------------------------------- */}
+                    {character.progression.symbols.grandis.isActive && (
+                        <div>
+                            <h3>Grandis</h3>
+                            <div className='arcaneRiver itemContainer'>
+                                {Object.values(character.progression.symbols.grandis.regions).map((region, index) => (
+                                    region && region.isActive && <GrandisCompletion key={index} region={region} characterId={id} />
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </>
+            ) : (
+                // Bosses content...
+                <div>
+                    BOSSES
                 </div>
             )}
         </div>
-
-
     )
 }
 ;

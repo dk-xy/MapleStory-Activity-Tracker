@@ -17,7 +17,7 @@
     border-radius: 4px;
 }
 
-.regionProgression h5{
+.regionProgression h5 {
     text-align: left;
     margin: 6px;
 }
@@ -44,11 +44,12 @@
     border-radius: 6px;
     border: 1px solid #ffffff;
 }
-.regionCheckBox label{
+
+.regionCheckBox label {
     width: 100px;
 }
 
-.regionCheckBox input{
+.regionCheckBox input {
     justify-content: flex-end;
 }
 
@@ -70,58 +71,88 @@
     --carcion-gradient: linear-gradient(to right, #7789ee5b 0%, #66bb6671 100%);
 }
 
-.regionProgression.oblivion, .regionSelector.oblivion {
+.regionProgression.oblivion,
+.regionSelector.oblivion {
     background: var(--oblivion-gradient);
 }
 
-.regionProgression.chuchu, .regionSelector.chuChu {
+.regionProgression.chuchu,
+.regionSelector.chuChu {
     background: var(--chuchu-gradient);
 }
 
-.regionProgression.lachelein, .regionSelector.lachelein {
+.regionProgression.lachelein,
+.regionSelector.lachelein {
     background: var(--lachelein-gradient);
 }
 
-.regionProgression.arcana, .regionSelector.arcana {
+.regionProgression.arcana,
+.regionSelector.arcana {
     background: var(--arcana-gradient);
 }
 
-.regionProgression.morass, .regionSelector.morass {
+.regionProgression.morass,
+.regionSelector.morass {
     background: var(--morass-gradient);
 }
 
-.regionProgression.esfera, .regionSelector.esfera {
+.regionProgression.esfera,
+.regionSelector.esfera {
     background: var(--esfera-gradient);
 }
 
-.regionProgression.tenebris, .regionSelector.tenebris {
+.regionProgression.tenebris,
+.regionSelector.tenebris {
     background: var(--tenebris-gradient);
 }
 
-.regionProgression.cernium, .regionSelector.cernium {
+.regionProgression.cernium,
+.regionSelector.cernium {
     background: var(--cernium-gradient);
 }
 
-.regionProgression.arcus, .regionSelector.arcus {
+.regionProgression.arcus,
+.regionSelector.arcus {
     background: var(--arcus-gradient);
 }
 
-.regionProgression.odium, .regionSelector.odium {
+.regionProgression.odium,
+.regionSelector.odium {
     background: var(--odium-gradient);
 }
 
-.regionProgression.shangrila, .regionSelector.shangriLa {
+.regionProgression.shangrila,
+.regionSelector.shangriLa {
     background: var(--shangrila-gradient);
 }
 
-.regionProgression.arteria, .regionSelector.arteria {
+.regionProgression.arteria,
+.regionSelector.arteria {
     background: var(--arteria-gradient);
 }
 
-.regionProgression.carcion, .regionSelector.carcion {
+.regionProgression.carcion,
+.regionSelector.carcion {
     background: var(--carcion-gradient);
 }
 
+.tabNav {
+    border-radius: 0%;
+    background-color: transparent;
+    color: #876544;
+    font-size: 23.04px;
+    font-style: normal;
+    font-weight: 400;
+
+}
+
+.tabNav.active {
+    
+    border-bottom: solid 2px #876544;
+    font-size: 23.04px;
+    font-style: normal;
+    font-weight: 400;
+}
 
 
 
