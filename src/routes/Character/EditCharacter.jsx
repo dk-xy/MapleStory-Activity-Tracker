@@ -5,14 +5,15 @@ import { useSelector, useDispatch } from 'react-redux';
 
 
 const RegionCheckbox = ({ regionName, isActive, handleCheckboxChange }) => (
-    <label>
+    <div className={`regionSelector ${regionName}`}>
+    <label>  {regionName.charAt(0).toUpperCase() + regionName.slice(1)}  </label>
         <input
             type="checkbox"
             checked={isActive}
             onChange={() => handleCheckboxChange(regionName)}
-        />
-        {regionName.charAt(0).toUpperCase() + regionName.slice(1)}
-    </label>
+        /> 
+
+    </div> 
 );
 
 const EditCharacter = () => {
@@ -27,7 +28,7 @@ const EditCharacter = () => {
 
     return (
         <div>
-            <div>
+            <div className={`regionContainer arcaneRiver`}>
                 {Object.keys(arcaneRiver.regions).map(regionName => (
                     <RegionCheckbox
                         key={regionName}
@@ -38,7 +39,7 @@ const EditCharacter = () => {
                 ))}
             </div>
 
-            <div>
+            <div className={`regionContainer grandis`}>
                 {Object.keys(grandis.regions).map(regionName => (
                     <RegionCheckbox
                         key={regionName}

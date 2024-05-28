@@ -4,6 +4,49 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addCharacter } from '../../redux/actions/characters'; // Import your actions
 
 function AddCharacter() {
+    const classes = [
+        "Angelic Buster",
+        "Arch Mage (Fire, Poison)",
+        "Arch Mage (Ice, Lightning)",
+        "Aran",
+        "Battle Mage",
+        "Beast Tamer",
+        "Bishop",
+        "Blaster",
+        "Blaze Wizard",
+        "Bowmaster",
+        "Buccaneer",
+        "Cannoneer",
+        "Corsair",
+        "Dark Knight",
+        "Demon Avenger",
+        "Demon Slayer",
+        "Dual Blade",
+        "Evan",
+        "Hero",
+        "Ice/Lightning Arch Mage",
+        "Illium",
+        "Kaiser",
+        "Kanna",
+        "Khali",
+        "Kinesis",
+        "Luminous",
+        "Marksman",
+        "Mechanic",
+        "Mercedes",
+        "Mihile",
+        "Night Lord",
+        "Night Walker",
+        "Paladin",
+        "Phantom",
+        "Shade",
+        "Shadower",
+        "Thunder Breaker",
+        "Wild Hunter",
+        "Wind Archer",
+        "Xenon",
+        "Zero"
+    ];
     const dispatch = useDispatch();
     const state = useSelector(state => state); // Access state with useSelector
     const characters = useSelector(state => state.characters); // Access state with useSelector
@@ -19,8 +62,8 @@ function AddCharacter() {
         console.log(state.Legion.Characters)
         // console.log(characters)
         if (state.Legion.Characters) {
-             maxId = Object.keys(state.Legion.Characters).length;
-        } 
+            maxId = Object.keys(state.Legion.Characters).length;
+        }
         // Generate a new character with an incremented ID
         const newCharacter = {
             id: maxId + 1,
@@ -81,8 +124,9 @@ function AddCharacter() {
 
             {/* include validation with required or other standard HTML validation rules */}
             <select {...register("characterClass")}>
-                <option value="AngelicBuster">Angelic Buster</option>
-                <option value="Blaster">Blaster</option>
+                {classes.map((characterClass, index) => (
+                    <option key={index} value={characterClass}>{characterClass}</option>
+                ))}
             </select>
             {/* errors will return when field validation fails 
             {errors.exampleRequired && <span>This field is required</span>} */}

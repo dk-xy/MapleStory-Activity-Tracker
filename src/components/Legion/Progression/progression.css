@@ -70,57 +70,57 @@
     --carcion-gradient: linear-gradient(to right, #7789ee5b 0%, #66bb6671 100%);
 }
 
-.regionProgression.oblivion {
+.regionProgression.oblivion, .regionSelector.oblivion {
     background: var(--oblivion-gradient);
 }
 
-.regionProgression.chuchu {
+.regionProgression.chuchu, .regionSelector.chuChu {
     background: var(--chuchu-gradient);
 }
 
-.regionProgression.lachelein {
+.regionProgression.lachelein, .regionSelector.lachelein {
     background: var(--lachelein-gradient);
 }
 
-.regionProgression.arcana {
+.regionProgression.arcana, .regionSelector.arcana {
     background: var(--arcana-gradient);
 }
 
-.regionProgression.morass {
+.regionProgression.morass, .regionSelector.morass {
     background: var(--morass-gradient);
 }
 
-.regionProgression.esfera {
+.regionProgression.esfera, .regionSelector.esfera {
     background: var(--esfera-gradient);
 }
 
-.regionProgression.tenebris {
+.regionProgression.tenebris, .regionSelector.tenebris {
     background: var(--tenebris-gradient);
 }
 
-.regionProgression.cernium {
+.regionProgression.cernium, .regionSelector.cernium {
     background: var(--cernium-gradient);
 }
 
-.regionProgression.arcus {
+.regionProgression.arcus, .regionSelector.arcus {
     background: var(--arcus-gradient);
 }
 
-.regionProgression.odium {
+.regionProgression.odium, .regionSelector.odium {
     background: var(--odium-gradient);
 }
 
-.regionProgression.shangrila {
+.regionProgression.shangrila, .regionSelector.shangriLa {
     background: var(--shangrila-gradient);
 }
 
-.regionProgression.arteria {
+.regionProgression.arteria, .regionSelector.arteria {
     background: var(--arteria-gradient);
 }
-.regionProgression.carcion {
+
+.regionProgression.carcion, .regionSelector.carcion {
     background: var(--carcion-gradient);
 }
-
 
 
 
