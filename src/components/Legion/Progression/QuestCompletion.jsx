@@ -5,15 +5,15 @@ function QuestCompletion({key, daily, characterId}) {
     const dispatch = useDispatch();
 
     const handleCheckboxChange = () => {
-        dispatch({ type: 'TOGGLE_DAILY_COMPLETION', payload: { dailyId: characterId, questName: daily.questName, completionType: 'daily' } });
+        dispatch({ type: 'TOGGLE_DAILY_COMPLETION', payload: { dailyId: characterId, questName: daily.questName, key: daily.key } });
     };
 
     return (
         <div>
-            <h4>{daily.questName}</h4>
+           
             <div className="completionBoxes">
                 <div className="questCheckBox">
-                    <label>Completed </label>
+                    <label>{daily.questName} </label>
                     <input
                         type="checkbox"
                         checked={daily.completion.isActive}

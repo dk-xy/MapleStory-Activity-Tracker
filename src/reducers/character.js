@@ -167,7 +167,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         dailyDate: null,
                                     },
                                 },
-                                monserParkExtreme: {
+                                monsterParkExtreme: {
                                     key: "monsterParkExtreme",
                                     questName: "Monster Park Extreme",
                                     isActive: false,
@@ -204,7 +204,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         dailyDate: null,
                                     },
                                 },
-                                Commerci: {
+                                commerci: {
                                     key: "commerci",
                                     questName: "Commerci",
                                     isActive: false,
@@ -342,7 +342,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                 const characterD = state.Characters[dailyId];
             
                 // Check if quest exists in dailies.quests
-                let quest = characterD.progression.dailies.quests[questName];
+                let quest = characterD.progression.dailies.quests[key];
             
                 // If quest is found, toggle its completion property
                 if (quest) {
@@ -352,7 +352,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                         quest.completion.dailyDate = new Date().toISOString();
                     }
                 } else {
-                    console.error(`Quest ${questName} not found for character ${characterId}`);
+                    console.error(`Quest ${questName} not found for character ${dailyId}`);
                 }
             
                 return { ...state };
