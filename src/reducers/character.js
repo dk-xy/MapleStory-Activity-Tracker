@@ -289,7 +289,748 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                             }
                         }
                     },
-                },
+                    bosses: {
+                        mapleWorld: {
+                            zakum: {
+                                key: "zakum",
+                                name: "Zakum",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Chaos",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            papulatus: {
+                                key: "papulatus",
+                                name: "Papulatus",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "easy",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Chaos",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+
+                            },
+                            horntail: {
+                                key: "horntail",
+                                name: "Horntail",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Chaos",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            hilla: {
+                                key: "hilla",
+                                name: "Hilla",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            cygnus: {
+                                key: "cygnus",
+                                name: "Cygnus",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            arkarium: {
+                                key: "arkarium",
+                                name: "Arkarium",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            ranmaru: {
+                                key: "ranmaru",
+                                name: "Ranmaru",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            magnus: {
+                                key: "magnus",
+                                name: "Magnus",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            vonLeon: {
+                                key: "vonLeon",
+                                name: "Von Leon",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            pierre: {
+                                key: "pierre",
+                                name: "Pierre",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            queen: {
+                                key: "queen",
+                                name: "Queen",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            vonBon: {
+                                key: "vonBon",
+                                name: "Von Bon",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            vellum: {
+                                key: "vellum",
+                                name: "Vellum",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            omnicln: {
+                                key: "omnicln",
+                                name: "Omni-CLN",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            pinkBean: {
+                                key: "pinkBean",
+                                name: "Pink Bean",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Chaos",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            lotus: {
+                                key: "lotus",
+                                name: "Lotus",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            damien: {
+                                key: "damien",
+                                name: "Damien",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            guardianSlime: {
+                                key: "guardianSlime",
+                                name: "Guardian Slime",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                        },
+                        arcaneRiver: {
+                            lucid: {
+                                key: "lucid",
+                                name: "Lucid",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Easy",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            will: {
+                                key: "will",
+                                name: "Will",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Easy",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            gloom: {
+                                key: "gloom",
+                                name: "Gloom",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Chaos",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            darknell: {
+                                key: "darknell",
+                                name: "Darknell",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            verusHilla: {
+                                key: "verusHilla",
+                                name: "Verus Hilla",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            blackMage: {
+                                key: "blackMage",
+                                name: "Black Mage",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "Monthly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Extreme",
+                                        isActive: false,
+                                        type: "Monthly",
+                                        completion: {
+                                            monthly: false,
+                                            monthlyDate: null,
+                                        },
+                                    },
+                                ]
+                            }
+                        },
+                        grandis:{
+                            seren: {
+                                key: "seren",
+                                name: "Seren",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Extreme",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            kalos: {
+                                key: "kalos",
+                                name: "Kalos",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Easy",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Chaos",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Extreme",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                            },
+                            kaling: {
+                                key: "kaling",
+                                name: "Kaling",
+                                isActive: false,
+                                difficulty: [
+                                    {
+                                        name: "Easy",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Normal",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Hard",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                    {
+                                        name: "Extreme",
+                                        isActive: false,
+                                        type: "weekly",
+                                        completion: {
+                                            weekly: false,
+                                            weeklyDate: null,
+                                        },
+                                    },
+                                ]
+                                
+                            
+                            }
+                        }
+
+                    },
+                }
             };
             return { Characters: newCharacters, maxId: newMaxId };
         // CHARACTER-----------------------------------------------------------------------
@@ -354,7 +1095,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
 
         case 'TOGGLE_WEEKLY_QUEST':
             const { id, questNameW } = action.payload;
-            
+
             const character = state.Characters[id];
 
             // Check if quest exists in weeklies.quests
@@ -452,26 +1193,26 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
 
             return { ...state };
 
-            case 'TOGGLE_WEEKLY_COMPLETION': {
-                const { weeklyId, questName, key } = action.payload;
-            
-                // Find the character and the weekly quest
-                const character = state.Characters[weeklyId];
-                console.log(character)
-                console.log(character.progression.weeklies.quests)
-                console.log(key)
-                const weekly = character.progression.weeklies.quests[key];
-            
-                // Toggle the completion status
-                weekly.completion.weekly = !weekly.completion.weekly ;
-            
-                // If the completion status is being set to true, also set the date
-                if (weekly.completion) {
-                    weekly.weeklyDate = new Date().toISOString();
-                }
-            
-                return { ...state };
+        case 'TOGGLE_WEEKLY_COMPLETION': {
+            const { weeklyId, questName, key } = action.payload;
+
+            // Find the character and the weekly quest
+            const character = state.Characters[weeklyId];
+            console.log(character)
+            console.log(character.progression.weeklies.quests)
+            console.log(key)
+            const weekly = character.progression.weeklies.quests[key];
+
+            // Toggle the completion status
+            weekly.completion.weekly = !weekly.completion.weekly;
+
+            // If the completion status is being set to true, also set the date
+            if (weekly.completion) {
+                weekly.weeklyDate = new Date().toISOString();
             }
+
+            return { ...state };
+        }
 
 
         // case 'TOGGLE_COMPLETION':
