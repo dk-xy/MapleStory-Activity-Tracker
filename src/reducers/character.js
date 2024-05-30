@@ -155,10 +155,89 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                 },
                             },
                         },
+                        dailies: {
+                            isActive: false,
+                            quests: {
+                                monsterPark: {
+                                    key: "monsterPark",
+                                    questName: "Monster Park",
+                                    isActive: false,
+                                    completion: {
+                                        daily: false,
+                                        dailyDate: null,
+                                    },
+                                },
+                                monserParkExtreme: {
+                                    key: "monsterParkExtreme",
+                                    questName: "Monster Park Extreme",
+                                    isActive: false,
+                                    completion: {
+                                        daily: false,
+                                        dailyDate: null,
+                                    },
+                                },
+                                ursus: {
+                                    key: "ursus",
+                                    questName: "Ursus",
+                                    isActive: false,
+                                    completion: {
+                                        daily: false,
+                                        dailyDate: null,
+                                    },
+                                },
+                                gollux: {
+                                    key: "gollux",
+                                    questName: "Gollux",
+                                    isActive: false,
+                                    completion: {
+                                        daily: false,
+                                        dailyDate: null,
+                                    },
+
+                                },
+                                mapleTour: {
+                                    key: "mapleTour",
+                                    questName: "Maple Tour",
+                                    isActive: false,
+                                    completion: {
+                                        daily: false,
+                                        dailyDate: null,
+                                    },
+                                },
+                                Commerci: {
+                                    key: "commerci",
+                                    questName: "Commerci",
+                                    isActive: false,
+                                    completion: {
+                                        daily: false,
+                                        dailyDate: null,
+                                    },
+                                },
+                                yuGarden: {
+                                    key: "yuGarden",
+                                    questName: "Yu Garden",
+                                    isActive: false,
+                                    completion: {
+                                        daily: false,
+                                        dailyDate: null,
+                                    },
+                                },
+                                phantomForest: {
+                                    key: "phantomForest",
+                                    questName: "Phantom Forest",
+                                    isActive: false,
+                                    completion: {
+                                        daily: false,
+                                        dailyDate: null,
+                                    },
+                                },
+                            }
+                        }
                     },
                 },
             };
             return { Characters: newCharacters, maxId: newMaxId };
+        // CHARACTER-----------------------------------------------------------------------
         case 'LOAD_CHARACTERS':
             return {
                 ...state,
@@ -211,6 +290,8 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
         //     character.progression.symbols.arcaneRiver.isActive = region.isActive || character.progression.symbols.arcaneRiver.regions.oblivion.isActive || character.progression.symbols.arcaneRiver.regions.chuChu.isActive;
         //     return { ...state };
 
+        // PROGRESSION---------------------------------------------------------------------
+
         case 'TOGGLE_COMPLETION':
             const { characterId, regionNameC, completionType } = action.payload;
             const characterC = state.Characters[characterId];
@@ -256,6 +337,26 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
 
             return { ...state };
 
+        case 'TOGGLE_DAILY': {
+            const characterId = action.payload.id;
+            const questName = action.payload.questName;
+            const questKey = action.payload.key;
+            const character = state.Characters[characterId];
+            console.log(character)
+            const quest = character.progression.dailies.quests[questName];
+            console.log(quest)
+            // const quest = character.progression.dailies[questName];
+
+            // If quest is found, toggle its isActive property
+            if (quest) {
+                quest.isActive = !quest.isActive;
+            } else {
+                console.error(`Quest ${questName} not found for character ${characterId}`);
+            }
+
+            return { ...state };
+        }
+
         // HANDLE RESETS HERE @@@@!!
 
 
@@ -281,31 +382,31 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             }
 
             return { ...state };
-        // case RESET_DAILY_COMPLETION_STATUSES:
-            
-        //     // Get the current date and convert to UTC
-        //     const now = new Date();
-        //     const nowUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes()));
+            // case RESET_DAILY_COMPLETION_STATUSES:
 
-        //     // Reset daily.isCompleted for all regions where the completion date is not today
-        //     for (const character of Object.values(state.Characters)) {
-        //         for (const region of Object.values(character.progression.symbols.arcaneRiver.regions)) {
-        //             const completionDate = new Date(region.completion.dailyDate);
-        //             completionDate.setUTCMinutes(completionDate.getUTCMinutes() + 1); // Add 1 minute to completion date
-        //             if (nowUTC >= completionDate) {
-        //                 region.completion.daily = false;
-        //             }
-        //         }
-        //         for (const region of Object.values(character.progression.symbols.grandis.regions)) {
-        //             const completionDate = new Date(region.completion.dailyDate);
-        //             completionDate.setUTCMinutes(completionDate.getUTCMinutes() + 1); // Add 1 minute to completion date
-        //             if (nowUTC >= completionDate) {
-        //                 region.completion.daily = false;
-        //             }
-        //         }
-        //     }
+            //     // Get the current date and convert to UTC
+            //     const now = new Date();
+            //     const nowUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes()));
 
-  
+            //     // Reset daily.isCompleted for all regions where the completion date is not today
+            //     for (const character of Object.values(state.Characters)) {
+            //         for (const region of Object.values(character.progression.symbols.arcaneRiver.regions)) {
+            //             const completionDate = new Date(region.completion.dailyDate);
+            //             completionDate.setUTCMinutes(completionDate.getUTCMinutes() + 1); // Add 1 minute to completion date
+            //             if (nowUTC >= completionDate) {
+            //                 region.completion.daily = false;
+            //             }
+            //         }
+            //         for (const region of Object.values(character.progression.symbols.grandis.regions)) {
+            //             const completionDate = new Date(region.completion.dailyDate);
+            //             completionDate.setUTCMinutes(completionDate.getUTCMinutes() + 1); // Add 1 minute to completion date
+            //             if (nowUTC >= completionDate) {
+            //                 region.completion.daily = false;
+            //             }
+            //         }
+            //     }
+
+
             return { ...state };
 
 

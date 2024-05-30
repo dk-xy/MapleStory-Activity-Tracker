@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
+// import QuestCheckbox from '../../components/Legion/Progression/QuestCheckbox';
 
 
 const RegionCheckbox = ({ regionName, isActive, handleCheckboxChange }) => (
@@ -16,18 +16,54 @@ const RegionCheckbox = ({ regionName, isActive, handleCheckboxChange }) => (
     </div> 
 );
 
+
+const QuestCheckbox = ({ questName, isActive, handleCheckboxChangeDailies }) => (
+     
+        <div>
+            <label>
+                <input
+                    type="checkbox"
+                    checked={isActive}
+                    onChange={() => handleCheckboxChangeDailies(questName)}
+                />
+                {questName}
+            </label>
+        </div>
+    );
+
+
+
+
+
+
+
+
+
 const EditCharacter = () => {
-    const handleCheckboxChange = (regionName) => {
-        dispatch({ type: 'TOGGLE_REGION', payload: { id, regionName } });
-    };
+
+    const dispatch = useDispatch();
     const { id } = useParams();
     const legionData = useSelector(state => state.Legion);
     const character = legionData.Characters[id];
-    const dispatch = useDispatch();
+
     const { arcaneRiver, grandis } = character.progression.symbols;
+    const dailies  = character.progression.dailies.quests
+    console.log(dailies);
+
+    const handleCheckboxChange = (regionName) => {
+        dispatch({ type: 'TOGGLE_REGION', payload: { id, regionName } });
+    };
+    const handleCheckboxChangeDailies = (questName) => {
+        dispatch({ type: 'TOGGLE_DAILY', payload: { id, questName } });
+    };
+
+
+
 
     return (
         <div>
+            {/* Arcane river-------------------------------- */}
+            <div className='symbolContainer'>
             <div className={`regionContainer arcaneRiver`}>
                 {Object.keys(arcaneRiver.regions).map(regionName => (
                     <RegionCheckbox
@@ -38,7 +74,8 @@ const EditCharacter = () => {
                     />
                 ))}
             </div>
-
+            
+            {/* Grandis-------------------------------- */}
             <div className={`regionContainer grandis`}>
                 {Object.keys(grandis.regions).map(regionName => (
                     <RegionCheckbox
@@ -48,6 +85,20 @@ const EditCharacter = () => {
                         handleCheckboxChange={handleCheckboxChange}
                     />
                 ))}
+            </div>
+            </div>
+            <div className='dailiesContainer'>
+
+            <div className={`dailyContainer`}>
+                {Object.keys(dailies).map(questName => (
+                    <QuestCheckbox
+                        // key={questName.key}
+                        questName={questName}
+                        isActive={dailies[questName].isActive}
+                        handleCheckboxChangeDailies={handleCheckboxChangeDailies}
+                    />
+                ))}
+            </div>
             </div>
         </div>
     );

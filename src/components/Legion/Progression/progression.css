@@ -4,9 +4,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
     margin: 0 auto;
-    width: 100%;
+    width: 80%;
     gap: 16px;
 }
 
@@ -136,6 +136,8 @@
     background: var(--carcion-gradient);
 }
 
+
+/* TAB NAVIGATION */
 .tabNav {
     border-radius: 0%;
     background-color: transparent;
@@ -143,6 +145,8 @@
     font-size: 23.04px;
     font-style: normal;
     font-weight: 400;
+    padding: 14px 0px;
+    margin: 0% 36px;
 
 }
 
