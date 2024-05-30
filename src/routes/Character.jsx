@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import EditCharacter from './Character/EditCharacter';
 import RegionCompletion from '../components/Legion/Progression/RegionCompletion';
 import GrandisCompletion from '../components/Legion/Progression/GrandisCompletion';
+import QuestCompletion from '../components/Legion/Progression/QuestCompletion';
 import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses } from '../redux/actions/characters';
 
 export default function Character() {
@@ -71,6 +72,16 @@ export default function Character() {
                             </div>
                         </div>
                     )}
+
+                    {/* DAILIES-------------------------------- */}
+                    <div>
+                        <h3>Dailies</h3>
+                        <div className='dailies itemContainer'>
+                            {Object.values(character.progression.dailies.quests).map((daily, index) => (
+                                daily && daily.isActive && <QuestCompletion key={index} daily={daily} characterId={id} />
+                            ))}
+                        </div>
+                    </div>
                 </>
             ) : (
                 // Bosses content...
