@@ -1,4 +1,4 @@
-import { RESET_DAILY_COMPLETION_STATUSES, RESET_WEEKLY_COMPLETION_STATUSES } from '../redux/actions/characters';
+import { RESET_DAILY_COMPLETION_STATUSES, RESET_WEEKLY_COMPLETION_STATUSES, RESET_DAILY_QUESTS_COMPLETION_STATUS } from '../redux/actions/characters';
 
 
 
@@ -232,6 +232,61 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                     },
                                 },
                             }
+                        },
+                        weeklies: {
+                            isActive: false,
+                            quests: {
+                                darkWorldTree: {
+                                    key: "darkWorldTree",
+                                    questName: "Dark World Tree",
+                                    isActive: false,
+                                    completion: {
+                                        weekly: false,
+                                        weeklyDate: null,
+                                    },
+                                },
+                                haven: {
+                                    key: "haven",
+                                    questName: "Haven",
+                                    isActive: false,
+                                    completion: {
+                                        weekly: false,
+                                        weeklyDate: null,
+                                    },
+                                },
+                                muLungDojo: {
+                                    key: "muLungDojo",
+                                    questName: "Mu Lung Dojo",
+                                    isActive: false,
+                                    completion: {
+                                        weekly: false,
+                                        weeklyDate: null,
+                                    },
+                                },
+                            }
+                        },
+                        guild: {
+                            isActive: false,
+                            quests: {
+                                culvert: {
+                                    key: "culvert",
+                                    questName: "Culvert",
+                                    isActive: false,
+                                    completion: {
+                                        daily: false,
+                                        dailyDate: null,
+                                    },
+                                },
+                                flagRace: {
+                                    key: "flagRace",
+                                    questName: "Flag Race",
+                                    isActive: false,
+                                    completion: {
+                                        daily: false,
+                                        dailyDate: null,
+                                    },
+                                }
+                            }
                         }
                     },
                 },
@@ -274,6 +329,46 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
 
             return { ...state };
         }
+
+
+        case 'TOGGLE_DAILY': {
+            const characterId = action.payload.id;
+            const questName = action.payload.questName;
+            const questKey = action.payload.key;
+            const character = state.Characters[characterId];
+            console.log(character)
+            const quest = character.progression.dailies.quests[questName];
+            console.log(quest)
+            // const quest = character.progression.dailies[questName];
+
+            // If quest is found, toggle its isActive property
+            if (quest) {
+                quest.isActive = !quest.isActive;
+            } else {
+                console.error(`Quest ${questName} not found for character ${characterId}`);
+            }
+
+            return { ...state };
+        }
+
+
+        case 'TOGGLE_WEEKLY_QUEST':
+            const { id, questNameW } = action.payload;
+            
+            const character = state.Characters[id];
+
+            // Check if quest exists in weeklies.quests
+            let questW = character.progression.weeklies.quests[questNameW];
+            console.log("NOWWESH")
+            // If quest is found, toggle its isActive property
+            if (questW) {
+                console.log("WESH")
+                questW.isActive = !questW.isActive;
+            } else {
+                console.error(`Quest ${questNameW} not found for character ${id}`);
+            }
+
+            return { ...state };
         // case 'TOGGLE_REGION_ARCANE': 
         //     const { id, regionName } = action.payload;
         //     const character = state.Characters[id];
@@ -337,26 +432,47 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
 
             return { ...state };
 
-            case 'TOGGLE_DAILY_COMPLETION':
-                const { dailyId, questName, key } = action.payload;
-                const characterD = state.Characters[dailyId];
+        case 'TOGGLE_DAILY_COMPLETION':
+            const { dailyId, questName, key } = action.payload;
+            const characterD = state.Characters[dailyId];
+
+            // Check if quest exists in dailies.quests
+            let quest = characterD.progression.dailies.quests[key];
+
+            // If quest is found, toggle its completion property
+            if (quest) {
+                quest.completion.daily = !quest.completion.daily;
+                // If the completion status is being set to true, also set the date
+                if (quest.completion.daily) {
+                    quest.completion.dailyDate = new Date().toISOString();
+                }
+            } else {
+                console.error(`Quest ${questName} not found for character ${dailyId}`);
+            }
+
+            return { ...state };
+
+            case 'TOGGLE_WEEKLY_COMPLETION': {
+                const { weeklyId, questName, key } = action.payload;
             
-                // Check if quest exists in dailies.quests
-                let quest = characterD.progression.dailies.quests[key];
+                // Find the character and the weekly quest
+                const character = state.Characters[weeklyId];
+                console.log(character)
+                console.log(character.progression.weeklies.quests)
+                console.log(key)
+                const weekly = character.progression.weeklies.quests[key];
             
-                // If quest is found, toggle its completion property
-                if (quest) {
-                    quest.completion.daily = !quest.completion.daily;
-                    // If the completion status is being set to true, also set the date
-                    if (quest.completion.daily) {
-                        quest.completion.dailyDate = new Date().toISOString();
-                    }
-                } else {
-                    console.error(`Quest ${questName} not found for character ${dailyId}`);
+                // Toggle the completion status
+                weekly.completion.weekly = !weekly.completion.weekly ;
+            
+                // If the completion status is being set to true, also set the date
+                if (weekly.completion) {
+                    weekly.weeklyDate = new Date().toISOString();
                 }
             
                 return { ...state };
-            
+            }
+
 
         // case 'TOGGLE_COMPLETION':
         //     const { characterId, regionNameC, completionType } = action.payload;
@@ -404,29 +520,10 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
         //     return { ...state };
 
 
-        case 'TOGGLE_DAILY': {
-            const characterId = action.payload.id;
-            const questName = action.payload.questName;
-            const questKey = action.payload.key;
-            const character = state.Characters[characterId];
-            console.log(character)
-            const quest = character.progression.dailies.quests[questName];
-            console.log(quest)
-            // const quest = character.progression.dailies[questName];
-
-            // If quest is found, toggle its isActive property
-            if (quest) {
-                quest.isActive = !quest.isActive;
-            } else {
-                console.error(`Quest ${questName} not found for character ${characterId}`);
-            }
-
-            return { ...state };
-        }
 
         // HANDLE RESETS HERE @@@@!!
 
-
+        // RESET OF SYMBOLS!!! ---------------------------------------
         case RESET_DAILY_COMPLETION_STATUSES:
             // Get the current date and convert to UTC
             const now = new Date();
@@ -449,53 +546,6 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             }
 
             return { ...state };
-            // case RESET_DAILY_COMPLETION_STATUSES:
-
-            //     // Get the current date and convert to UTC
-            //     const now = new Date();
-            //     const nowUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes()));
-
-            //     // Reset daily.isCompleted for all regions where the completion date is not today
-            //     for (const character of Object.values(state.Characters)) {
-            //         for (const region of Object.values(character.progression.symbols.arcaneRiver.regions)) {
-            //             const completionDate = new Date(region.completion.dailyDate);
-            //             completionDate.setUTCMinutes(completionDate.getUTCMinutes() + 1); // Add 1 minute to completion date
-            //             if (nowUTC >= completionDate) {
-            //                 region.completion.daily = false;
-            //             }
-            //         }
-            //         for (const region of Object.values(character.progression.symbols.grandis.regions)) {
-            //             const completionDate = new Date(region.completion.dailyDate);
-            //             completionDate.setUTCMinutes(completionDate.getUTCMinutes() + 1); // Add 1 minute to completion date
-            //             if (nowUTC >= completionDate) {
-            //                 region.completion.daily = false;
-            //             }
-            //         }
-            //     }
-
-
-            // return { ...state };
-            // case 'TOGGLE_QUEST_COMPLETION':
-            //     const { characterId, questName, completionType } = action.payload;
-            //     return {
-            //         ...state,
-            //         Characters: {
-            //             ...state.Characters,
-            //             [characterId]: {
-            //                 ...state.Characters[characterId],
-            //                 progression: {
-            //                     ...state.Characters[characterId].progression,
-            //                     dailies: {
-            //                         ...state.Characters[characterId].progression.dailies,
-            //                         [questName]: {
-            //                             ...state.Characters[characterId].progression.dailies[questName],
-            //                             [completionType]: !state.Characters[characterId].progression.dailies[questName][completionType]
-            //                         }
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     };
 
         case RESET_WEEKLY_COMPLETION_STATUSES:
             // Get the current date and the date of last Sunday
@@ -514,6 +564,22 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                     const completionDate = new Date(region.completion.weeklyDate);
                     if (completionDate < lastSunday) {
                         region.completion.weekly = false;
+                    }
+                }
+            }
+
+            return { ...state };
+        case RESET_DAILY_QUESTS_COMPLETION_STATUS:
+            // Get the current date and convert to UTC
+            const nowDaily = new Date();
+            const nowUTCDaily = new Date(Date.UTC(nowDaily.getFullYear(), nowDaily.getMonth(), nowDaily.getDate()));
+
+            // Reset daily.isCompleted for all quests where the completion date is not today
+            for (const character of Object.values(state.Characters)) {
+                for (const quest of Object.values(character.progression.dailies.quests)) {
+                    const completionDate = new Date(quest.completion.dailyDate);
+                    if (completionDate.getUTCDate() !== nowUTCDaily.getDate() || completionDate.getUTCMonth() !== nowUTCDaily.getMonth() || completionDate.getUTCFullYear() !== nowUTCDaily.getFullYear()) {
+                        quest.completion.daily = false;
                     }
                 }
             }

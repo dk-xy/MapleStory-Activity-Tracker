@@ -32,6 +32,19 @@ const QuestCheckbox = ({ questName, isActive, handleCheckboxChangeDailies }) => 
     );
 
 
+    const WeeklyQuestCheckbox = ({ questName, isActive, handleCheckboxChangeWeeklies }) => (
+        <div>
+            <label>
+                <input
+                    type="checkbox"
+                    checked={isActive}
+                    onChange={() => handleCheckboxChangeWeeklies(questName)}
+                />
+                {questName}
+            </label>
+        </div>
+    );
+    
 
 
 
@@ -50,6 +63,8 @@ const EditCharacter = () => {
     const dailies  = character.progression.dailies.quests
     console.log(dailies);
 
+    // CHECKBOX HANDLERS------------------------------
+
     const handleCheckboxChange = (regionName) => {
         dispatch({ type: 'TOGGLE_REGION', payload: { id, regionName } });
     };
@@ -57,12 +72,15 @@ const EditCharacter = () => {
         dispatch({ type: 'TOGGLE_DAILY', payload: { id, questName } });
     };
 
+    const handleCheckboxChangeWeeklies = (questName) => {
+        dispatch({ type: 'TOGGLE_WEEKLY_QUEST', payload: { id, questNameW: questName } });
+    };
 
-
+// --------------------------------------------------
 
     return (
         <div>
-            {/* Arcane river-------------------------------- */}
+{/* Arcane river-------------------------------- */}
             <div className='symbolContainer'>
             <div className={`regionContainer arcaneRiver`}>
                 {Object.keys(arcaneRiver.regions).map(regionName => (
@@ -75,7 +93,7 @@ const EditCharacter = () => {
                 ))}
             </div>
             
-            {/* Grandis-------------------------------- */}
+{/* Grandis-------------------------------- */}
             <div className={`regionContainer grandis`}>
                 {Object.keys(grandis.regions).map(regionName => (
                     <RegionCheckbox
@@ -89,6 +107,8 @@ const EditCharacter = () => {
             </div>
             <div className='dailiesContainer'>
 
+{/* DAILIES ---------------------------------- */}
+<h4>DailiesS</h4>
             <div className={`dailyContainer`}>
                 {Object.keys(dailies).map(questName => (
                     <QuestCheckbox
@@ -99,6 +119,23 @@ const EditCharacter = () => {
                     />
                 ))}
             </div>
+
+{/* WEEKLIES ---------------------------------- */}
+{/* Weeklies -------------------------------- */}
+<div className='weeklyQuestsContainer'>
+    <h4>Weeklies</h4>
+    {Object.keys(character.progression.weeklies.quests).map(questName => (
+        console.log(questName),
+        // console.log(character.progression.weeklies.quests[questName]),
+
+        <WeeklyQuestCheckbox
+            key={questName}
+            questName={questName}
+            isActive={character.progression.weeklies.quests[questName].isActive}
+            handleCheckboxChangeWeeklies={handleCheckboxChangeWeeklies}
+        />
+    ))}
+</div>
             </div>
         </div>
     );

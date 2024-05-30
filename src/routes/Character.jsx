@@ -6,7 +6,7 @@ import EditCharacter from './Character/EditCharacter';
 import RegionCompletion from '../components/Legion/Progression/RegionCompletion';
 import GrandisCompletion from '../components/Legion/Progression/GrandisCompletion';
 import QuestCompletion from '../components/Legion/Progression/QuestCompletion';
-import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses } from '../redux/actions/characters';
+import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses, resetDailyQuestsCompletionStatuses } from '../redux/actions/characters';
 
 export default function Character() {
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ export default function Character() {
         // Dispatch the actions immediately on component mount
         dispatch(resetDailyCompletionStatuses());
         dispatch(resetWeeklyCompletionStatuses());
-
+        dispatch(resetDailyQuestsCompletionStatuses());
         // Set up a timer to dispatch the actions every minute
         const timer = setInterval(() => {
             dispatch(resetDailyCompletionStatuses());
@@ -78,10 +78,22 @@ export default function Character() {
                         <h3>Dailies</h3>
                         <div className='dailies itemContainer'>
                             {Object.values(character.progression.dailies.quests).map((daily, index) => (
-                                daily && daily.isActive && <QuestCompletion key={index} daily={daily} characterId={id} />
+                                daily && daily.isActive && <QuestCompletion key={index} quest={daily} characterId={id} questType={'daily'} />
                             ))}
                         </div>
                     </div>
+
+                    {/* WEEKLIES -------------------------------- */}
+                    <div>
+                        <h3>Weeklies</h3>
+                        <div className='weeklies itemContainer'>
+                            {Object.values(character.progression.weeklies.quests).map((weekly, index) => (
+                                weekly && weekly.isActive && <QuestCompletion key={index} quest={weekly} characterId={id} questType={'weekly'} />
+                            ))}
+                        </div>
+                    </div>
+
+
                 </>
             ) : (
                 // Bosses content...

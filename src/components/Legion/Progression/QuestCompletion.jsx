@@ -1,11 +1,19 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-function QuestCompletion({key, daily, characterId}) {
+function QuestCompletion({key, quest, characterId, questType}) {
     const dispatch = useDispatch();
 
+    // const handleCheckboxChange = () => {
+    //     dispatch({ type: 'TOGGLE_DAILY_COMPLETION', payload: { dailyId: characterId, questName: quest.questName, key: quest.key, questType } });
+    // };
+
     const handleCheckboxChange = () => {
-        dispatch({ type: 'TOGGLE_DAILY_COMPLETION', payload: { dailyId: characterId, questName: daily.questName, key: daily.key } });
+        if (questType === 'daily') {
+            dispatch({ type: 'TOGGLE_DAILY_COMPLETION', payload: { dailyId: characterId, questName: quest.questName, key: quest.key } });
+        } else if (questType === 'weekly') {
+            dispatch({ type: 'TOGGLE_WEEKLY_COMPLETION', payload: { weeklyId: characterId, questName: quest.questName, key: quest.key } });
+        }
     };
 
     return (
@@ -13,10 +21,10 @@ function QuestCompletion({key, daily, characterId}) {
            
             <div className="completionBoxes">
                 <div className="questCheckBox">
-                    <label>{daily.questName} </label>
+                    <label>{quest.questName} </label>
                     <input
                         type="checkbox"
-                        checked={daily.completion.isActive}
+                        checked={quest.completion.isActive}
                         onChange={handleCheckboxChange}
                     />
                 </div>
