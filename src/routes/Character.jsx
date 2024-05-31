@@ -7,6 +7,7 @@ import RegionCompletion from '../components/Legion/Progression/RegionCompletion'
 import GrandisCompletion from '../components/Legion/Progression/GrandisCompletion';
 import QuestCompletion from '../components/Legion/Progression/QuestCompletion';
 import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses, resetDailyQuestsCompletionStatuses } from '../redux/actions/characters';
+import BossCompletion from '../components/Legion/Bosses/BossCompletion';
 
 export default function Character() {
     const dispatch = useDispatch();
@@ -98,8 +99,16 @@ export default function Character() {
             ) : (
                 // Bosses content...
                 <div>
-                    BOSSES
+                    <h3>BOSSES</h3>
+                    {Object.values(character.bosses.mapleWorld)
+                        .filter(boss => boss.difficulty.some(difficulty => difficulty.isActive))
+                        .map((boss, index) => (
+                            <BossCompletion key={index} boss={boss} characterId={id} />
+                        ))
+                    }
                 </div>
+
+
             )}
         </div>
     )

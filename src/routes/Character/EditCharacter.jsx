@@ -1,7 +1,13 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import BossSelection from '../../components/Legion/Bosses/BossSelection';
+
 // import QuestCheckbox from '../../components/Legion/Progression/QuestCheckbox';
+
+
+
 
 
 const RegionCheckbox = ({ regionName, isActive, handleCheckboxChange }) => (
@@ -63,6 +69,8 @@ const EditCharacter = () => {
     const dailies  = character.progression.dailies.quests
     console.log(dailies);
 
+    const [selectedTab, setSelectedTab] = useState('quests');
+
     // CHECKBOX HANDLERS------------------------------
 
     const handleCheckboxChange = (regionName) => {
@@ -79,8 +87,25 @@ const EditCharacter = () => {
 // --------------------------------------------------
 
     return (
-        <div>
-{/* Arcane river-------------------------------- */}
+    <div>
+        <div className='tabContainer'>
+            <div
+                className={`tab ${selectedTab === 'quests' ? 'active' : ''}`}
+                onClick={() => setSelectedTab('quests')}
+            >
+                Quests
+        </div>
+            <div
+                className={`tab ${selectedTab === 'bosses' ? 'active' : ''}`}
+                onClick={() => setSelectedTab('bosses')}
+            >
+                Bosses
+            </div>
+        </div>
+
+        {selectedTab === 'quests' && (
+            <div className='questContainer'>
+                {/* Arcane river-------------------------------- */}
             <div className='symbolContainer'>
             <div className={`regionContainer arcaneRiver`}>
                 {Object.keys(arcaneRiver.regions).map(regionName => (
@@ -137,7 +162,25 @@ const EditCharacter = () => {
     ))}
 </div>
             </div>
+            </div>
+        )}
+
+{selectedTab === 'bosses' && (
+    <div className='bossesContainer'>
+        {console.log(character.bosses.mapleWorld)}
+        <div className='bossList mapleWorld'>
+        {Object.values(character.bosses.mapleWorld).map((boss, index) => (
+            <BossSelection key={index} boss={boss} characterId={id} />
+        ))}
+
         </div>
+       
+    </div>
+)}
+
+            
+
+    </div>
     );
 };
 

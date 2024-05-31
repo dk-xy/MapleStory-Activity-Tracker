@@ -1110,21 +1110,6 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             }
 
             return { ...state };
-        // case 'TOGGLE_REGION_ARCANE': 
-        //     const { id, regionName } = action.payload;
-        //     const character = state.Characters[id];
-        //     const region = character.progression.symbols.arcaneRiver.regions[regionName];
-        //     region.isActive = !region.isActive;
-        //     character.progression.symbols.arcaneRiver.isActive = region.isActive || character.progression.symbols.arcaneRiver.regions.oblivion.isActive || character.progression.symbols.arcaneRiver.regions.chuChu.isActive;
-        //     return { ...state };
-
-        //     case 'TOGGLE_REGION_GRANDIS': 
-        //     const { idG, regionNameG } = action.payload;
-        //     const characterG = state.Characters[idG];
-        //     const regionG = characterG.progression.symbols.arcaneRiver.regions[regionNameG];
-        //     region.isActive = !regionG.isActive;
-        //     character.progression.symbols.arcaneRiver.isActive = region.isActive || character.progression.symbols.arcaneRiver.regions.oblivion.isActive || character.progression.symbols.arcaneRiver.regions.chuChu.isActive;
-        //     return { ...state };
 
         // PROGRESSION---------------------------------------------------------------------
 
@@ -1211,6 +1196,39 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                 weekly.weeklyDate = new Date().toISOString();
             }
 
+            return { ...state };
+        }
+
+        // BOSSES--------------------------------------------------------------------------
+        case 'TOGGLE_BOSS_DIFFICULTY_ACTIVE': {
+            const { bossId, bossKey, difficultyName } = action.payload;
+        
+            // Find the character and the boss
+            const character = state.Characters[bossId];
+            const boss = character.bosses.mapleWorld[bossKey];
+        
+            // Find the difficulty
+            const difficulty = boss.difficulty.find(diff => diff.name === difficultyName);
+        
+            // Toggle the active status
+            difficulty.isActive = !difficulty.isActive;
+        
+            return { ...state };
+        }
+
+        case 'TOGGLE_BOSS_DIFFICULTY_COMPLETION': {
+            const { bossId, bossKey, difficultyName, completionType } = action.payload;
+        
+            // Find the character and the boss
+            const character = state.Characters[bossId];
+            const boss = character.bosses.mapleWorld[bossKey];
+        
+            // Find the difficulty
+            const difficulty = boss.difficulty.find(diff => diff.name === difficultyName);
+        
+            // Toggle the completion status
+            difficulty.completion[completionType] = !difficulty.completion[completionType];
+        
             return { ...state };
         }
 
