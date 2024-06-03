@@ -8,6 +8,8 @@ import GrandisCompletion from '../components/Legion/Progression/GrandisCompletio
 import QuestCompletion from '../components/Legion/Progression/QuestCompletion';
 import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses, resetDailyQuestsCompletionStatuses } from '../redux/actions/characters';
 import BossCompletion from '../components/Legion/Bosses/BossCompletion';
+import Countdown from '../components/Legion/Countdown';
+import CountdownDaily from '../components/Legion/CountdownDaily';
 
 export default function Character() {
     const dispatch = useDispatch();
@@ -48,8 +50,20 @@ export default function Character() {
 
             {/* Tab content */}
             {selectedTab === 'progression' ? (
+
                 // Progression content...
                 <>
+                <div className='resetContainer'>
+                <div className='reset'>
+                <div className='resetLabel'> Daily reset:</div>
+                <CountdownDaily /> {/* Countdown to next Monday */}
+                </div>
+                <div div className='reset'>
+                <div className='resetLabel'>Weekly reset:</div>
+                <Countdown /> {/* Countdown to next Sunday */}
+                </div>
+                </div>
+               
                     {/* ARCANE RIVER---------------------------- */}
                     {character.progression.symbols.arcaneRiver.isActive && (
                         <div>
