@@ -6,6 +6,34 @@ import BossSelection from '../../components/Legion/Bosses/BossSelection';
 
 // import QuestCheckbox from '../../components/Legion/Progression/QuestCheckbox';
 
+import ursus from '../../assets/quests/MapIcon_Urus.webp';
+import monsterPark from '../../assets/quests/MapIcon_Carnival.webp';
+import yuGarden from '../../assets/quests/Etc_Yu_Garden_Coin.webp';
+import Haven from '../../assets/quests/MapIcon_Haven.webp';
+import fallenWorldTree from '../../assets/quests/MapIcon_fallenWorldTree.webp';
+import dojo from '../../assets/quests/MapIcon_MuruengRaid.webp';
+import mapleTour from '../../assets/quests/MapIcon_MTour.webp';
+import commerci from '../../assets/quests/MapIcon_CommerzBT.webp';
+import gollux from '../../assets/quests/MapIcon_GiantVellud.webp';
+
+import shadowknight from '../../assets/quests/Etc_Shadowknight_Coin.webp';
+
+
+const questToImage = {
+    "ursus": ursus,
+    "monsterPark": monsterPark,
+    "monsterParkExtreme": monsterPark,
+    "haven": Haven,
+    "darkWorldTree": fallenWorldTree,
+    "muLungDojo": dojo,
+    "mapleTour": mapleTour,
+    "commerci": commerci,
+    "gollux": gollux,
+    "yuGarden": yuGarden,
+    "phantomForest": shadowknight,
+   
+    // ... other quests ...
+};
 
 
 
@@ -25,29 +53,28 @@ const RegionCheckbox = ({ regionName, isActive, handleCheckboxChange }) => (
 
 const QuestCheckbox = ({ questName, isActive, handleCheckboxChangeDailies }) => (
      
-        <div>
-            <label>
+        <div className='questActivation'>
+            <img src={questToImage[questName]} alt={`${questName} icon`} />
+            <label>{questName} </label>
                 <input
                     type="checkbox"
                     checked={isActive}
                     onChange={() => handleCheckboxChangeDailies(questName)}
                 />
-                {questName}
-            </label>
         </div>
     );
 
 
     const WeeklyQuestCheckbox = ({ questName, isActive, handleCheckboxChangeWeeklies }) => (
-        <div>
-            <label>
+        <div className='questActivation'>
+            <img src={questToImage[questName]} alt={`${questName} icon`} />
+            <label>{questName}</label>
                 <input
                     type="checkbox"
                     checked={isActive}
                     onChange={() => handleCheckboxChangeWeeklies(questName)}
                 />
-                {questName}
-            </label>
+       
         </div>
     );
     

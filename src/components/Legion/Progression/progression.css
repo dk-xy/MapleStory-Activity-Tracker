@@ -137,6 +137,36 @@
 }
 
 
+.itemContainer{
+    /* margin: auto; */
+    /* display: flex; */
+    /* align-items: left; */
+    /* justify-content: left; */
+}
+
+/* dailies */
+.questCheckBox{
+    display: flex;
+    height: 56px;
+    width: 160px;
+    padding: 4px 16px;
+    justify-content: left;
+    align-items: center;
+    gap: 16px;
+    border-radius: 8px;
+border: 1px solid var(--lIGHTgRADIENT, #FFD9B4);
+background: var(--BG-2, #EAC8AF);
+box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.15);
+text-align: left;
+margin: auto;
+
+}
+
+.questCheckBox input {
+    justify-content: flex-end;
+}
+
+
 /* TAB NAVIGATION */
 .tabNav {
     border-radius: 0%;
@@ -160,39 +190,4 @@
 
 
 
-/* .regionProgression.oblivion {
-    background: linear-gradient(to right, #98e0ff86 0%, #b9eaff75 100%);
-}
 
-.regionProgression.chuchu {
-    background: linear-gradient(to right, #ffccff77 0%, #bf4dbf59 100%);
-}
-
-
-.regionProgression.lachelein {
-    background: linear-gradient(to right, #fa61cf7c 0%, #ff7b4385 100%);
-}
-
-.regionProgression.arcana {
-    background: linear-gradient(to right, #9E96FF 0%, #57A4 100%);
-}
-
-.regionProgression.morass {
-    background: linear-gradient(to right, #EE4C5D4D 0%, #F3BCAA4D 100%);
-}
-
-.regionProgression.esfera {
-    background: linear-gradient(to right, #98e0ff6b 0%, #b9eaff7c 100%);
-}
-
-.regionProgression.tenebris {
-    background: linear-gradient(to right, #98E0FF33 0%, #B9EAFF2A 100%);
-} */
-
-
-
-
-
-
-
-/* edit prog-------------------------------------------- */
