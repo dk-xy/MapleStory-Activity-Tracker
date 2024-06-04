@@ -27,7 +27,7 @@ export default function Character() {
         dispatch(resetDailyQuestsCompletionStatuses());
         dispatch(resetDailyBossCompletionStatuses());
         dispatch(resetWeeklyBossCompletionStatuses());
-    
+
         // Set up a timer to dispatch the actions every minute
         const timer = setInterval(() => {
             dispatch(resetDailyCompletionStatuses());
@@ -58,60 +58,96 @@ export default function Character() {
 
                 // Progression content...
                 <>
-                <div className='resetContainer'>
-                <div className='reset'>
-                <div className='resetLabel'> Daily reset:</div>
-                <CountdownDaily /> {/* Countdown to next Monday */}
-                </div>
-                <div div className='reset'>
-                <div className='resetLabel'>Weekly reset:</div>
-                <Countdown /> {/* Countdown to next Sunday */}
-                </div>
-                </div>
-               
-                    {/* ARCANE RIVER---------------------------- */}
-                    {character.progression.symbols.arcaneRiver.isActive && (
-                        <div>
-                            <h3>Arcane River</h3>
-                            <div className='arcaneRiver itemContainer'>
-                                {Object.values(character.progression.symbols.arcaneRiver.regions).map((region, index) => (
-                                    region && region.isActive && <RegionCompletion key={index} region={region} characterId={id} />
-                                ))}
-                            </div>
+                    <div className='resetContainer'>
+                        <div className='reset'>
+                            <div className='resetLabel'> Daily reset:</div>
+                            <CountdownDaily /> {/* Countdown to next Monday */}
+                        </div>
+                        <div div className='reset'>
+                            <div className='resetLabel'>Weekly reset:</div>
+                            <Countdown /> {/* Countdown to next Sunday */}
+                        </div>
+                    </div>
+                    {/* symbole conbtainer if either arcaneRiver or grandis isActive*/}
+                    {(character.progression.symbols.arcaneRiver.isActive || character.progression.symbols.grandis.isActive) && (
+                        <div className='symbolsContainer'>
+
+
+                            {/* ARCANE RIVER---------------------------- */}
+                            {character.progression.symbols.arcaneRiver.isActive && (
+                                <div className='symbolsBox'>
+                                    <h3>Arcane River</h3>
+                                    <div className='arcaneRiver itemContainer'>
+                                        {Object.values(character.progression.symbols.arcaneRiver.regions).map((region, index) => (
+                                            region && region.isActive && <RegionCompletion key={index} region={region} characterId={id} />
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* GRANDIS-------------------------------- */}
+                            {character.progression.symbols.grandis.isActive && (
+                                <div className='symbolsBox'>
+                                    <h3>Grandis</h3>
+                                    <div className='arcaneRiver itemContainer'>
+                                        {Object.values(character.progression.symbols.grandis.regions).map((region, index) => (
+                                            region && region.isActive && <GrandisCompletion key={index} region={region} characterId={id} />
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     )}
 
-                    {/* GRANDIS-------------------------------- */}
-                    {character.progression.symbols.grandis.isActive && (
-                        <div>
-                            <h3>Grandis</h3>
-                            <div className='arcaneRiver itemContainer'>
-                                {Object.values(character.progression.symbols.grandis.regions).map((region, index) => (
-                                    region && region.isActive && <GrandisCompletion key={index} region={region} characterId={id} />
-                                ))}
-                            </div>
-                        </div>
-                    )}
+                    {(
+                        Object.values(character.progression.dailies.quests).some(daily => daily && daily.isActive) ||
+                        Object.values(character.progression.weeklies.quests).some(weekly => weekly && weekly.isActive)
+                    ) && (
+                            <div className='activityContainer'>
+                                {/* DAILIES-------------------------------- */}
+                                {Object.values(character.progression.dailies.quests).some(daily => daily && daily.isActive) && (
+                                    <div className='activityBox'>
+                                        <h3>Dailies</h3>
+                                        <div className='dailies itemContainer'>
+                                            {Object.values(character.progression.dailies.quests).map((daily, index) => (
+                                                daily && daily.isActive && <QuestCompletion key={index} quest={daily} characterId={id} questType={'daily'} />
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
 
+                                {/* WEEKLIES -------------------------------- */}
+                                {Object.values(character.progression.weeklies.quests).some(weekly => weekly && weekly.isActive) && (
+                                    <div className='activityBox'>
+                                        <h3>Weeklies</h3>
+                                        <div className='weeklies itemContainer'>
+                                            {Object.values(character.progression.weeklies.quests).map((weekly, index) => (
+                                                weekly && weekly.isActive && <QuestCompletion key={index} quest={weekly} characterId={id} questType={'weekly'} />
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     {/* DAILIES-------------------------------- */}
-                    <div>
+                    {/* <div className='activityBox'>
                         <h3>Dailies</h3>
                         <div className='dailies itemContainer'>
                             {Object.values(character.progression.dailies.quests).map((daily, index) => (
                                 daily && daily.isActive && <QuestCompletion key={index} quest={daily} characterId={id} questType={'daily'} />
                             ))}
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* WEEKLIES -------------------------------- */}
-                    <div>
+                    {/* <div className='activityBox'>
                         <h3>Weeklies</h3>
                         <div className='weeklies itemContainer'>
                             {Object.values(character.progression.weeklies.quests).map((weekly, index) => (
                                 weekly && weekly.isActive && <QuestCompletion key={index} quest={weekly} characterId={id} questType={'weekly'} />
                             ))}
                         </div>
-                    </div>
+                    </div> */}
 
 
                 </>

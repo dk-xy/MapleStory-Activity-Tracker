@@ -1,14 +1,48 @@
 /* SHOW PROG---------------------------------- */
 
+
+
+.symbolsContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    /* default to column for mobile */
+    margin: 0;
+    margin-bottom: 5%;
+    /* remove margins if any */
+}
+
+.activityBox, .symbolsContainer{
+    text-align: left;
+}
+
+
+.activityBox h3 {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: 1em;
+}
+
 .itemContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: left;
+    align-items: flex-start;
     margin: 0 auto;
     width: 100%;
     gap: 16px;
 }
+
+.dailies {
+    justify-content: flex-start;
+}
+
 
 .regionProgression {
     width: 112px;
@@ -137,30 +171,46 @@
 }
 
 
-.itemContainer{
-    /* margin: auto; */
-    /* display: flex; */
-    /* align-items: left; */
-    /* justify-content: left; */
-    margin: 0 auto;
+
+
+.questCheckBox img {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    margin: 0;
+    padding: 0;
+    /* margin: 0 auto; */
+
 }
 
 /* dailies */
-.questCheckBox{
+.questCheckBox {
     display: flex;
     height: 56px;
-    width: 160px;
+    width: 165px;
     padding: 4px 16px;
+    /* space between */
+
     justify-content: left;
     align-items: center;
-    gap: 16px;
+    gap: 8px;
     border-radius: 8px;
-border: 1px solid var(--lIGHTgRADIENT, #FFD9B4);
-background: var(--BG-2, #EAC8AF);
-box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.15);
-text-align: left;
-margin: auto;
+    border: 1px solid var(--lIGHTgRADIENT, #FFD9B4);
+    background: var(--BG-2, #EAC8AF);
+    box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.15);
+    text-align: left;
 
+    line-height: 1.02;
+
+}
+
+.questCheckBox label {
+    width: 100px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+    /* margin: 0;
+    padding: 0; */
 }
 
 .questCheckBox input {
@@ -182,7 +232,7 @@ margin: auto;
 }
 
 .tabNav.active {
-    
+
     border-bottom: solid 2px #876544;
     font-size: 23.04px;
     font-style: normal;
@@ -192,3 +242,25 @@ margin: auto;
 
 
 
+/* MOBILE */
+
+@media (min-width: 768px) {
+    .itemContainer {
+        width: 100%;
+        margin: none;
+        flex-wrap: wrap;
+    }
+
+    .symbolsContainer, .activityContainer {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+
+    }
+
+    .symbolsBox, .activityBox{
+        width: 50%;
+    }
+
+}
