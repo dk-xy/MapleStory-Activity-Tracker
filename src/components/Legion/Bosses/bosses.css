@@ -1,0 +1,89 @@
+
+.allBossesContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+
+    margin: auto;
+    gap: 6px 8px;
+}
+
+.allBossesContainer::after {
+    content: '';
+    flex-shrink:1;
+}
+.bossCompletionContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: 385px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    border: 1px solid var(--lIGHTgRADIENT, #FFD9B4);
+    background-color: #EAC8AF;
+    overflow: hidden;
+    padding: 16px 24px;
+
+}
+.bossInfo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin-left: 16px;
+    margin-right: 16px;
+    padding: 8px;
+
+ 
+    width: 80%;
+
+}
+
+.imageContainer{
+    width: 60px;
+    display: flex;
+    margin-left: -20px;
+    
+}
+
+.bossCompletionContainer img {
+    width: 130%;
+    height: 100%; /* Set the height to 100% so the image fills the container */
+    flex-shrink: 0;
+    object-fit: cover; /* This will scale the image to cover the container, cropping any excess */
+}
+
+.bossCompletionContainer h3{
+    color: var(--Dark, #2D2D2D);
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 0%;
+
+}
+
+
+
+.bossName {
+    border-radius: 8px;
+    border: 1px solid #D1B9A1;
+    background: linear-gradient(108deg, rgba(231, 231, 231, 0.50) 3.2%, rgba(255, 255, 255, 0.00) 94.9%, rgba(233, 233, 233, 0.50) 94.9%), linear-gradient(99deg, rgba(110, 71, 50, 0.25) 2.02%, rgba(205, 189, 173, 0.25) 85.02%);
+    background-color: #ffecd99d;
+    backdrop-filter: blur(7.5px);
+    width: auto;
+/* padding: 8px 16px; */
+}
+
+
+.difficultyConatiner{
+    /* align to flex end */
+    width: 80%;
+
+    display: flex;
+    justify-content: flex-end;
+}

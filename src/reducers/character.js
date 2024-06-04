@@ -904,7 +904,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                 ]
                             }
                         },
-                        grandis:{
+                        grandis: {
                             seren: {
                                 key: "seren",
                                 name: "Seren",
@@ -913,7 +913,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                     {
                                         name: "Normal",
                                         isActive: false,
-                                        type: "daily",
+                                        type: "weekly",
                                         completion: {
                                             daily: false,
                                             dailyDate: null,
@@ -947,7 +947,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                     {
                                         name: "Easy",
                                         isActive: false,
-                                        type: "daily",
+                                        type: "weekly",
                                         completion: {
                                             daily: false,
                                             dailyDate: null,
@@ -990,10 +990,10 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                     {
                                         name: "Easy",
                                         isActive: false,
-                                        type: "daily",
+                                        type: "weekly",
                                         completion: {
-                                            daily: false,
-                                            dailyDate: null,
+                                            weekly: false,
+                                            weeklyDate: null,
                                         },
                                     },
                                     {
@@ -1024,8 +1024,8 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         },
                                     },
                                 ]
-                                
-                            
+
+
                             }
                         }
 
@@ -1043,6 +1043,8 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             return { characters: {}, maxId: 0 };
         default:
             return state;
+
+        // TOGGLE PROGRESSION ITEMS ON TABS
         case 'TOGGLE_REGION': {
             const { id, regionName } = action.payload;
             const character = state.Characters[id];
@@ -1111,7 +1113,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
 
             return { ...state };
 
-        // PROGRESSION---------------------------------------------------------------------
+        // PROGRESSION COMPLETION---------------------------------------------------------------------
 
         case 'TOGGLE_COMPLETION':
             const { characterId, regionNameC, completionType } = action.payload;
@@ -1200,66 +1202,121 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
         }
 
         // BOSSES--------------------------------------------------------------------------
+        // BOSSES--------------------------------------------------------------------------
         case 'TOGGLE_BOSS_DIFFICULTY_ACTIVE': {
             const { bossId, bossKey, difficultyName } = action.payload;
-        
+
             // Find the character and the boss
             const character = state.Characters[bossId];
             const boss = character.bosses.mapleWorld[bossKey];
-        
+
             // Find the difficulty
             const difficulty = boss.difficulty.find(diff => diff.name === difficultyName);
-        
             // Toggle the active status
-            difficulty.isActive = !difficulty.isActive;
-        
-            return { ...state };
-        }
+         
+            // Check if any difficulty is active
+            const anyActive = boss.difficulty.some(diff => diff.isActive);
 
+            // Toggle the boss active status
+            if (anyActive) {
+                boss.isActive = true;
+            } else {
+                boss.isActive = false;
+            }
+            difficulty.isActive = !difficulty.isActive;
+            return { ...state };
+
+        
+        }
         case 'TOGGLE_BOSS_DIFFICULTY_COMPLETION': {
             const { bossId, bossKey, difficultyName, completionType } = action.payload;
-        
+
             // Find the character and the boss
             const character = state.Characters[bossId];
             const boss = character.bosses.mapleWorld[bossKey];
-        
+
             // Find the difficulty
             const difficulty = boss.difficulty.find(diff => diff.name === difficultyName);
-        
+
             // Toggle the completion status
             difficulty.completion[completionType] = !difficulty.completion[completionType];
-        
+
+            // Get the current date and convert to UTC
+            const nowBoss = new Date();
+            const nowBossUTC = new Date(Date.UTC(nowBoss.getFullYear(), nowBoss.getMonth(), nowBoss.getDate()));
+
+            // Set the completion date
+            if (completionType === 'daily') {
+                difficulty.completion.dailyDate = nowBossUTC;
+            } else if (completionType === 'weekly') {
+                difficulty.completion.weeklyDate = nowBossUTC;
+            }
+
             return { ...state };
         }
         // BOSS RESETS  ---------------------------------------------------------------------
-        case 'RESET_DAILY_BOSS_COMPLETION_STATUSES':
+        case 'RESET_BOSS_COMPLETION_STATUSES':
             // Get the current date and convert to UTC
-            const nowBossDaily = new Date();
-            const nowBossUTCDaily = new Date(Date.UTC(nowBossDaily.getFullYear(), nowBossDaily.getMonth(), nowBossDaily.getDate()));
-        
+            const nowBossDaily = new Date(Date.now());
+            nowBossDaily.setMinutes(nowBossDaily.getMinutes() - nowBossDaily.getTimezoneOffset());
+
             // Reset daily completion status for all bosses where the completion date is not today
             for (const character of Object.values(state.Characters)) {
                 for (const world of Object.values(character.bosses)) {
                     for (const boss of Object.values(world)) {
-                        for (const difficulty of boss.difficulty) {
-                            if (difficulty.type === 'daily') {
-                                const completionDate = new Date(difficulty.completion.dailyDate);
-                                if (completionDate.getUTCDate() !== nowBossUTCDaily.getDate() || completionDate.getUTCMonth() !== nowBossUTCDaily.getMonth() || completionDate.getUTCFullYear() !== nowBossUTCDaily.getFullYear()) {
-                                    difficulty.completion.daily = false;
+                        
+                        if (boss.isActive){
+                            console.log(boss)
+                            for (const difficulty of boss.difficulty) {
+                                    if (difficulty.type === 'daily') {
+                                        if (difficulty.completion.daily) {
+                                            const completionDate = new Date(difficulty.completion.dailyDate);
+                                            if (completionDate.getUTCDate() !== nowBossDaily.getDate() || completionDate.getUTCMonth() !== nowBossDaily.getMonth() || completionDate.getUTCFullYear() !== nowBossDaily.getFullYear()) {
+                                                difficulty.completion.daily = false;
+                                                // console.log("RESET")
+                                                // console.log(boss.name)
+                                            
+                                        }
+        
+                                    }
+        
+                                    if (difficulty.type === 'weekly') {
+                                        if (difficulty.completion.weekly) {
+                                            const completionDate = new Date(difficulty.completion.weeklyDate);
+                                            if (completionDate.getUTCDate() !== nowBossDaily.getDate() || completionDate.getUTCMonth() !== nowBossDaily.getMonth() || completionDate.getUTCFullYear() !== nowBossDaily.getFullYear()) {
+                                                difficulty.completion.weekly = false;
+                                                // console.log("RESET")
+                                                // console.log(boss.name)
+                                            }
+                                        }
+        
+        
+        
+                                    }
                                 }
                             }
                         }
+
                     }
                 }
+                return { ...state };
             }
-        
-            return { ...state };
-        
-        case 'RESET_WEEKLY_COMPLETION_STATUSES':
+
+          
+
+        case 'RESET_WEEKLY_BOSS_COMPLETION_STATUSES':
             // Get the current date and convert to UTC
-            const nowBossWeekly = new Date();
-            const nowBossUTCWeekly = new Date(Date.UTC(nowBossWeekly.getFullYear(), nowBossWeekly.getMonth(), nowBossWeekly.getDate()));
-        
+            const nowBossWeekly = new Date(Date.now());
+            nowBossWeekly.setMinutes(nowBossWeekly.getMinutes() - nowBossWeekly.getTimezoneOffset());
+
+
+            // const completionDate = new Date(region.completion.dailyDate);
+            // if (completionDate.getUTCDate() !== nowUTC.getDate() || completionDate.getUTCMonth() !== nowUTC.getMonth() || completionDate.getUTCFullYear() !== nowUTC.getFullYear()) {
+            //     region.completion.daily = false;
+            // }
+
+
+
             // Reset weekly completion status for all bosses where the completion date is not this week
             for (const character of Object.values(state.Characters)) {
                 for (const world of Object.values(character.bosses)) {
@@ -1268,7 +1325,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                             if (difficulty.type === 'weekly') {
                                 const completionDate = new Date(difficulty.completion.weeklyDate);
                                 // Check if completionDate is before the start of this week
-                                if (completionDate < new Date(nowBossUTCWeekly.setDate(nowBossUTCWeekly.getDate() - nowBossUTCWeekly.getDay()))) {
+                                if (completionDate < new Date(nowBossWeekly.setDate(nowBossWeekly.getDate() - nowBossWeekly.getDay()))) {
                                     difficulty.completion.weekly = false;
                                 }
                             }
@@ -1276,9 +1333,8 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                     }
                 }
             }
-        
-            return { ...state };
 
+            return { ...state };
 
 
         // case 'TOGGLE_COMPLETION':
@@ -1342,6 +1398,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                     const completionDate = new Date(region.completion.dailyDate);
                     if (completionDate.getUTCDate() !== nowUTC.getDate() || completionDate.getUTCMonth() !== nowUTC.getMonth() || completionDate.getUTCFullYear() !== nowUTC.getFullYear()) {
                         region.completion.daily = false;
+
                     }
                 }
                 for (const region of Object.values(character.progression.symbols.grandis.regions)) {
@@ -1376,7 +1433,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             }
 
             return { ...state };
-        
+
         // reset of quests!!! ---------------------------------------
         case RESET_DAILY_QUESTS_COMPLETION_STATUS:
             // Get the current date and convert to UTC
@@ -1387,14 +1444,16 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             for (const character of Object.values(state.Characters)) {
                 for (const quest of Object.values(character.progression.dailies.quests)) {
                     const completionDate = new Date(quest.completion.dailyDate);
+
                     if (completionDate.getUTCDate() !== nowUTCDaily.getDate() || completionDate.getUTCMonth() !== nowUTCDaily.getMonth() || completionDate.getUTCFullYear() !== nowUTCDaily.getFullYear()) {
+                        console.log("RESET")
                         quest.completion.daily = false;
                     }
                 }
             }
 
             return { ...state };
-        
+
 
     }
 };

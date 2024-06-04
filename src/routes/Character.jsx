@@ -6,11 +6,13 @@ import EditCharacter from './Character/EditCharacter';
 import RegionCompletion from '../components/Legion/Progression/RegionCompletion';
 import GrandisCompletion from '../components/Legion/Progression/GrandisCompletion';
 import QuestCompletion from '../components/Legion/Progression/QuestCompletion';
-import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses, resetDailyQuestsCompletionStatuses, resetDailyBossCompletionStatuses, resetWeeklyBossCompletionStatuses } from '../redux/actions/characters';
+import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses, resetDailyQuestsCompletionStatuses, resetBossCompletionStatuses,  } from '../redux/actions/characters';
 import BossCompletion from '../components/Legion/Bosses/BossCompletion';
 import Countdown from '../components/Legion/Countdown';
 import CountdownDaily from '../components/Legion/CountdownDaily';
 import ResetCountdown from '../components/Legion/ResetCountdown';
+
+
 
 export default function Character() {
     const dispatch = useDispatch();
@@ -26,16 +28,16 @@ export default function Character() {
         dispatch(resetDailyCompletionStatuses());
         dispatch(resetWeeklyCompletionStatuses());
         dispatch(resetDailyQuestsCompletionStatuses());
-        dispatch(resetDailyBossCompletionStatuses());
-        dispatch(resetWeeklyBossCompletionStatuses());
+        dispatch(resetBossCompletionStatuses());
+
 
         // Set up a timer to dispatch the actions every minute
         const timer = setInterval(() => {
             dispatch(resetDailyCompletionStatuses());
             dispatch(resetWeeklyCompletionStatuses());
-            dispatch(resetDailyBossCompletionStatuses());
-            dispatch(resetWeeklyBossCompletionStatuses());
-        }, 60000); // 60000 milliseconds = 1 minute
+            dispatch(resetDailyQuestsCompletionStatuses());
+            dispatch(resetBossCompletionStatuses());
+        }, 3000); // 60000 milliseconds = 1 minute
 
         // Clean up function
         return () => clearInterval(timer);
@@ -149,12 +151,16 @@ export default function Character() {
                 <div>
                     <h3>BOSSES</h3>
                     <ResetCountdown weeklyResetDay={4} />
+
+                    <div className='allBossesContainer'>
                     {Object.values(character.bosses.mapleWorld)
                         .filter(boss => boss.difficulty.some(difficulty => difficulty.isActive))
                         .map((boss, index) => (
                             <BossCompletion key={index} boss={boss} characterId={id} />
                         ))
                     }
+                    </div>
+                   
                 </div>
 
 

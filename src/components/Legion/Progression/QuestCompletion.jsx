@@ -26,7 +26,6 @@ const questToImage = {
     "gollux": gollux,
     "yuGarden": yuGarden,
     "phantomForest": shadowknight,
-
    
     // ... other quests ...
 };
@@ -55,7 +54,7 @@ function QuestCompletion({key, quest, characterId, questType}) {
                     <label>{quest.questName} </label>
                     <input
                         type="checkbox"
-                        checked={quest.completion.isActive}
+                        checked={quest.completion.daily || quest.completion.weekly}
                         onChange={handleCheckboxChange}
                     />
                 </div>
