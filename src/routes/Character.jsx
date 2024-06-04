@@ -37,7 +37,7 @@ export default function Character() {
             dispatch(resetWeeklyCompletionStatuses());
             dispatch(resetDailyQuestsCompletionStatuses());
             dispatch(resetBossCompletionStatuses());
-        }, 3000); // 60000 milliseconds = 1 minute
+        }, 6000); // 60000 milliseconds = 1 minute
 
         // Clean up function
         return () => clearInterval(timer);

@@ -1139,8 +1139,10 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                 if (regionC.completion[completionType]) {
                     if (completionType === 'daily') {
                         regionC.completion.dailyDate = new Date().toISOString();
+                        console.log(regionC.completion.dailyDate)
                     } else if (completionType === 'weekly') {
                         regionC.completion.weeklyDate = new Date().toISOString();
+                        console.log(regionC.completion.weeklyDate)
                     }
                 }
 
@@ -1273,6 +1275,9 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                             const completionDate = new Date(difficulty.completion.dailyDate);
                                             if (completionDate.getUTCDate() !== nowBossDaily.getDate() || completionDate.getUTCMonth() !== nowBossDaily.getMonth() || completionDate.getUTCFullYear() !== nowBossDaily.getFullYear()) {
                                                 difficulty.completion.daily = false;
+                                                // redefine difficulty.completion.dailyDate as null instead of a date
+                                                difficulty.completion.dailyDate = null;
+                                                
                                                 // console.log("RESET")
                                                 // console.log(boss.name)
                                             
@@ -1285,6 +1290,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                             const completionDate = new Date(difficulty.completion.weeklyDate);
                                             if (completionDate.getUTCDate() !== nowBossDaily.getDate() || completionDate.getUTCMonth() !== nowBossDaily.getMonth() || completionDate.getUTCFullYear() !== nowBossDaily.getFullYear()) {
                                                 difficulty.completion.weekly = false;
+                                                difficulty.completion.weeklyDate = false;
                                                 // console.log("RESET")
                                                 // console.log(boss.name)
                                             }
@@ -1391,25 +1397,41 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             // Get the current date and convert to UTC
             const now = new Date();
             const nowUTC = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
-
+        
+            // Clone the state
+            const newState = JSON.parse(JSON.stringify(state));
+        
             // Reset daily.isCompleted for all regions where the completion date is not today
-            for (const character of Object.values(state.Characters)) {
+            for (const character of Object.values(newState.Characters)) {
                 for (const region of Object.values(character.progression.symbols.arcaneRiver.regions)) {
-                    const completionDate = new Date(region.completion.dailyDate);
-                    if (completionDate.getUTCDate() !== nowUTC.getDate() || completionDate.getUTCMonth() !== nowUTC.getMonth() || completionDate.getUTCFullYear() !== nowUTC.getFullYear()) {
-                        region.completion.daily = false;
-
+                    
+                    if(region.completion.daily){
+                        const completionDate = new Date(region.completion.dailyDate);
+                        console.log(completionDate)
+                        console.log(completionDate.toUTCString())
+                        if (completionDate.getUTCDate() !== nowUTC.getDate() || completionDate.getUTCMonth() !== nowUTC.getMonth() || completionDate.getUTCFullYear() !== nowUTC.getFullYear()) {
+                            region.completion.daily = false;
+                            region.completion.dailyDate = null;
+                        }
                     }
+                   
                 }
                 for (const region of Object.values(character.progression.symbols.grandis.regions)) {
-                    const completionDate = new Date(region.completion.dailyDate);
-                    if (completionDate.getUTCDate() !== nowUTC.getDate() || completionDate.getUTCMonth() !== nowUTC.getMonth() || completionDate.getUTCFullYear() !== nowUTC.getFullYear()) {
-                        region.completion.daily = false;
+                   
+                    if(region.completion.daily){
+                        const completionDateConvert = new Date(region.completion.dailyDate);
+                        const completionDate = new Date(Date.UTC(completionDateConvert.getFullYear(), completionDateConvert.getMonth(), completionDateConvert.getDate()));
+                        console.log(completionDate)
+                        console.log(completionDate.toUTCString())
+                        if (completionDate.getDate() !== nowUTC.getDate() || completionDate.getMonth() !== nowUTC.getMonth() || completionDate.getFullYear() !== nowUTC.getFullYear()) {
+                            region.completion.daily = false;
+                            region.completion.dailyDate = null;
+                        }
                     }
                 }
             }
-
-            return { ...state };
+        
+            return newState;
 
         case RESET_WEEKLY_COMPLETION_STATUSES:
             // Get the current date and the date of last Sunday
@@ -1448,6 +1470,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                     if (completionDate.getUTCDate() !== nowUTCDaily.getDate() || completionDate.getUTCMonth() !== nowUTCDaily.getMonth() || completionDate.getUTCFullYear() !== nowUTCDaily.getFullYear()) {
                         console.log("RESET")
                         quest.completion.daily = false;
+                        quest.completion.dailyDate = "null";
                     }
                 }
             }
