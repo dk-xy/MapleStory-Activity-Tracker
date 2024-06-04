@@ -32,11 +32,19 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #2d2d2d;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--secondary);
+}
+
+.appMenu a.active {
+  color: var(--secondary);
+}
+
+.menuLabel{
+  font-weight: 500;
 }
 
 body {
@@ -80,15 +88,20 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.appMenu :active{
+  color: var(--secondary);
+
+}
+
 
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #2d2d2d;
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    /* color: #747bff; */
   }
   button {
     background-color: #f9f9f9;
@@ -129,22 +142,24 @@ nav{
 
 }
 
-nav ul{
- 
+nav ul li {
+  color: #2D2D2D;
+}
 
- 
+nav ul li:active {
+  color: var(--secondary);
 }
 
 .appMenu {
   background: linear-gradient(94deg, rgba(156, 110, 73, 0.49) -16.45%, rgba(133, 116, 103, 0.43) 128.2%), rgba(255, 236, 217, 0.50);
   display: flex;
- 
-  width: 401px;
+ min-width: 300px;
+  max-width: 400px;
   height: 64px;
   padding: 16px 8px;
   justify-content: center;
   align-items: center;
-  gap: 24px;
+  gap: 32px;
   margin-top: -5px;
 
 

@@ -18,7 +18,7 @@ const bossToImage = {
     "papulatus": papulatusPic,
     "cygnus": cygnusPic,
     "lotus": lotusPic,
-    
+
     // ... other quests ...
 };
 
@@ -34,28 +34,31 @@ function BossCompletion({ boss, characterId }) {
         <div className='bossCompletionContainer'>
             <div className='imageContainer'><img src={bossToImage[boss.key]} /></div>
             <div className='bossInfo'>
-            <div className='bossName'>
-                <h3>{boss.name}</h3>
+                <div className='bossName'>
+                    <h3>{boss.name}</h3>
+                </div>
+
+                <div className='difficultyConatiner'>
+                    {boss.difficulty.map((difficulty, index) => (
+                        difficulty.isActive && (
+                            <div className={difficulty.name} key={index}>
+                                <label>
+                                    {difficulty.name}
+                                </label>
+                                <input
+                                    type="checkbox"
+                                    checked={difficulty.completion[difficulty.type]}
+                                    onChange={() => handleCheckboxChange(difficulty.name, difficulty.type)}
+                                // add difficultyName as class
+
+                                />
+
+                            </div>
+                        )
+                    ))}
+                </div>
             </div>
 
-            <div className='difficultyConatiner'>
-            {boss.difficulty.map((difficulty, index) => (
-                difficulty.isActive && (
-                    <div key={index}>
-                        <label>
-                            {difficulty.name}
-                            <input
-                                type="checkbox"
-                                checked={difficulty.completion[difficulty.type]}
-                                onChange={() => handleCheckboxChange(difficulty.name, difficulty.type)}
-                            />
-                        </label>
-                    </div>
-                )
-            ))}
-            </div>
-            </div>
-            
         </div>
     );
 }

@@ -1,23 +1,23 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, NavLink } from 'react-router-dom';
 
 import Dashboard from './routes/Dashboard';
 import Legion from './routes/Legion';
 import Checklists from './routes/Checklists';
 import Character from './routes/Character';
 import EditCharacter from './routes/Character/EditCharacter';
-
+import { IconUsers, IconChartPie, IconChecklist } from '@tabler/icons-react';
 import { useDispatch } from 'react-redux';
 import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses } from './redux/actions/characters';
 
 const App = () => {
   const [count, setCount] = useState(0)
- 
 
-  
-  ;
+
+
+    ;
 
   return (
     <>
@@ -44,7 +44,10 @@ const Navigation = () => {
                           height="25px"
                           width="25px"
                       /> */}
-            <Link to="/dashboard">Dashboard</Link>
+            <NavLink to="/dashboard">
+              <IconChartPie />
+              <div className='menuLabel'>Dashboard</div>
+              </NavLink>
           </li>
           <li className='menuElement'>
             {/* <People
@@ -53,7 +56,10 @@ const Navigation = () => {
                           height="25px"
                           width="25px"
                       /> */}
-            <Link to="/legion">Legion</Link>
+            <NavLink to="/legion" >
+              <IconUsers />
+              <div className='menuLabel'>Legion</div>
+            </NavLink>
           </li>
           <li className='menuElement'>
             {/* <Checkbox
@@ -62,7 +68,10 @@ const Navigation = () => {
                           height="25px"
                           width="25px"
                       /> */}
-            <Link to="/checklists">Checklists</Link>
+            <NavLink to="/checklists">
+              <IconChecklist />
+              <div className='menuLabel'>Checklists</div>
+              </NavLink>
           </li>
           {/* Add other menu items */}
         </ul>
