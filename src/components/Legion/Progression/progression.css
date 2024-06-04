@@ -1,5 +1,11 @@
 /* SHOW PROG---------------------------------- */
 
+.symbolsBox, .activityBox {
+    background-color: #eac8af3f;
+    margin: 8px auto;
+    padding: 16px 8px;
+}
+
 
 
 .symbolsContainer {
@@ -17,15 +23,17 @@
     text-align: left;
 }
 
+.activityBox{
+    
+}
+
 
 .activityBox h3 {
     width: 100%;
-    margin: 0;
+
     padding: 0;
-    text-align: center;
-    font-size: 1.5em;
-    font-weight: 500;
-    margin-bottom: 1em;
+    text-align: left;
+    line-height: 1.5;
 }
 
 .itemContainer {
@@ -34,8 +42,9 @@
     flex-wrap: wrap;
     justify-content: left;
     align-items: flex-start;
-    margin: 0 auto;
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    /* width: 100%; */
     gap: 16px;
 }
 
@@ -260,7 +269,8 @@
     }
 
     .symbolsBox, .activityBox{
-        width: 50%;
+        width: 45%;
+        margin: 8px auto;
     }
 
 }

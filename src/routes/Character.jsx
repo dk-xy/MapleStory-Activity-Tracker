@@ -10,6 +10,7 @@ import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses, resetDaily
 import BossCompletion from '../components/Legion/Bosses/BossCompletion';
 import Countdown from '../components/Legion/Countdown';
 import CountdownDaily from '../components/Legion/CountdownDaily';
+import ResetCountdown from '../components/Legion/ResetCountdown';
 
 export default function Character() {
     const dispatch = useDispatch();
@@ -58,16 +59,8 @@ export default function Character() {
 
                 // Progression content...
                 <>
-                    <div className='resetContainer'>
-                        <div className='reset'>
-                            <div className='resetLabel'> Daily reset:</div>
-                            <CountdownDaily /> {/* Countdown to next Monday */}
-                        </div>
-                        <div div className='reset'>
-                            <div className='resetLabel'>Weekly reset:</div>
-                            <Countdown /> {/* Countdown to next Sunday */}
-                        </div>
-                    </div>
+                <ResetCountdown weeklyResetDay={7} />
+
                     {/* symbole conbtainer if either arcaneRiver or grandis isActive*/}
                     {(character.progression.symbols.arcaneRiver.isActive || character.progression.symbols.grandis.isActive) && (
                         <div className='symbolsContainer'>
@@ -155,6 +148,7 @@ export default function Character() {
                 // Bosses content...
                 <div>
                     <h3>BOSSES</h3>
+                    <ResetCountdown weeklyResetDay={4} />
                     {Object.values(character.bosses.mapleWorld)
                         .filter(boss => boss.difficulty.some(difficulty => difficulty.isActive))
                         .map((boss, index) => (
