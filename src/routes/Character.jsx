@@ -6,7 +6,7 @@ import EditCharacter from './Character/EditCharacter';
 import RegionCompletion from '../components/Legion/Progression/RegionCompletion';
 import GrandisCompletion from '../components/Legion/Progression/GrandisCompletion';
 import QuestCompletion from '../components/Legion/Progression/QuestCompletion';
-import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses, resetDailyQuestsCompletionStatuses } from '../redux/actions/characters';
+import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses, resetDailyQuestsCompletionStatuses, resetDailyBossCompletionStatuses, resetWeeklyBossCompletionStatuses } from '../redux/actions/characters';
 import BossCompletion from '../components/Legion/Bosses/BossCompletion';
 import Countdown from '../components/Legion/Countdown';
 import CountdownDaily from '../components/Legion/CountdownDaily';
@@ -25,10 +25,15 @@ export default function Character() {
         dispatch(resetDailyCompletionStatuses());
         dispatch(resetWeeklyCompletionStatuses());
         dispatch(resetDailyQuestsCompletionStatuses());
+        dispatch(resetDailyBossCompletionStatuses());
+        dispatch(resetWeeklyBossCompletionStatuses());
+    
         // Set up a timer to dispatch the actions every minute
         const timer = setInterval(() => {
             dispatch(resetDailyCompletionStatuses());
             dispatch(resetWeeklyCompletionStatuses());
+            dispatch(resetDailyBossCompletionStatuses());
+            dispatch(resetWeeklyBossCompletionStatuses());
         }, 60000); // 60000 milliseconds = 1 minute
 
         // Clean up function

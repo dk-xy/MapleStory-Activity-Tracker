@@ -1231,6 +1231,54 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
         
             return { ...state };
         }
+        // BOSS RESETS  ---------------------------------------------------------------------
+        case 'RESET_DAILY_BOSS_COMPLETION_STATUSES':
+            // Get the current date and convert to UTC
+            const nowBossDaily = new Date();
+            const nowBossUTCDaily = new Date(Date.UTC(nowBossDaily.getFullYear(), nowBossDaily.getMonth(), nowBossDaily.getDate()));
+        
+            // Reset daily completion status for all bosses where the completion date is not today
+            for (const character of Object.values(state.Characters)) {
+                for (const world of Object.values(character.bosses)) {
+                    for (const boss of Object.values(world)) {
+                        for (const difficulty of boss.difficulty) {
+                            if (difficulty.type === 'daily') {
+                                const completionDate = new Date(difficulty.completion.dailyDate);
+                                if (completionDate.getUTCDate() !== nowBossUTCDaily.getDate() || completionDate.getUTCMonth() !== nowBossUTCDaily.getMonth() || completionDate.getUTCFullYear() !== nowBossUTCDaily.getFullYear()) {
+                                    difficulty.completion.daily = false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        
+            return { ...state };
+        
+        case 'RESET_WEEKLY_COMPLETION_STATUSES':
+            // Get the current date and convert to UTC
+            const nowBossWeekly = new Date();
+            const nowBossUTCWeekly = new Date(Date.UTC(nowBossWeekly.getFullYear(), nowBossWeekly.getMonth(), nowBossWeekly.getDate()));
+        
+            // Reset weekly completion status for all bosses where the completion date is not this week
+            for (const character of Object.values(state.Characters)) {
+                for (const world of Object.values(character.bosses)) {
+                    for (const boss of Object.values(world)) {
+                        for (const difficulty of boss.difficulty) {
+                            if (difficulty.type === 'weekly') {
+                                const completionDate = new Date(difficulty.completion.weeklyDate);
+                                // Check if completionDate is before the start of this week
+                                if (completionDate < new Date(nowBossUTCWeekly.setDate(nowBossUTCWeekly.getDate() - nowBossUTCWeekly.getDay()))) {
+                                    difficulty.completion.weekly = false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        
+            return { ...state };
+
 
 
         // case 'TOGGLE_COMPLETION':
@@ -1328,6 +1376,8 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             }
 
             return { ...state };
+        
+        // reset of quests!!! ---------------------------------------
         case RESET_DAILY_QUESTS_COMPLETION_STATUS:
             // Get the current date and convert to UTC
             const nowDaily = new Date();
@@ -1344,6 +1394,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             }
 
             return { ...state };
+        
 
     }
 };

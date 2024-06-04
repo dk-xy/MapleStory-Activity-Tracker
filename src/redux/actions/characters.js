@@ -34,3 +34,12 @@ export function resetWeeklyCompletionStatuses() {
 export function resetDailyQuestsCompletionStatuses() {
   return { type: RESET_DAILY_QUESTS_COMPLETION_STATUS };
 }
+
+
+export const resetDailyBossCompletionStatuses = () => ({
+  type: 'RESET_DAILY_BOSS_COMPLETION_STATUSES'
+});
+
+export const resetWeeklyBossCompletionStatuses = () => ({
+  type: 'RESET_WEEKLY_BOSS_COMPLETION_STATUSES'
+});
