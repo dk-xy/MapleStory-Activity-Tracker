@@ -7,11 +7,12 @@
 }
 
 :root {
+  height: auto;
   font-family: 'Open Sans', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  height: 100vh;
+/* width: 100vw;
+  height: 100vh; */
   color-scheme: light dark;
   color: rgba(53, 53, 53, 0.87);
  
@@ -25,6 +26,7 @@
   --secondary: #6E4732;
 
   background-color: var(--primary);
+  margin-top: 0;
 
 }
 
@@ -40,8 +42,9 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  place-items: top;
+  justify-content: center;
+  /* min-width: 320px; */
   min-height: 100vh;
 }
 
@@ -77,6 +80,8 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -88,13 +93,26 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+
+
+  
 }
 
 
 
+
+
 /* ROOT-------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+  #root,
+  .App {
+    display: block;
+    justify-content: flex-start;
+  }
+}
 #root{
-  height: 100vh !important;
+  /* height: 100vh !important; */
 }
 
 

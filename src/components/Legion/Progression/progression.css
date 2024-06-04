@@ -7,8 +7,8 @@
     padding: 12px 16px;
     /* width: 40%; */
     /* min-width: 404px; */
-    min-width: 417px;
-    max-width: 417px;
+    /* min-width: 417px;
+    max-width: 417px; */
 }
 
 .symbolsContainer,
@@ -56,7 +56,7 @@
     justify-content: left;
     align-items: flex-start;
     /* min-width: 372px; */
-    /* max-width: 440px; */
+    max-width: 440px;
     margin-left: 0;
     margin-right: 0;
 
@@ -69,6 +69,12 @@
 
 .dailies {
     justify-content: flex-start;
+}
+
+
+.dailies.itemContainer{
+    /* width: 390px; */
+
 }
 
 
@@ -215,7 +221,7 @@
 .questCheckBox {
     display: flex;
     height: 56px;
-    width: 160px;
+    /* width: 160px; */
     padding: 4px 8px;
     /* space between */
 
@@ -233,9 +239,9 @@
 }
 
 .questCheckBox label {
-    width: 80px;
-    font-size: 14.2px;
-    font-weight: 500;
+    width: 60px;
+    font-size: 14.8px;
+    font-weight: 400;
     text-align: left;
     /* margin: 0;
     padding: 0; */
@@ -275,7 +281,7 @@
 @media (max-width: 768px) {
 
     .symbolsBox {
-        width: 100%;
+        /* width: 100%; */
         margin: 8px auto;
     }
 
@@ -300,4 +306,21 @@
         margin: 8px auto;
     } */
 
+}
+
+
+/* Mobile styles */
+@media screen and (max-width: 768px) { /* Adjust 768px to the breakpoint you want */
+    .itemContainer {
+
+    }
+
+    /* .activityContainer {
+        display: flex;
+        flex-direction: column;
+    } */
+
+    .activityContainer .item {
+        /* Adjust styles for mobile here, if needed */
+    }
 }
