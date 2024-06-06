@@ -18,6 +18,9 @@ import gollux from '../../assets/quests/MapIcon_GiantVellud.webp';
 
 import shadowknight from '../../assets/quests/Etc_Shadowknight_Coin.webp';
 
+// import caret down full icon
+import { IconCaretDownFilled, IconCaretUpFilled } from '@tabler/icons-react';
+
 
 const questToImage = {
     "ursus": ursus,
@@ -87,6 +90,10 @@ const QuestCheckbox = ({ questName, isActive, handleCheckboxChangeDailies }) => 
 
 const EditCharacter = () => {
 
+    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen2, setIsOpen2] = useState(false);
+    const [isOpen3, setIsOpen3] = useState(false);
+
     const dispatch = useDispatch();
     const { id } = useParams();
     const legionData = useSelector(state => state.Legion);
@@ -113,17 +120,30 @@ const EditCharacter = () => {
 
 // --------------------------------------------------
 
+
+// COllapsable
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+
     return (
-    <div>
-        <div className='tabContainer'>
+        
+    <div> 
+      
+        <div>
+        EDITING {character.characterInfo.characterName}
+        </div>
+            <button onClick={() => window.history.back()}>Back</button>
+
+        <div className='tabNavContainer'>
             <div
-                className={`tab ${selectedTab === 'quests' ? 'active' : ''}`}
+                className={`tabNav ${selectedTab === 'quests' ? 'active' : ''}`}
                 onClick={() => setSelectedTab('quests')}
             >
                 Quests
         </div>
             <div
-                className={`tab ${selectedTab === 'bosses' ? 'active' : ''}`}
+                className={`tabNav ${selectedTab === 'bosses' ? 'active' : ''}`}
                 onClick={() => setSelectedTab('bosses')}
             >
                 Bosses
@@ -160,7 +180,7 @@ const EditCharacter = () => {
             <div className='dailiesContainer'>
 
 {/* DAILIES ---------------------------------- */}
-<h4>DailiesS</h4>
+<h4>Dailies</h4>
             <div className={`dailyContainer`}>
                 {Object.keys(dailies).map(questName => (
                     <QuestCheckbox
@@ -174,14 +194,15 @@ const EditCharacter = () => {
 
 {/* WEEKLIES ---------------------------------- */}
 {/* Weeklies -------------------------------- */}
+<h4>Weeklies</h4>
 <div className='weeklyQuestsContainer'>
-    <h4>Weeklies</h4>
+  
     {Object.keys(character.progression.weeklies.quests).map(questName => (
         console.log(questName),
         // console.log(character.progression.weeklies.quests[questName]),
 
         <WeeklyQuestCheckbox
-            key={questName}
+            // key={questName}
             questName={questName}
             isActive={character.progression.weeklies.quests[questName].isActive}
             handleCheckboxChangeWeeklies={handleCheckboxChangeWeeklies}
@@ -195,12 +216,36 @@ const EditCharacter = () => {
 {selectedTab === 'bosses' && (
     <div className='bossesContainer'>
         {console.log(character.bosses.mapleWorld)}
-        <div className='bossList mapleWorld'>
-        {Object.values(character.bosses.mapleWorld).map((boss, index) => (
-            <BossSelection key={index} boss={boss} characterId={id} />
-        ))}
 
-        </div>
+        <div className='dropDownContainer'  onClick={() => setIsOpen(!isOpen)}><h4>Maple World</h4>  {isOpen ? <IconCaretUpFilled /> : <IconCaretDownFilled />}</div>
+        {isOpen && (
+            <div className='bossList mapleWorld'>
+                {Object.values(character.bosses.mapleWorld).map((boss, index) => (
+                    <BossSelection key={index} boss={boss} characterId={id} />
+                ))}
+            </div>
+        )}
+
+    <div className='dropDownContainer'  onClick={() => setIsOpen2(!isOpen2)}><h4>Arcane River</h4>  {isOpen2 ? <IconCaretUpFilled /> : <IconCaretDownFilled />}</div>
+        {isOpen2 && (    
+            <div className='bossList arcaneRiver'>   
+                {Object.values(character.bosses.arcaneRiver).map((boss, index) => (
+                    <BossSelection key={index} boss={boss} characterId={id} />
+                ))}
+            </div>
+        )}
+   
+    
+   <div className='dropDownContainer'  onClick={() => setIsOpen3(!isOpen3)}><h4>Grandis</h4>  {isOpen3 ? <IconCaretUpFilled /> : <IconCaretDownFilled />}</div>
+        {isOpen3 && (    
+            <div className='bossList Grandis'>   
+                {Object.values(character.bosses.grandis).map((boss, index) => (
+                    <BossSelection key={index} boss={boss} characterId={id} />
+                ))}
+            </div>
+        )}
+           
+
        
     </div>
 )}

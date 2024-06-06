@@ -265,3 +265,99 @@ gap: 4px;
 .regionSelector label{
   width: 77px;
 }
+
+.symbolContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+
+}
+
+.tabNavContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  /* max-width: 1080px; */
+}
+
+.regionContainer{
+  max-width: 437px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* quests */
+
+.dailyContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 16px;
+  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.15);
+  min-width: none;
+  max-width: 637px;
+}
+
+.questActivation{
+  max-width: 320px;
+}
+
+/* dailies */
+.questActivation {
+  display: flex;
+  height: 56px;
+  /* width: 160px; */
+  padding: 4px 8px;
+  /* space between */
+
+  justify-content: left;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--lIGHTgRADIENT, #FFD9B4);
+  background: var(--BG-2, #EAC8AF);
+  box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.15);
+  text-align: left;
+
+  line-height: 1.02;
+
+}
+
+.questActivation label {
+  width: 60px;
+  font-size: 14.8px;
+  font-weight: 400;
+  text-align: left;
+  /* margin: 0;
+  padding: 0; */
+}
+
+.questActivation input {
+  justify-content: flex-end;
+}
+
+.weeklyQuestsContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 16px;
+  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.15);
+  max-width: 347px;
+}
+

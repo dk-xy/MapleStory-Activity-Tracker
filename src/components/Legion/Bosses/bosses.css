@@ -20,7 +20,7 @@
     content: '';
     flex-shrink:1;
 }
-.bossCompletionContainer {
+.bossCompletionContainer, .bossSelectionContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -39,7 +39,7 @@
 
 /* change width if not on mobile */
 @media (min-width: 768px) {
-    .bossCompletionContainer {
+    .bossCompletionContainer, .bossSelectionContainer {
         width: 40%;
     }
 }
@@ -67,14 +67,14 @@
     
 }
 
-.bossCompletionContainer img {
+.bossCompletionContainer img , .bossSelectionContainer img{
     width: 130%;
     height: 100%; /* Set the height to 100% so the image fills the container */
     flex-shrink: 0;
     object-fit: cover; /* This will scale the image to cover the container, cropping any excess */
 }
 
-.bossCompletionContainer h3{
+.bossCompletionContainer h3, .bossSelectionContainer h3{
     color: var(--Dark, #2D2D2D);
 
     font-size: 18px;
@@ -106,6 +106,7 @@
     flex-direction: row;
     gap: 8px;
 align-self: flex-start;
+min-width: 60%;
     /* justify-content: right; */
     /* margin-left: auto; */
 }
@@ -114,10 +115,10 @@ align-self: flex-start;
 
 
 
-.Normal, .Chaos, .Hard{
+.Easy, .Normal, .Chaos, .Hard, .Extreme{
     display: flex;
-    background-color: #FFECD9;
-    padding: 4px 8px;
+    background-color: #33312f60;
+    /* padding: 4px 8px; */
     border-radius: 12px;
 }
 
@@ -166,4 +167,76 @@ color:#DB8;
 font-size: 12px;
 font-weight: 700;
 color: white;
+}
+
+
+
+/* BOSS SELECTION */
+
+.bossesContainer{
+    min-width: 320px;
+    /* max-width: 90vw; */
+
+}
+
+.bossList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    /* max-width: 90vw; */
+}
+
+
+.bossSelectionContainer .difficultyConatiner{
+text-align: left;
+}
+
+.bossSelectionContainer{ max-width: 90%; min-width: 300px;}
+
+.diffContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.diffSelection{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: left;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.bossDiffLabel{
+    font-family: 'Open Sans Bold', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--Dark, #2D2D2D);
+}
+
+
+.bossList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    
+}
+
+
+.dropDownContainer{
+    min-width: 200px; /* or any specific value you want */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

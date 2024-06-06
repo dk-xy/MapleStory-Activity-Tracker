@@ -3,6 +3,16 @@ import { RESET_DAILY_COMPLETION_STATUSES, RESET_WEEKLY_COMPLETION_STATUSES, RESE
 
 
 const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
+
+    Date.prototype.getUTCWeekNumber = function() {
+        const date = new Date(Date.UTC(this.getUTCFullYear(), this.getUTCMonth(), this.getUTCDate()));
+        const dayNum = date.getUTCDay() || 7;
+        date.setUTCDate(date.getUTCDate() + 4 - dayNum);
+        const yearStart = new Date(Date.UTC(date.getUTCFullYear(),0,1));
+        return Math.ceil((((date - yearStart) / 86400000) + 1)/7);
+    };
+
+
     switch (action.type) {
         case "CHARACTER_ADD":
             // Increment maxId and use it as the new character's ID
@@ -516,7 +526,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         },
                                     },
                                     {
-                                        name: "Hard",
+                                        name: "Chaos",
                                         isActive: false,
                                         type: "weekly",
                                         completion: {
@@ -541,7 +551,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         },
                                     },
                                     {
-                                        name: "Hard",
+                                        name: "Chaos",
                                         isActive: false,
                                         type: "weekly",
                                         completion: {
@@ -566,7 +576,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         },
                                     },
                                     {
-                                        name: "Hard",
+                                        name: "Chaos",
                                         isActive: false,
                                         type: "weekly",
                                         completion: {
@@ -582,7 +592,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                 isActive: false,
                                 difficulty: [
                                     {
-                                        name: "Normal",
+                                        name: "Chaos",
                                         isActive: false,
                                         type: "daily",
                                         completion: {
@@ -607,7 +617,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                 isActive: false,
                                 difficulty: [
                                     {
-                                        name: "Normal",
+                                        name: "Chaos",
                                         isActive: false,
                                         type: "daily",
                                         completion: {
@@ -1215,20 +1225,23 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             // Find the difficulty
             const difficulty = boss.difficulty.find(diff => diff.name === difficultyName);
             // Toggle the active status
-         
+
+
+            difficulty.isActive = !difficulty.isActive;
+
             // Check if any difficulty is active
             const anyActive = boss.difficulty.some(diff => diff.isActive);
-
+            console.log(anyActive)
             // Toggle the boss active status
             if (anyActive) {
                 boss.isActive = true;
+                console.log("atLeastOneActive bossdiff")
             } else {
                 boss.isActive = false;
             }
-            difficulty.isActive = !difficulty.isActive;
             return { ...state };
 
-        
+
         }
         case 'TOGGLE_BOSS_DIFFICULTY_COMPLETION': {
             const { bossId, bossKey, difficultyName, completionType } = action.payload;
@@ -1258,57 +1271,95 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
         }
         // BOSS RESETS  ---------------------------------------------------------------------
         case 'RESET_BOSS_COMPLETION_STATUSES':
-            // Get the current date and convert to UTC
             const nowBossDaily = new Date(Date.now());
             nowBossDaily.setMinutes(nowBossDaily.getMinutes() - nowBossDaily.getTimezoneOffset());
-
-            // Reset daily completion status for all bosses where the completion date is not today
+        
             for (const character of Object.values(state.Characters)) {
                 for (const world of Object.values(character.bosses)) {
                     for (const boss of Object.values(world)) {
-                        
-                        if (boss.isActive){
-                            console.log(boss)
+                        if (boss.isActive) {
                             for (const difficulty of boss.difficulty) {
-                                    if (difficulty.type === 'daily') {
-                                        if (difficulty.completion.daily) {
-                                            const completionDate = new Date(difficulty.completion.dailyDate);
-                                            if (completionDate.getUTCDate() !== nowBossDaily.getDate() || completionDate.getUTCMonth() !== nowBossDaily.getMonth() || completionDate.getUTCFullYear() !== nowBossDaily.getFullYear()) {
-                                                difficulty.completion.daily = false;
-                                                // redefine difficulty.completion.dailyDate as null instead of a date
-                                                difficulty.completion.dailyDate = null;
-                                                
-                                                // console.log("RESET")
-                                                // console.log(boss.name)
-                                            
+                                if (difficulty.type === 'daily') {
+                                    if (difficulty.completion.daily) {
+                                        const completionDate = new Date(difficulty.completion.dailyDate);
+                                        if (completionDate.getUTCDate() !== nowBossDaily.getDate() || completionDate.getUTCMonth() !== nowBossDaily.getMonth() || completionDate.getUTCFullYear() !== nowBossDaily.getFullYear()) {
+                                            difficulty.completion.daily = false;
+                                            difficulty.completion.dailyDate = null;
                                         }
-        
                                     }
+                                }
         
-                                    if (difficulty.type === 'weekly') {
-                                        if (difficulty.completion.weekly) {
-                                            const completionDate = new Date(difficulty.completion.weeklyDate);
-                                            if (completionDate.getUTCDate() !== nowBossDaily.getDate() || completionDate.getUTCMonth() !== nowBossDaily.getMonth() || completionDate.getUTCFullYear() !== nowBossDaily.getFullYear()) {
-                                                difficulty.completion.weekly = false;
-                                                difficulty.completion.weeklyDate = false;
-                                                // console.log("RESET")
-                                                // console.log(boss.name)
-                                            }
+                                if (difficulty.type === 'weekly') {
+                                    if (difficulty.completion.weekly) {
+                                        const completionDate = new Date(difficulty.completion.weeklyDate);
+                                        const now = new Date();
+                                        if (now.getUTCDay() === 4 && (completionDate.getUTCWeekNumber() !== now.getUTCWeekNumber() || completionDate.getUTCFullYear() !== now.getUTCFullYear())) {
+                                            difficulty.completion.weekly = false;
+                                            difficulty.completion.weeklyDate = null;
                                         }
-        
-        
-        
                                     }
                                 }
                             }
                         }
-
                     }
                 }
-                return { ...state };
             }
+            return { ...state };
 
-          
+
+
+        // case 'RESET_BOSS_COMPLETION_STATUSES':
+        //     // Get the current date and convert to UTC
+        //     const nowBossDaily = new Date(Date.now());
+        //     nowBossDaily.setMinutes(nowBossDaily.getMinutes() - nowBossDaily.getTimezoneOffset());
+
+        //     // Reset daily completion status for all bosses where the completion date is not today
+        //     for (const character of Object.values(state.Characters)) {
+        //         for (const world of Object.values(character.bosses)) {
+        //             for (const boss of Object.values(world)) {
+
+        //                 if (boss.isActive) {
+        //                     console.log(boss)
+        //                     for (const difficulty of boss.difficulty) {
+        //                         if (difficulty.type === 'daily') {
+        //                             if (difficulty.completion.daily) {
+        //                                 const completionDate = new Date(difficulty.completion.dailyDate);
+        //                                 if (completionDate.getUTCDate() !== nowBossDaily.getDate() || completionDate.getUTCMonth() !== nowBossDaily.getMonth() || completionDate.getUTCFullYear() !== nowBossDaily.getFullYear()) {
+        //                                     difficulty.completion.daily = false;
+        //                                     // redefine difficulty.completion.dailyDate as null instead of a date
+        //                                     difficulty.completion.dailyDate = null;
+
+        //                                     // console.log("RESET")
+        //                                     // console.log(boss.name)
+
+        //                                 }
+
+        //                             }
+
+        //                             if (difficulty.type === 'weekly') {
+        //                                 if (difficulty.completion.weekly) {
+        //                                     const completionDate = new Date(difficulty.completion.weeklyDate);
+        //                                     if (completionDate.getUTCDate() !== nowBossDaily.getDate() || completionDate.getUTCMonth() !== nowBossDaily.getMonth() || completionDate.getUTCFullYear() !== nowBossDaily.getFullYear()) {
+        //                                         difficulty.completion.weekly = false;
+        //                                         difficulty.completion.weeklyDate = false;
+        //                                         // console.log("RESET")
+        //                                         // console.log(boss.name)
+        //                                     }
+        //                                 }
+
+
+
+        //                             }
+        //                         }
+        //                     }
+        //                 }
+
+        //             }
+        //         }
+        //         return { ...state };
+        //     }
+
+
 
         case 'RESET_WEEKLY_BOSS_COMPLETION_STATUSES':
             // Get the current date and convert to UTC
@@ -1397,15 +1448,15 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             // Get the current date and convert to UTC
             const now = new Date();
             const nowUTC = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
-        
+
             // Clone the state
             const newState = JSON.parse(JSON.stringify(state));
-        
+
             // Reset daily.isCompleted for all regions where the completion date is not today
             for (const character of Object.values(newState.Characters)) {
                 for (const region of Object.values(character.progression.symbols.arcaneRiver.regions)) {
-                    
-                    if(region.completion.daily){
+
+                    if (region.completion.daily) {
                         const completionDate = new Date(region.completion.dailyDate);
                         console.log(completionDate)
                         console.log(completionDate.toUTCString())
@@ -1414,11 +1465,11 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                             region.completion.dailyDate = null;
                         }
                     }
-                   
+
                 }
                 for (const region of Object.values(character.progression.symbols.grandis.regions)) {
-                   
-                    if(region.completion.daily){
+
+                    if (region.completion.daily) {
                         const completionDateConvert = new Date(region.completion.dailyDate);
                         const completionDate = new Date(Date.UTC(completionDateConvert.getFullYear(), completionDateConvert.getMonth(), completionDateConvert.getDate()));
                         console.log(completionDate)
@@ -1430,7 +1481,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                     }
                 }
             }
-        
+
             return newState;
 
         case RESET_WEEKLY_COMPLETION_STATUSES:
