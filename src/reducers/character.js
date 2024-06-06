@@ -1215,34 +1215,70 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
 
         // BOSSES--------------------------------------------------------------------------
         // BOSSES--------------------------------------------------------------------------
+
         case 'TOGGLE_BOSS_DIFFICULTY_ACTIVE': {
             const { bossId, bossKey, difficultyName } = action.payload;
-
-            // Find the character and the boss
+        
+            // Find the character
             const character = state.Characters[bossId];
-            const boss = character.bosses.mapleWorld[bossKey];
-
+        
+            // Check if the boss exists in each key and select it
+            let boss;
+            if (character.bosses.mapleWorld && character.bosses.mapleWorld[bossKey]) {
+                boss = character.bosses.mapleWorld[bossKey];
+            } else if (character.bosses.grandis && character.bosses.grandis[bossKey]) {
+                boss = character.bosses.grandis[bossKey];
+            } else if (character.bosses.arcaneRiver && character.bosses.arcaneRiver[bossKey]) {
+                boss = character.bosses.arcaneRiver[bossKey];
+            }
+        
+            if (!boss) {
+                console.error(`Boss with key ${bossKey} not found`);
+                return { ...state };
+            }
+        
             // Find the difficulty
             const difficulty = boss.difficulty.find(diff => diff.name === difficultyName);
+        
             // Toggle the active status
-
-
             difficulty.isActive = !difficulty.isActive;
-
+        
             // Check if any difficulty is active
             const anyActive = boss.difficulty.some(diff => diff.isActive);
-            console.log(anyActive)
+        
             // Toggle the boss active status
-            if (anyActive) {
-                boss.isActive = true;
-                console.log("atLeastOneActive bossdiff")
-            } else {
-                boss.isActive = false;
-            }
+            boss.isActive = anyActive;
+        
             return { ...state };
-
-
         }
+        // case 'TOGGLE_BOSS_DIFFICULTY_ACTIVE': {
+        //     const { bossId, bossKey, difficultyName } = action.payload;
+
+        //     // Find the character and the boss
+        //     const character = state.Characters[bossId];
+        //     const boss = character.bosses.mapleWorld[bossKey];
+
+        //     // Find the difficulty
+        //     const difficulty = boss.difficulty.find(diff => diff.name === difficultyName);
+        //     // Toggle the active status
+
+
+        //     difficulty.isActive = !difficulty.isActive;
+
+        //     // Check if any difficulty is active
+        //     const anyActive = boss.difficulty.some(diff => diff.isActive);
+        //     console.log(anyActive)
+        //     // Toggle the boss active status
+        //     if (anyActive) {
+        //         boss.isActive = true;
+        //         console.log("atLeastOneActive bossdiff")
+        //     } else {
+        //         boss.isActive = false;
+        //     }
+        //     return { ...state };
+
+
+        // }
         case 'TOGGLE_BOSS_DIFFICULTY_COMPLETION': {
             const { bossId, bossKey, difficultyName, completionType } = action.payload;
 

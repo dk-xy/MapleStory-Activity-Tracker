@@ -160,6 +160,22 @@ export default function Character() {
                         ))
                     }
                     </div>
+                    <div className='allBossesContainer'>
+                    {Object.values(character.bosses.arcaneRiver)
+                        .filter(boss => boss.difficulty.some(difficulty => difficulty.isActive))
+                        .map((boss, index) => (
+                            <BossCompletion key={index} boss={boss} characterId={id} />
+                        ))
+                    }
+                    </div>
+                    <div className='allBossesContainer'>
+                    {Object.values(character.bosses.grandis)
+                        .filter(boss => boss.difficulty.some(difficulty => difficulty.isActive))
+                        .map((boss, index) => (
+                            <BossCompletion key={index} boss={boss} characterId={id} />
+                        ))
+                    }
+                    </div>
                    
                 </div>
 
