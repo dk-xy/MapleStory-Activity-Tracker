@@ -307,6 +307,15 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                 isActive: false,
                                 difficulty: [
                                     {
+                                        name: "Easy",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
                                         name: "Normal",
                                         isActive: false,
                                         type: "daily",
@@ -332,7 +341,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                 isActive: false,
                                 difficulty: [
                                     {
-                                        name: "easy",
+                                        name: "Easy",
                                         isActive: false,
                                         type: "daily",
                                         completion: {
@@ -367,6 +376,15 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                 isActive: false,
                                 difficulty: [
                                     {
+                                        name: "Easy",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
                                         name: "Normal",
                                         isActive: false,
                                         type: "daily",
@@ -378,7 +396,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                     {
                                         name: "Chaos",
                                         isActive: false,
-                                        type: "weekly",
+                                        type: "daily",
                                         completion: {
                                             weekly: false,
                                             weeklyDate: null,
@@ -419,7 +437,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                     {
                                         name: "Normal",
                                         isActive: false,
-                                        type: "daily",
+                                        type: "weekly",
                                         completion: {
                                             daily: false,
                                             dailyDate: null,
@@ -442,7 +460,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                 isActive: false,
                                 difficulty: [
                                     {
-                                        name: "Normal",
+                                        name: "Easy",
                                         isActive: false,
                                         type: "daily",
                                         completion: {
@@ -451,9 +469,9 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         },
                                     },
                                     {
-                                        name: "Hard",
+                                        name: "Normal",
                                         isActive: false,
-                                        type: "weekly",
+                                        type: "daily",
                                         completion: {
                                             weekly: false,
                                             weeklyDate: null,
@@ -478,7 +496,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                     {
                                         name: "Hard",
                                         isActive: false,
-                                        type: "weekly",
+                                        type: "daily",
                                         completion: {
                                             weekly: false,
                                             weeklyDate: null,
@@ -491,6 +509,15 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                 name: "Magnus",
                                 isActive: false,
                                 difficulty: [
+                                    {
+                                        name: "Easy",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
                                     {
                                         name: "Normal",
                                         isActive: false,
@@ -517,6 +544,15 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                 isActive: false,
                                 difficulty: [
                                     {
+                                        name: "Easy",
+                                        isActive: false,
+                                        type: "daily",
+                                        completion: {
+                                            daily: false,
+                                            dailyDate: null,
+                                        },
+                                    },
+                                    {
                                         name: "Normal",
                                         isActive: false,
                                         type: "daily",
@@ -526,9 +562,9 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         },
                                     },
                                     {
-                                        name: "Chaos",
+                                        name: "Hard",
                                         isActive: false,
-                                        type: "weekly",
+                                        type: "daily",
                                         completion: {
                                             weekly: false,
                                             weeklyDate: null,
@@ -1097,6 +1133,16 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             // If quest is found, toggle its isActive property
             if (quest) {
                 quest.isActive = !quest.isActive;
+        
+                // Check if any quest is active
+                const anyQuestActive = Object.values(character.progression.dailies.quests).some(quest => quest.isActive);
+        
+                // If any quest is active, set character.progression.dailies.isActive to true
+                if (anyQuestActive) {
+                    character.progression.dailies.isActive = true;
+                } else {
+                    character.progression.dailies.isActive = false;
+                }
             } else {
                 console.error(`Quest ${questName} not found for character ${characterId}`);
             }
@@ -1105,23 +1151,32 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
         }
 
 
-        case 'TOGGLE_WEEKLY_QUEST':
+        case 'TOGGLE_WEEKLY_QUEST': {
             const { id, questNameW } = action.payload;
-
             const character = state.Characters[id];
-
+        
             // Check if quest exists in weeklies.quests
             let questW = character.progression.weeklies.quests[questNameW];
-            console.log("NOWWESH")
+        
             // If quest is found, toggle its isActive property
             if (questW) {
-                console.log("WESH")
                 questW.isActive = !questW.isActive;
+        
+                // Check if any quest is active
+                const anyQuestActive = Object.values(character.progression.weeklies.quests).some(quest => quest.isActive);
+        
+                // If any quest is active, set character.progression.weeklies.isActive to true
+                if (anyQuestActive) {
+                    character.progression.weeklies.isActive = true;
+                } else {
+                    character.progression.weeklies.isActive = false;
+                }
             } else {
                 console.error(`Quest ${questNameW} not found for character ${id}`);
             }
-
+        
             return { ...state };
+        }
 
         // PROGRESSION COMPLETION---------------------------------------------------------------------
 

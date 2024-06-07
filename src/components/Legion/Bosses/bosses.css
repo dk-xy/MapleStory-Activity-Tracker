@@ -22,26 +22,34 @@
 }
 .bossCompletionContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     /* min-width: 385px; */
-    height: 24px;
+
     flex-shrink: 0;
     border-radius: 8px;
     border: 1px solid var(--lIGHTgRADIENT, #FFD9B4);
     background-color: #EAC8AF;
     overflow: hidden;
-    padding: 16px 24px;
+    /* padding: 16px 24px; */
     /* min-width: 260px; */
-    width: 85%;
+    /* width: 85%; */
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: contain;
 
+}
+
+.bossCompletionContainer .difficultyContainer{
+    display: flex;
+    flex-direction: row;
 }
 
 /* change width if not on mobile */
 @media (min-width: 768px) {
-    .bossCompletionContainer {
+    /* .bossCompletionContainer {
         width: 40%;
-    }
+    } */
 }
 
 
@@ -51,28 +59,33 @@
     justify-content: space-between;
     align-items: center;
     gap: 8px;
-    margin-left: -32px;
-    margin-right: 16px;
+
     padding: 8px;
-
+    background: linear-gradient(108deg, rgba(231, 231, 231, 0.164) 3.2%, rgba(255, 255, 255, 0.00) 94.9%, rgba(233, 233, 233, 0.50) 94.9%), linear-gradient(99deg, rgba(110, 71, 50, 0.25) 2.02%, rgba(205, 189, 173, 0.25) 85.02%);
  
-    width: 120%;
+  width: 100%;
+  padding: 8px 16px;
+  min-width: 240px;
 
 }
 
-.imageContainer{
-    width: 60px;
+.bossCompletionContainer .bossName{
+    margin: 4px 16px;
+}
+
+.bossCompletionContainer .typeLabel{
+    font-size: 10pt;
+    font-weight: 400;
+}
+
+
+.bossCompletionContainer .difficultyConatiner .daily,
+.bossCompletionContainer .difficultyConatiner .weekly {
     display: flex;
-    margin-left: -28px;
-    
+    flex-direction: row;
 }
 
-.bossCompletionContainer img {
-    width: 130%;
-    height: 100%; /* Set the height to 100% so the image fills the container */
-    flex-shrink: 0;
-    object-fit: cover; /* This will scale the image to cover the container, cropping any excess */
-}
+
 
 .bossCompletionContainer h3{
     color: var(--Dark, #2D2D2D);
@@ -122,23 +135,22 @@ min-width: 60%;
     border-radius: 12px;
 }
 
-.Normal label, .Chaos label, .Hard label{
+.Normal label, .Chaos label, .Hard label, .Easy label, .Extreme label{
     padding: 2px 8px;
     justify-content: center;
     align-items: center;
     gap: 7px;
     border-radius: 16px;
+    font-size: 12px;
+font-weight: 700;
 }
 
 
 /* DIFFICULTYCSS */
 .Normal label {
-
-
 background: var(--NormalDiff, linear-gradient(180deg, rgba(0, 0, 0, 0.01) 7.87%, rgba(0, 0, 0, 0.16) 30.73%, rgba(0, 0, 0, 0.20) 45.34%, rgba(0, 0, 0, 0.16) 77.08%, rgba(0, 0, 0, 0.00) 100%), #3AB);
 color: white;
-font-size: 12px;
-font-weight: 700;
+
 /* SimpleDrop */
 box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.15);
 border: solid 1px rgb(255, 255, 255);
@@ -153,8 +165,7 @@ background: var(--CHaosDiff, linear-gradient(180deg, rgba(0, 0, 0, 0.01) 7.87%, 
 
 /* SimpleDrop */
 box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.15);
-font-size: 12px;
-font-weight: 700;
+
 color:#DB8;
 
 }
@@ -169,6 +180,22 @@ font-weight: 700;
 color: white;
 }
 
+
+.Easy label{
+    border-radius: 10px;
+background: linear-gradient(180deg, rgba(0, 0, 0, 0.01) 7.87%, rgba(0, 0, 0, 0.16) 30.73%, rgba(0, 0, 0, 0.20) 45.34%, rgba(0, 0, 0, 0.16) 77.08%, rgba(0, 0, 0, 0.00) 100%), #999;
+
+/* SimpleDrop */
+box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.15);
+border: solid 1px rgb(255, 255, 255);
+color: white;
+}
+
+.Extreme label{
+    border: 1px solid #B5344E;
+    color: #B5344E;
+    background: var(--CHaosDiff, linear-gradient(180deg, rgba(0, 0, 0, 0.01) 7.87%, rgba(0, 0, 0, 0.16) 30.73%, rgba(0, 0, 0, 0.20) 45.34%, rgba(0, 0, 0, 0.16) 65.62%, rgba(0, 0, 0, 0.00) 78.81%), #282828);
+}
 
 
 /* BOSS SELECTION */
@@ -197,7 +224,7 @@ color: white;
 text-align: left;
 }
 
-.bossSelectionContainer{ max-width: 90%; min-width: 300px;}
+.bossSelectionContainer{ max-width: 90%; min-width: 350px;}
 
 .diffContainer{
     display: flex;
@@ -245,6 +272,8 @@ text-align: left;
     background-repeat: no-repeat;
     background-size: contain;
 
+    min-width: none;
+    max-width: 320px;
 
 
     /* min-width: 385px; */

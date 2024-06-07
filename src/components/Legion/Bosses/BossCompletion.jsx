@@ -88,34 +88,35 @@ function BossCompletion({ boss, characterId }) {
     };
 
     return (
-        <div className='bossCompletionContainer'>
-            <div className='imageContainer'><img src={bossToImage[boss.key]} /></div>
+        <div className='bossCompletionContainer' style={{ backgroundImage: `url(${bossToImage[boss.key]})` }}>
             <div className='bossInfo'>
                 <div className='bossName'>
                     <h3>{boss.name}</h3>
                 </div>
-
-                <div className='difficultyConatiner'>
-                    {boss.difficulty.map((difficulty, index) => (
-                        difficulty.isActive && (
-                            <div className={difficulty.name} key={index}>
-                                <label>
-                                    {difficulty.name}
-                                </label>
-                                <input
-                                    type="checkbox"
-                                    checked={difficulty.completion[difficulty.type]}
-                                    onChange={() => handleCheckboxChange(difficulty.name, difficulty.type)}
-                                // add difficultyName as class
-
-                                />
-
+    
+                <div className='difficultyContainer'>
+                    {['daily', 'weekly'].map(type => {
+                        const activeDifficulties = boss.difficulty.filter(difficulty => difficulty.type === type && difficulty.isActive);
+                        return activeDifficulties.length > 0 && (
+                            <div className={type}>
+                                <div className='typeLabel'>{type}</div>
+                                {activeDifficulties.map((difficulty, index) => (
+                                    <div className={difficulty.name} key={index}>
+                                        <label>
+                                            {difficulty.name}
+                                        </label>
+                                        <input
+                                            type="checkbox"
+                                            checked={difficulty.completion[difficulty.type]}
+                                            onChange={() => handleCheckboxChange(difficulty.name, difficulty.type)}
+                                        />
+                                    </div>
+                                ))}
                             </div>
-                        )
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
-
         </div>
     );
 }

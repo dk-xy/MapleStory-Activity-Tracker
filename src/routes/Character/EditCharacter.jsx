@@ -54,15 +54,15 @@ const RegionCheckbox = ({ regionName, isActive, handleCheckboxChange }) => (
 );
 
 
-const QuestCheckbox = ({ questName, isActive, handleCheckboxChangeDailies }) => (
+const QuestCheckbox = ({ quest, questName, isActive, handleCheckboxChangeDailies }) => (
      
         <div className='questActivation'>
-            <img src={questToImage[questName]} alt={`${questName} icon`} />
+            <img src={questToImage[quest]} alt={`${quest} icon`} />
             <label>{questName} </label>
                 <input
                     type="checkbox"
                     checked={isActive}
-                    onChange={() => handleCheckboxChangeDailies(questName)}
+                    onChange={() => handleCheckboxChangeDailies(quest)}
                 />
         </div>
     );
@@ -182,11 +182,12 @@ var i;
 {/* DAILIES ---------------------------------- */}
 <h4>Dailies</h4>
             <div className={`dailyContainer`}>
-                {Object.keys(dailies).map(questName => (
+                {Object.keys(dailies).map(quest => (
+                    console.log(quest),
                     <QuestCheckbox
-                        // key={questName.key}
-                        questName={questName}
-                        isActive={dailies[questName].isActive}
+                        quest={quest}
+                        questName={dailies[quest].questName}
+                        isActive={dailies[quest].isActive}
                         handleCheckboxChangeDailies={handleCheckboxChangeDailies}
                     />
                 ))}

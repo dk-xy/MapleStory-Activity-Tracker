@@ -22,13 +22,15 @@ function Legion() {
             <ResetLegion />
             <AddCharacter />
             <div className='legionGrid'>
-            {characters && Object.keys(characters).map(key => (
+            {characters && Object.keys(characters).length > 0 ? (
+                Object.keys(characters).map(key => (
                     <CharacterItem key={key} character={characters[key]} />
-                ))}
-                {/* {Object.keys(characters).forEach(key => {
-                    console.log(characters[key].characterInfo);
-                    <CharacterItem key={key} character={characters[key].characterInfo} />
-                })} */}
+                ))
+            ) : (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                    No character in legion, please add a character
+                </div>
+            )}
             </div>
 
         </div>
