@@ -89,13 +89,13 @@ function BossSelection({ boss, characterId }) {
     };
 
     return (
-        <div className='bossSelectionContainer'>
-            <div className='imageContainer'><img src={bossToImage[boss.key]} /></div>
+        <div className='bossSelectionContainer' style={{ backgroundImage: `url(${bossToImage[boss.key]})` }}>
+            {/* <div className='imageContainer'><img src={bossToImage[boss.key]} /></div> */}
             <div className='bossInfo'>
                 <div className='bossName'>
                     <h3>{boss.name}</h3>
                 </div>
-
+                </div>
                 <div className='difficultyConatiner'>
                     {boss.difficulty.some(difficulty => difficulty.type === 'daily') && (
                         <>
@@ -147,7 +147,7 @@ function BossSelection({ boss, characterId }) {
                         </>
                     )}
                 </div>
-            </div>
+            
         </div>
     );
 }

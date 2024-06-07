@@ -20,7 +20,7 @@
     content: '';
     flex-shrink:1;
 }
-.bossCompletionContainer, .bossSelectionContainer {
+.bossCompletionContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -39,13 +39,13 @@
 
 /* change width if not on mobile */
 @media (min-width: 768px) {
-    .bossCompletionContainer, .bossSelectionContainer {
+    .bossCompletionContainer {
         width: 40%;
     }
 }
 
 
-.bossInfo{
+.bossCompletionContainer .bossInfo{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -67,14 +67,14 @@
     
 }
 
-.bossCompletionContainer img , .bossSelectionContainer img{
+.bossCompletionContainer img {
     width: 130%;
     height: 100%; /* Set the height to 100% so the image fills the container */
     flex-shrink: 0;
     object-fit: cover; /* This will scale the image to cover the container, cropping any excess */
 }
 
-.bossCompletionContainer h3, .bossSelectionContainer h3{
+.bossCompletionContainer h3{
     color: var(--Dark, #2D2D2D);
 
     font-size: 18px;
@@ -233,10 +233,59 @@ text-align: left;
 }
 
 
-.dropDownContainer{
-    min-width: 200px; /* or any specific value you want */
+
+.bossCompletionContainer h3{
+    margin: none;
+}
+.bossSelectionContainer {
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+
+
+    /* min-width: 385px; */
+    /* height: 24px; */
+    flex-shrink: 0;
+    border-radius: 8px;
+    border: 1px solid var(--lIGHTgRADIENT, #FFD9B4);
+    background-color: #EAC8AF;
+    overflow: hidden;
+    /* padding: 16px 24px; */
+    /* min-width: 260px; */
+    width: 85%;
+    border: 1px solid #FFD9B4;
+    margin: auto;
+  }
+
+  .bossSelectionContainer .bossInfo {
+    /* background-color: red; */
+
+    /* gradient from primary to FFECD9 trasparent */
+    background: linear-gradient(108deg, rgba(231, 231, 231, 0.336) 3.2%, rgba(255, 255, 255, 0.00) 94.9%, rgba(233, 233, 233, 0.50) 94.9%), linear-gradient(99deg, rgba(110, 71, 50, 0.25) 2.02%, rgba(205, 189, 173, 0.25) 85.02%);
+
+  }
+
+  .bossSelectionContainer .bossInfo {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-}
+    gap: 8px;
+    /* margin-left: -32px;
+    margin-right: 16px; */
+    padding: 8px;
+    height: auto;
+  }
+  .bossSelectionContainer .bossInfo h3{
+margin: 0;
+  }
+
+  .bossSelectionContainer .difficultyConatiner{
+    width: 100%;
+    background-color: #EAC8AF;
+    padding: 8px;
+  }
