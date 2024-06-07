@@ -95,39 +95,39 @@ function BossSelection({ boss, characterId }) {
                 <div className='bossName'>
                     <h3>{boss.name}</h3>
                 </div>
-                </div>
-                <div className='difficultyConatiner'>
-                    {boss.difficulty.some(difficulty => difficulty.type === 'daily') && (
-                        <>
+            </div>
+            <div className='difficultyConatiner'>
+                {boss.difficulty.some(difficulty => difficulty.type === 'daily') && (
+                    <>
 
-                            <div className='diffContainer'>
-                                <div className='bossDiffLabel'>Daily</div>
-                                <div className='diffSelection'>
-                                    {boss.difficulty.filter(difficulty => difficulty.type === 'daily').map((difficulty, index) => (
-                                        <div className={difficulty.name} key={index}>
-                                            <label>
-                                                {difficulty.name}
-                                            </label>
-                                            <input
-                                                type="checkbox"
-                                                checked={difficulty.isActive}
-                                                onChange={() => handleCheckboxChange(difficulty.name)}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-
-
+                        <div className='diffContainer'>
+                            <div className='bossDiffLabel'>Daily</div>
+                            <div className='diffSelection'>
+                                {boss.difficulty.filter(difficulty => difficulty.type === 'daily').map((difficulty, index) => (
+                                    <div className={difficulty.name} key={index}>
+                                        <label>
+                                            {difficulty.name}
+                                        </label>
+                                        <input
+                                            type="checkbox"
+                                            checked={difficulty.isActive}
+                                            onChange={() => handleCheckboxChange(difficulty.name)}
+                                        />
+                                    </div>
+                                ))}
                             </div>
 
-                        </>
-                    )}
 
-                    {boss.difficulty.some(difficulty => difficulty.type === 'weekly') && (
-                        <>
-                            <div className='diffContainer'>
-                                <div className='bossDiffLabel'>Weekly</div>
-                                <div className='diffSelection'>
+                        </div>
+
+                    </>
+                )}
+
+                {boss.difficulty.some(difficulty => difficulty.type === 'weekly') && (
+                    <>
+                        <div className='diffContainer'>
+                            <div className='bossDiffLabel'>Weekly</div>
+                            <div className='diffSelection'>
                                 {boss.difficulty.filter(difficulty => difficulty.type === 'weekly').map((difficulty, index) => (
                                     <div className={difficulty.name} key={index}>
                                         <label>
@@ -140,14 +140,38 @@ function BossSelection({ boss, characterId }) {
                                         />
                                     </div>
                                 ))}
-                                </div>
-                               
                             </div>
 
-                        </>
-                    )}
-                </div>
-            
+                        </div>
+
+                    </>
+                )}
+
+                {boss.difficulty.some(difficulty => difficulty.type === 'Monthly') && (
+                    <>
+                        <div className='diffContainer'>
+                            <div className='bossDiffLabel'>Monthly</div>
+                            <div className='diffSelection'>
+                                {boss.difficulty.filter(difficulty => difficulty.type === 'Monthly').map((difficulty, index) => (
+                                    <div className={difficulty.name} key={index}>
+                                        <label>
+                                            {difficulty.name}
+                                        </label>
+                                        <input
+                                            type="checkbox"
+                                            checked={difficulty.isActive}
+                                            onChange={() => handleCheckboxChange(difficulty.name)}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+
+                        </div>
+
+                    </>
+                )}
+            </div>
+
         </div>
     );
 }

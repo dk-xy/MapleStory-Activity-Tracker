@@ -51,10 +51,10 @@ export default function Character() {
             <CharacterInfo character={character} />
 
             <div>
-            <EditButton id={character.characterInfo.id} />
+                <EditButton id={character.characterInfo.id} />
             </div>
-            
-             {/* <div>{character.characterInfo.characterName}</div>
+
+            {/* <div>{character.characterInfo.characterName}</div>
              <div>{character.characterInfo.characterClass}</div> */}
             {/* link to edit character */}
             {/* <Link to={`/legion/${id}/edit`} className='editButton'>EDIT</Link> */}
@@ -155,6 +155,12 @@ export default function Character() {
                             </div>
                         )}
                     <div className='allBossesContainer'>
+                    {
+                            Object.values(character.bosses.mapleWorld)
+                                .filter(boss => boss.difficulty.some(difficulty => difficulty.isActive)).length > 0 && (
+                                <h2>Maple World</h2>
+                            )
+                        }
                         {Object.values(character.bosses.mapleWorld)
                             .filter(boss => boss.difficulty.some(difficulty => difficulty.isActive))
                             .map((boss, index) => (
@@ -163,6 +169,12 @@ export default function Character() {
                         }
                     </div>
                     <div className='allBossesContainer'>
+                    {
+                            Object.values(character.bosses.arcaneRiver)
+                                .filter(boss => boss.difficulty.some(difficulty => difficulty.isActive)).length > 0 && (
+                                <h2>Arcane River</h2>
+                            )
+                        }
                         {Object.values(character.bosses.arcaneRiver)
                             .filter(boss => boss.difficulty.some(difficulty => difficulty.isActive))
                             .map((boss, index) => (
@@ -171,9 +183,16 @@ export default function Character() {
                         }
                     </div>
                     <div className='allBossesContainer'>
+                        {
+                            Object.values(character.bosses.grandis)
+                                .filter(boss => boss.difficulty.some(difficulty => difficulty.isActive)).length > 0 && (
+                                <h2>Grandis</h2>
+                            )
+                        }
                         {Object.values(character.bosses.grandis)
                             .filter(boss => boss.difficulty.some(difficulty => difficulty.isActive))
                             .map((boss, index) => (
+
                                 <BossCompletion key={index} boss={boss} characterId={id} />
                             ))
                         }
