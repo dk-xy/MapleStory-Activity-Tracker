@@ -23,8 +23,52 @@
 }
 
 
+/* EditButton.css */
+.editButton {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.01) 7.87%, rgba(0, 0, 0, 0.16) 30.73%, rgba(0, 0, 0, 0.20) 45.34%, rgba(0, 0, 0, 0.16) 77.08%, rgba(0, 0, 0, 0.00) 100%), var(--BlueGraph, #3AB);
+    /* Add other necessary styles */
+}
 
-.activityBox{
-    min-width: 300px;
-    max-width: 400px;
+.characterInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+}
+
+.infoHeader{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}  
+h3.charaterName  {
+    margin: none !important;
+}
+
+.characterInfo img{
+width: 24px;
+height: 24px;
+
+}
+
+.editButton{
+    max-width: 64px;
+    padding: 8px 16px;
+    display: flex;
+    border-radius: 8px;
+    justify-content: center;
+    margin: auto;
+    color: white;
+   /* border inside solid 1px white */
+   border: inset solid 4px white;
+cursor: pointer;
+
+}
+
+.editButton:hover{
+    background: white;
+    color: #3AB;
+    border: inset solid 4px #3AB;
 }

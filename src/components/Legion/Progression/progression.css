@@ -1,15 +1,24 @@
+
+/* CHARACTER INFO */
+.characterInfo{
+    height: 100px;
+}
+
 /* SHOW PROG---------------------------------- */
 
 .symbolsBox,
-.activityBox {
+ .activityBox {
     background-color: #eac8af3f;
     margin: 8px 16;
     padding: 12px 16px;
-    /* width: 40%; */
+    max-width: 480px;
+    /* max-width: 50%; */
     /* min-width: 404px; */
     /* min-width: 417px;
     max-width: 417px; */
 }
+
+
 
 .symbolsContainer,
 .activityContainer {
@@ -17,69 +26,125 @@
     justify-content: center;
 }
 
-
 .symbolsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    justify-content: center;
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    /* default to column for mobile */
     margin: 0;
     margin-bottom: 5%;
-    /* remove margins if any */
+}
+@media (max-width: 767px) {
+    .symbolsContainer {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.symbolsContainer h3 {
+    /* Your styles for h3 */
+}
+
+.arcaneRiver,
+.grandis {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust the minmax value as needed */
+    gap: 8px;
+}
+
+.arcaneRiver .itemContainer,
+.grandis .itemContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.regionProgression {
+    /* Your styles for .regionProgression */
 }
 
 .activityBox,
 .symbolsContainer {
     text-align: left;
+
+    /* margin: 0; */
+
 }
 
 .activityContainer {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 5%;
 }
 
+@media (max-width: 767px) {
+    .activityContainer {
+        grid-template-columns: 1fr;
+    }
+}
 
 .activityBox h3 {
     width: 100%;
-
     padding: 0;
     text-align: left;
     line-height: 1.5;
 }
 
 .itemContainer {
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left ;
     align-items: flex-start;
-    /* min-width: 372px; */
-    max-width: 440px;
-    margin-left: 0;
-    margin-right: 0;
-
-    /* padding: 32px 48px; */
-
-
-
+   
+ 
     gap: 16px;
 }
 
 
 
-.dailies.itemContainer{
-    /* width: 390px; */
+
+
+.dailies .itemContainer, .weeklies .itemContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    justify-content: center;
+    width: 50%;
+    max-width: 100%; /* Ensure it can expand to full width of its parent */
+    margin: 0;
+    margin-bottom: 5%;
 
 }
 
+@media (max-width: 767px) {
+    .dailies .itemContainer, .weeklies .itemContainer {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+@media (max-width: 767px) {
+    .dailiesContainer,
+    .weekliesContainer {
+        grid-template-columns: 1fr;
+    }
+}
+}
+
+
 
 .regionProgression {
-    width: 112px;
+    min-width: 120px;
+    max-width: 412px;
     padding: 8px;
     flex-shrink: 0;
     border-radius: 4px;
+    flex-grow: 2;
 }
 
 .regionProgression h5 {
@@ -111,7 +176,7 @@
 }
 
 .regionCheckBox label {
-    width: 100px;
+    /* width: 100px; */
 }
 
 .regionCheckBox input {
@@ -217,12 +282,15 @@
 /* dailies */
 .questCheckBox {
     display: flex;
-    height: 56px;
+    /* height: 56px; */
     /* width: 160px; */
     padding: 4px 8px;
     /* space between */
-
-    justify-content: left;
+    max-width: 50%;
+    min-width: 132px;
+    height: 56px !important;
+    height: auto;
+    justify-content: space-between;
     align-items: center;
     gap: 8px;
     border-radius: 8px;
@@ -236,7 +304,7 @@
 }
 
 .questCheckBox label {
-    width: 60px;
+    /* width: 60px; */
     font-size: 14.8px;
     font-weight: 400;
     text-align: left;
@@ -245,6 +313,16 @@
 }
 
 .questCheckBox input {
+    justify-content: flex-end;
+}
+
+.questInfo{
+    display: flex;
+    align-items: center;
+}
+
+.questInfo input{
+    /* align to right */
     justify-content: flex-end;
 }
 
@@ -274,50 +352,4 @@
 
 
 /* MOBILE */
-
-@media (max-width: 768px) {
-
-    .symbolsBox {
-        /* width: 100%; */
-        margin: 8px auto;
-    }
-
-    .itemContainer,
-    .activityBox {
-        width: 100%;
-        /* margin: none; */
-        flex-wrap: wrap;
-    }
-
-    .symbolsContainer,
-    .activityContainer {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-
-    }
-
-    /* .symbolsBox, .activityBox{
-        width: 45%;
-        margin: 8px auto;
-    } */
-
-}
-
-
-/* Mobile styles */
-@media screen and (max-width: 768px) { /* Adjust 768px to the breakpoint you want */
-    .itemContainer {
-
-    }
-
-    /* .activityContainer {
-        display: flex;
-        flex-direction: column;
-    } */
-
-    .activityContainer .item {
-        /* Adjust styles for mobile here, if needed */
-    }
-}
+/*  */

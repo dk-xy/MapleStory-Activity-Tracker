@@ -12,6 +12,8 @@ import Countdown from '../components/Legion/Countdown';
 import CountdownDaily from '../components/Legion/CountdownDaily';
 import ResetCountdown from '../components/Legion/ResetCountdown';
 
+import CharacterInfo from '../components/Legion/CharacterInfo';
+import EditButton from '../components/Legion/EditButton';
 
 
 export default function Character() {
@@ -46,11 +48,17 @@ export default function Character() {
 
     return (
         <div className="character-page">
-            <div>character</div>
+            <CharacterInfo character={character} />
+
+            <div>
+            <EditButton id={character.characterInfo.id} />
+            </div>
+            
+             {/* <div>{character.characterInfo.characterName}</div>
+             <div>{character.characterInfo.characterClass}</div> */}
             {/* link to edit character */}
-            <Link to={`/legion/${id}/edit`}>EDIT</Link>
-            <div>{character.characterInfo.characterName}</div>
-            <div>{character.characterInfo.characterClass}</div>
+            {/* <Link to={`/legion/${id}/edit`} className='editButton'>EDIT</Link> */}
+
 
             {/* Tab buttons */}
             <button className={`tabNav ${selectedTab === 'progression' ? 'active' : ''}`} onClick={() => setSelectedTab('progression')}>Progression</button>

@@ -48,15 +48,18 @@ function QuestCompletion({key, quest, characterId, questType}) {
 
     return (
                 <div className="questCheckBox">
-                     <img src={questToImage[quest.key]} 
+                    <div className='questInfo'>
+                    <img src={questToImage[quest.key]} 
                     //  alt={`${quest.questName} icon`}
                      />
                     <label>{quest.questName} </label>
+                    </div>
                     <input
                         type="checkbox"
                         checked={quest.completion.daily || quest.completion.weekly}
                         onChange={handleCheckboxChange}
                     />
+                   
                 </div>
     );
 }

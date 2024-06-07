@@ -240,16 +240,15 @@ gap: 4px;
 /* EDIT CHARACTER----------------------------- */
 
 .regionContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Adjust as needed */
+  grid-template-rows: auto;
   gap: 16px;
   padding: 16px;
   margin: 16px;
   border-radius: 16px;
-
-
   box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.15);
+  /* min-width: 302px; */
 }
 
 .regionSelector {
@@ -260,13 +259,15 @@ gap: 4px;
   justify-content: center;
   align-items: center;
   gap: 8px;
-} 
-
+  width: 100%;
+  min-width: 50px; /* Adjust as needed */
+  max-width: 100px; /* Adjust as needed */
+}
 .regionSelector label{
-  width: 77px;
+  /* min-width: 77px; */
 }
 
-.symbolContainer{
+/* .symbolContainer{
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -274,6 +275,18 @@ gap: 4px;
   gap: 8px;
   flex-wrap: wrap;
 
+} */
+
+.symbolContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .symbolContainer {
+    grid-template-columns: 1fr;
+  }
 }
 
 .tabNavContainer{
@@ -294,20 +307,15 @@ gap: 4px;
 
 /* quests */
 
-.dailyContainer{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-  align-items: center;
+.dailyContainer, .weeklyQuestsContainer, .regionContainer {
+ background-color: #eac8af3f;
   padding: 16px;
   margin: 16px;
   border-radius: 16px;
   box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.15);
   min-width: none;
-  max-width: 637px;
-  min-width: 302px;
+  /* max-width: 637px;
+  min-width: 302px; */
 }
 
 .questActivation img{
@@ -315,7 +323,7 @@ gap: 4px;
 }
 
 .questActivation{
-  max-width: 320px;
+  min-width: 160px;
 }
 
 /* dailies */
@@ -352,7 +360,7 @@ gap: 4px;
   justify-content: flex-end;
 }
 
-.weeklyQuestsContainer{
+/* .weeklyQuestsContainer{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -364,5 +372,29 @@ gap: 4px;
   border-radius: 16px;
   box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.15);
   max-width: 347px;
+} */
+
+.dailiesContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
 }
 
+.dailiesContainer h4 {
+  grid-column: 1 / -1; /* This will make the h4 take full width */
+}
+
+.dailyContainer, .weeklyQuestsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+
+/* media  width at 600 */
+
+@media (max-width: 640px) {
+  .dailyContainer, .weeklyQuestsContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
