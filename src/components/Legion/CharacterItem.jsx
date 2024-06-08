@@ -13,6 +13,8 @@ import pirateIcon from '../../assets/classes/icon-job-pirate.gif';
 import bowmanIcon from '../../assets/classes/icon-job-bowman.gif';
 import warriorIcon from '../../assets/classes/icon-job-warrior.gif';
 
+import ShowMiniProg from './ShowMiniProg';
+
 // import thiefIcon from '../assets/classes/icon-job-thief.gif';
 // import pirateIcon from '../assets/classes/icon-job-pirate.gif';
 // import bowmanIcon from '../assets/classes/icon-job-bowman.gif';
@@ -65,26 +67,14 @@ function CharacterItem({ character }) {
         "Wind Archer": bowmanIcon,
         "Xenon": pirateIcon,
         "Zero": warriorIcon,
-        // "Blaze Wizard": mageIcon,
-        // "Arch Mage (Fire, Poison)": mageIcon,
-        // "Arch Mage (Ice, Lightning)": mageIcon,
-        // "Battle Mage": mageIcon,
-        // "Illium": mageIcon,
-        // "Kanna": mageIcon,
-        // "Kinesis": mageIcon,
-        // "Luminous": mageIcon,
-        // "Evan": mageIcon,
 
-        // "Shadower": thiefIcon,
-        // "Pirate": pirateIcon,
-        // "Bowman": bowmanIcon,
-        // "Warrior": warriorIcon,
     };
     console.log(character);
     return (
         <div className='legionBlock'>
             <h5>{character.characterInfo.characterName}</h5>
             <img src={classToIcon[character.characterInfo.characterClass]} alt={`${character.characterInfo.characterClass} icon`} />
+            <ShowMiniProg character={character} />
             <Link to={{
                 pathname: `/legion/${character.characterInfo.id}`,
             }}>
