@@ -1,9 +1,10 @@
 .legionGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Adjust as needed */
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Adjust as needed */
     gap: 16px 8px;
     width: 100%;
     margin: auto;
+    text-align: center;
 }
 /* 2 columns when viewport is 400px or larger */
 @media (min-width: 400px) {
@@ -15,9 +16,13 @@
   /* 3 columns when viewport is 600px or larger */
   @media (min-width: 600px) {
     .legionGrid {
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
     }
   }
+
+.legionGrid .screenMessage{
+    grid-column: 1 / -1; /* This will make the h2 take full width */
+}
 
 .legionBlock {
     display: flex;
@@ -84,3 +89,4 @@ cursor: pointer;
     color: #3AB;
     border: inset solid 4px #3AB;
 }
+

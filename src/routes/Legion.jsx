@@ -27,8 +27,9 @@ function Legion() {
                     <CharacterItem key={key} character={characters[key]} />
                 ))
             ) : (
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                    No character in legion, please add a character
+                <div className='screenMessage' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%' }}>
+                    No character in legion, <br />
+                    please add a character
                 </div>
             )}
             </div>
