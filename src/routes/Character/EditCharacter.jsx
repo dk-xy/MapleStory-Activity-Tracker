@@ -57,8 +57,10 @@ const RegionCheckbox = ({ regionName, isActive, handleCheckboxChange }) => (
 const QuestCheckbox = ({ quest, questName, isActive, handleCheckboxChangeDailies }) => (
      
         <div className='questActivation'>
-            <img src={questToImage[quest]} alt={`${quest} icon`} />
+        <div className='activationInfo'>
+        <img src={questToImage[quest]} alt={`${quest} icon`} />
             <label>{questName} </label>
+        </div>
                 <input
                     type="checkbox"
                     checked={isActive}

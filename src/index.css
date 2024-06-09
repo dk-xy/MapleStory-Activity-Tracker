@@ -241,9 +241,9 @@ gap: 4px;
 
 .regionContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* Adjust as needed */
+  grid-template-columns: 1fr 1fr; /* Adjust as needed */
   grid-template-rows: auto;
-  gap: 16px;
+  gap: 8px;
   padding: 16px;
   margin: 16px;
   border-radius: 16px;
@@ -251,6 +251,16 @@ gap: 4px;
   /* min-width: 302px; */
 }
 
+
+
+/*media query max width 726 */
+/*media query max width 726 */
+@media (min-width: 522px) {
+  .regionContainer {
+     grid-template-columns: 1fr 1fr 1fr;
+   }
+}
+ 
 .regionSelector {
   border-radius: 4px;
   border: 1px solid #ffffffb6;
@@ -283,7 +293,7 @@ gap: 4px;
   gap: 16px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 840px) {
   .symbolContainer {
     grid-template-columns: 1fr;
   }
@@ -297,18 +307,27 @@ gap: 4px;
   /* max-width: 1080px; */
 }
 
-.regionContainer{
+/* .regionContainer{
   max-width: 437px;
   min-width: 300px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-}
+} */
 
 /* quests */
 
-.dailyContainer, .weeklyQuestsContainer, .regionContainer {
- background-color: #eac8af3f;
+.symbolContainer {
+
+}
+
+
+
+.dailyContainer, .weeklyQuestsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  background-color: #eac8af3f;
   padding: 16px;
   margin: 16px;
   border-radius: 16px;
@@ -318,12 +337,15 @@ gap: 4px;
   min-width: 302px; */
 }
 
+
+
+
 .questActivation img{
   width: 32px;
 }
 
 .questActivation{
-  min-width: 160px;
+  min-width: 120px;
 }
 
 /* dailies */
@@ -334,7 +356,7 @@ gap: 4px;
   padding: 4px 8px;
   /* space between */
 
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
   gap: 8px;
   border-radius: 8px;
@@ -348,8 +370,8 @@ gap: 4px;
 }
 
 .questActivation label {
-  width: 60px;
-  font-size: 14.8px;
+  /* width: 60px; */
+  font-size: 12.8px;
   font-weight: 400;
   text-align: left;
   /* margin: 0;
@@ -358,6 +380,16 @@ gap: 4px;
 
 .questActivation input {
   justify-content: flex-end;
+}
+
+.questActivation img {
+  width: 24px;
+}
+
+.questActivation .activationInfo{
+  display: flex;
+  align-items: center;
+  align-content: center;
 }
 
 /* .weeklyQuestsContainer{
@@ -373,12 +405,12 @@ gap: 4px;
   box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.15);
   max-width: 347px;
 } */
-
+/* 
 .dailiesContainer {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
-}
+} */
 
 .dailiesContainer h4 {
   grid-column: 1 / -1; /* This will make the h4 take full width */
@@ -386,15 +418,20 @@ gap: 4px;
 
 .dailyContainer, .weeklyQuestsContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
 
 /* media  width at 600 */
 
-@media (max-width: 640px) {
+@media (max-width: 482px) {
   .dailyContainer, .weeklyQuestsContainer {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
-}
+
+  @media (min-width: 800px) {
+    .dailyContainer, .weeklyQuestsContainer {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+}}
