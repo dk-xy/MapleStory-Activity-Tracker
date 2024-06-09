@@ -8,7 +8,7 @@ function ShowMiniProg ({ character }) {
     return (
         <div className="miniIndicator">
             <div className="miniIndicatorLabel">
-            Dailies:
+            Dailies
             </div>
             <div className="miniIndicatorNb">
             {completedDailies} / {activeQuests.length}

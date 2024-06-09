@@ -23,7 +23,10 @@
   -moz-osx-font-smoothing: grayscale;
 
   --primary: #FFECD9;
-  --secondary: #6E4732;
+  --dark: #6E4732;
+
+  --elevationOne:#eac8af;
+  --elevationTwo:#e9c7ae;
 
   background-color: var(--primary);
   margin-top: 0;

@@ -1,10 +1,17 @@
+@import url('../../App.css');
+
+
+
+
 .legionGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Adjust as needed */
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Adjust as needed */
     gap: 16px 8px;
     width: 100%;
+    max-width: 1225px;
     margin: auto;
     text-align: center;
+
 }
 /* 2 columns when viewport is 400px or larger */
 @media (min-width: 400px) {
@@ -28,16 +35,17 @@
     display: flex;
     /* min-width: 100px;
     max-width: 144px; */
-    height: 100%;
+    /* height: 100%; */
     padding: 8px;
     flex-direction: column;
     align-items: center;
     gap: 4px;
     flex-shrink: 0;
     border-radius: 8px;
-    background: #f5d9be;
+    background: var(--elevationZero);
     box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.05);
-    width: 100%;
+    min-width: 140px;
+    /* width: 100%; */
 }
 
 
@@ -95,7 +103,7 @@ cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 8px;
+    gap: 4px;
     margin: auto;
     margin-top: 8px;
     width: 100%;
@@ -104,17 +112,32 @@ cursor: pointer;
 
 .miniIndicator{
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
     align-items: center;
     flex-direction: row;
     font-size: 10pt;
     gap: 0px;
-    background-color: #eac8af;
+    /* background-color: #eac8af; */
+    background-color: var(--elevationTwo);
     width: 80%;
     border-radius: 16px;
     /* text-align: left; */
-    padding: 2px 2px;
-    margin: 2px 4px;
+    padding: 3px 6px;
+    margin: auto;
+  
 
 }
 
+.miniIndicatorNb{
+    background-color: var(--elevationZero);
+    padding: 1px 4px;
+    border-radius: 42px;
+    color: #2d2d2d;
+    font-weight: 600;
+    border: solid 1px var(--primary);
+}
+
+
+.miniIndicatorLabel{
+    font-weight: 500;
+}
