@@ -80,8 +80,11 @@ function CharacterItem({ character }) {
         <div className='legionBlock'>
             <h5>{character.characterInfo.characterName}</h5>
             <img src={classToIcon[character.characterInfo.characterClass]} alt={`${character.characterInfo.characterClass} icon`} />
-            {hasActiveDaily && <ShowMiniProg character={character} />}
-            {hasActiveWeekly && <ShowMiniProgWeeklies character={character} />}
+           <div className='miniIndicatorContainer'>
+           {hasActiveDaily && <ShowMiniProg character={character} />}
+           {hasActiveWeekly && <ShowMiniProgWeeklies character={character} />}
+           </div>
+            
             <Link to={{
                 pathname: `/legion/${character.characterInfo.id}`,
             }}>

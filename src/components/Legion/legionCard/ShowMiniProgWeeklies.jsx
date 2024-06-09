@@ -6,9 +6,16 @@ function ShowMiniProgWeeklies ({ character }) {
     }, 0);
 
     return (
-        <div>
-            weeklies: {completedWeeklies} / {activeQuests.length}
+        <div className="miniIndicator">
+            <div className="miniIndicatorLabel">
+            Weeklies:
+            </div>
+            <div className="miniIndicatorNb">
+            {completedWeeklies} / {activeQuests.length}
+            </div>
         </div>
+
+
     );
 }
 

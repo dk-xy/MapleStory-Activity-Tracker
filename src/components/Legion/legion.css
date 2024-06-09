@@ -16,7 +16,7 @@
   /* 3 columns when viewport is 600px or larger */
   @media (min-width: 600px) {
     .legionGrid {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
@@ -35,8 +35,9 @@
     gap: 4px;
     flex-shrink: 0;
     border-radius: 8px;
-    background: #EAC8AF;
+    background: #f5d9be;
     box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.05);
+    width: 100%;
 }
 
 
@@ -88,5 +89,32 @@ cursor: pointer;
     background: white;
     color: #3AB;
     border: inset solid 4px #3AB;
+}
+
+.miniIndicatorContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    margin: auto;
+    margin-top: 8px;
+    width: 100%;
+
+}
+
+.miniIndicator{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    font-size: 10pt;
+    gap: 0px;
+    background-color: #eac8af;
+    width: 80%;
+    border-radius: 16px;
+    /* text-align: left; */
+    padding: 2px 2px;
+    margin: 2px 4px;
+
 }
 
