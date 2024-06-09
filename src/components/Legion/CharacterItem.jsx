@@ -15,7 +15,7 @@ import bowmanIcon from '../../assets/classes/icon-job-bowman.gif';
 import warriorIcon from '../../assets/classes/icon-job-warrior.gif';
 
 import ShowMiniProg from './legionCard/ShowMiniProg';
-
+import ShowBossProgress from './legionCard/ShowBossProgress';
 // import thiefIcon from '../assets/classes/icon-job-thief.gif';
 // import pirateIcon from '../assets/classes/icon-job-pirate.gif';
 // import bowmanIcon from '../assets/classes/icon-job-bowman.gif';
@@ -25,6 +25,7 @@ import ShowMiniProg from './legionCard/ShowMiniProg';
 function CharacterItem({ character }) {
     const hasActiveDaily = character.progression.dailies.isActive;
     const hasActiveWeekly = character.progression.weeklies.isActive;
+    // const hasActiveBoss = Object.values(character.bosses).flat().some(boss => boss.difficulties.some(difficulty => difficulty.isActive));
 
 
 
@@ -78,13 +79,18 @@ function CharacterItem({ character }) {
     console.log(character);
     return (
         <div className='legionBlock'>
-            <h5>{character.characterInfo.characterName}</h5>
-            <img src={classToIcon[character.characterInfo.characterClass]} alt={`${character.characterInfo.characterClass} icon`} />
-           <div className='miniIndicatorContainer'>
-           {hasActiveDaily && <ShowMiniProg character={character} />}
-           {hasActiveWeekly && <ShowMiniProgWeeklies character={character} />}
-           </div>
-            
+            <div className='legionBlockHeader'>
+                <h5>{character.characterInfo.characterName}</h5>
+                <img src={classToIcon[character.characterInfo.characterClass]} alt={`${character.characterInfo.characterClass} icon`} />
+            </div>
+
+            <div className='miniIndicatorContainer'>
+                {hasActiveDaily && <ShowMiniProg character={character} />}
+                {hasActiveWeekly && <ShowMiniProgWeeklies character={character} />}
+                <ShowBossProgress character={character} />
+                {/* {hasActiveBoss && <ShowBossProgress character={character} />} */}
+            </div>
+
             <Link to={{
                 pathname: `/legion/${character.characterInfo.id}`,
             }}>
