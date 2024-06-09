@@ -5,26 +5,32 @@
 
 .legionGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Adjust as needed */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust as needed */
     gap: 16px 8px;
     width: 100%;
     
-    max-width: 1225px;
+    /* max-width: 1225px; */
     margin: auto;
     text-align: center;
 
 }
 /* 2 columns when viewport is 400px or larger */
-@media (min-width: 400px) {
+@media (min-width: 430px) {
     .legionGrid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
   
   /* 3 columns when viewport is 600px or larger */
-  @media (min-width: 600px) {
+  @media (min-width: 640px) {
     .legionGrid {
       grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 800px) {
+    .legionGrid {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 
@@ -47,6 +53,14 @@
     box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.05);
     min-width: 140px;
     /* width: 100%; */
+}
+
+.legionBlockHeader{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 
@@ -99,47 +113,60 @@ cursor: pointer;
     color: #3AB;
     border: inset solid 4px #3AB;
 }
-
 .miniIndicatorContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 column grid */
     gap: 4px;
     margin: auto;
     margin-top: 8px;
     width: 100%;
-
 }
 
+
 .miniIndicator{
+    position: relative;
     display: flex;
-    justify-content:space-between;
+    justify-content:center;
     align-items: center;
     flex-direction: row;
-    font-size: 10pt;
+    font-size: 9pt;
     gap: 0px;
-    /* background-color: #eac8af; */
     background-color: var(--elevationTwo);
-    width: 80%;
     border-radius: 16px;
-    /* text-align: left; */
-    padding: 3px 6px;
-    margin: auto;
+    padding: 3px 0px;
     border: solid 1px var(--primary);
-  
-
+    min-width: 87px;
 }
 
 .miniIndicatorNb{
-    background-color: var(--elevationZero);
+    /* background-color: var(--elevationZero); */
     padding: 1px 4px;
     border-radius: 42px;
     color: #2d2d2d;
     font-weight: 600;
-    border: solid 1px var(--primary);
+    /* border: solid 1px var(--primary); */
 }
 
 
 .miniIndicatorLabel{
     font-weight: 500;
+}
+
+.indicatorOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(0, 0, 0, 0.384); */
+    /* linear gradient dark with 3 stop, dark in center, trasparent at edges */
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.37) 0%, rgba(0, 0, 0, 0.603) 50%, rgba(0, 0, 0, 0.459) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 42px;
+}
+
+.tabler-icon-check{
+    color: #3CBF39;
 }

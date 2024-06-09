@@ -16,6 +16,7 @@ import warriorIcon from '../../assets/classes/icon-job-warrior.gif';
 
 import ShowMiniProg from './legionCard/ShowMiniProg';
 import ShowBossProgress from './legionCard/ShowBossProgress';
+import ShowSymbolProg from './legionCard/ShowSymbolProg';
 // import thiefIcon from '../assets/classes/icon-job-thief.gif';
 // import pirateIcon from '../assets/classes/icon-job-pirate.gif';
 // import bowmanIcon from '../assets/classes/icon-job-bowman.gif';
@@ -23,10 +24,16 @@ import ShowBossProgress from './legionCard/ShowBossProgress';
 
 
 function CharacterItem({ character }) {
+    const hasActiveSymbol = Object.values(character.progression.symbols.arcaneRiver.regions).some(symbol => symbol.isActive);
+    const hasActiveGrandis = Object.values(character.progression.symbols.grandis.regions).some(symbol => symbol.isActive);
     const hasActiveDaily = character.progression.dailies.isActive;
     const hasActiveWeekly = character.progression.weeklies.isActive;
     // const hasActiveBoss = Object.values(character.bosses).flat().some(boss => boss.difficulties.some(difficulty => difficulty.isActive));
-
+    const hasActiveBoss = Object.values(character.bosses).some(bossRegion => 
+        Object.values(bossRegion).some(boss => 
+            boss.isActive && boss.difficulty.some(difficulty => difficulty.isActive)
+        )
+    );
 
 
     const classToIcon = {
@@ -80,15 +87,17 @@ function CharacterItem({ character }) {
     return (
         <div className='legionBlock'>
             <div className='legionBlockHeader'>
+            <img src={classToIcon[character.characterInfo.characterClass]} alt={`${character.characterInfo.characterClass} icon`} />
                 <h5>{character.characterInfo.characterName}</h5>
-                <img src={classToIcon[character.characterInfo.characterClass]} alt={`${character.characterInfo.characterClass} icon`} />
+                
             </div>
 
             <div className='miniIndicatorContainer'>
                 {hasActiveDaily && <ShowMiniProg character={character} />}
                 {hasActiveWeekly && <ShowMiniProgWeeklies character={character} />}
-                <ShowBossProgress character={character} />
-                {/* {hasActiveBoss && <ShowBossProgress character={character} />} */}
+                {/* <ShowBossProgress character={character} /> */}
+                {hasActiveBoss && <ShowBossProgress character={character} />}
+                {(hasActiveSymbol || hasActiveGrandis) && <ShowSymbolProg character={character} />}
             </div>
 
             <Link to={{

@@ -274,7 +274,8 @@ color: blue;
   flex-grow: 2;
  border: solid 1px var(--primary);
   border-radius: 8px;
-  background-color: #fae4cf;
+  /* background-color: #fae4cf; */
+  background-color: #e6ab84da;
 
 }
 
