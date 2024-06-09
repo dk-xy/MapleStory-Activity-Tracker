@@ -22,6 +22,9 @@ import ShowMiniProg from './ShowMiniProg';
 
 
 function CharacterItem({ character }) {
+    const hasActiveDaily = character.progression.dailies.isActive;
+
+
     const classToIcon = {
 
         // Add all other classes here...
@@ -74,7 +77,7 @@ function CharacterItem({ character }) {
         <div className='legionBlock'>
             <h5>{character.characterInfo.characterName}</h5>
             <img src={classToIcon[character.characterInfo.characterClass]} alt={`${character.characterInfo.characterClass} icon`} />
-            <ShowMiniProg character={character} />
+            {hasActiveDaily && <ShowMiniProg character={character} />}
             <Link to={{
                 pathname: `/legion/${character.characterInfo.id}`,
             }}>
@@ -84,4 +87,4 @@ function CharacterItem({ character }) {
         </div>
     );
 }
-export default CharacterItem
+export default CharacterItem;

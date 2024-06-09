@@ -160,6 +160,7 @@ var i;
             <div className='questContainer'>
                 {/* Arcane river-------------------------------- */}
             
+            <div className='wholeDropDownContainer'>
             <div className='dropDownContainer'  onClick={() => setIsSymbolOpen(!isSymbolOpen)}><h4> Symbols</h4>  {isSymbolOpen ? <IconCaretUpFilled /> : <IconCaretDownFilled />}</div>
             {isSymbolOpen && (
                 <div className='symbolContainer'>
@@ -173,7 +174,7 @@ var i;
                     handleCheckboxChange={handleCheckboxChange}
                 />
             ))}
-</div>
+                </div>
 
         {/* Grandis-------------------------------- */}
         <div className={`regionContainer grandis`}>
@@ -185,11 +186,14 @@ var i;
                 handleCheckboxChange={handleCheckboxChange}
             />
         ))}
+            </div>
         </div>
-</div>
         )}
+            </div>
+           
            
             <div className='dailiesContainer'>
+            <div className='wholeDropDownContainer'>
             <div className='dropDownContainer'  onClick={() => setIsDailyOpen(!isDailyOpen)}><h4> Dailies</h4>  {isDailyOpen ? <IconCaretUpFilled /> : <IconCaretDownFilled />}</div>
             {isDailyOpen && (    
             <div className={`dailyContainer`}>
@@ -204,11 +208,14 @@ var i;
             ))}
         </div>
         )}
+            </div>
+            
 {/* DAILIES ---------------------------------- */}
 
 
 {/* WEEKLIES ---------------------------------- */}
 {/* Weeklies -------------------------------- */}
+<div className='wholeDropDownContainer'>
 <div className='dropDownContainer'  onClick={() => setIsWeeklyOpen(!isWeeklyOpen)}><h4> Weeklies</h4>  {isWeeklyOpen ? <IconCaretUpFilled /> : <IconCaretDownFilled />}</div>
 {isWeeklyOpen && (                <div className='weeklyQuestsContainer'>
             
@@ -224,6 +231,8 @@ var i;
                 />
             ))}
         </div>)}
+</div>
+
 
             </div>
             </div>

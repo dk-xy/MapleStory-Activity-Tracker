@@ -244,10 +244,11 @@ gap: 4px;
   grid-template-columns: 1fr 1fr; /* Adjust as needed */
   grid-template-rows: auto;
   gap: 8px;
-  padding: 16px;
   margin: 16px;
-  border-radius: 16px;
-  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.15);
+  /* padding: 8px;
+  margin: 16px; */
+  /* border-radius: 16px;
+  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.15); */
   /* min-width: 302px; */
 }
 
@@ -296,7 +297,7 @@ gap: 4px;
 .symbolContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 8px;
 }
 
 @media (max-width: 840px) {
@@ -327,17 +328,21 @@ gap: 4px;
 
 }
 
+.wholeDropDownContainer{
+  background-color: #eac8af3f;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 4px;
+  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.15);
+}
+
 
 
 .dailyContainer, .weeklyQuestsContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
-  background-color: #eac8af3f;
-  padding: 16px;
-  margin: 16px;
-  border-radius: 16px;
-  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.15);
+ 
   min-width: none;
   /* max-width: 637px;
   min-width: 302px; */
@@ -446,10 +451,15 @@ gap: 4px;
 .dropDownContainer{
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   gap: 8px;
-  padding: 16px;
-  margin: 16px;
+  padding: 8px;
+  margin: 0px;
   border-radius: 16px;
+}
+
+.dropDownContainer h4{
+  margin: 0px;
+ 
 }

@@ -16,7 +16,9 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
     switch (action.type) {
         case "CHARACTER_ADD":
             // Increment maxId and use it as the new character's ID
+            // eslint-disable-next-line no-case-declarations
             const newMaxId = state.maxId + 1;
+            // eslint-disable-next-line no-case-declarations
             const newCharacters = {
                 ...state.Characters,
                 [newMaxId]: {
@@ -435,7 +437,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                 isActive: false,
                                 difficulty: [
                                     {
-                                        name: "Normal",
+                                        name: "Easy",
                                         isActive: false,
                                         type: "weekly",
                                         completion: {
@@ -444,7 +446,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         },
                                     },
                                     {
-                                        name: "Hard",
+                                        name: "Normal",
                                         isActive: false,
                                         type: "weekly",
                                         completion: {
@@ -628,7 +630,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                 isActive: false,
                                 difficulty: [
                                     {
-                                        name: "Chaos",
+                                        name: "Easy",
                                         isActive: false,
                                         type: "daily",
                                         completion: {
@@ -637,7 +639,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         },
                                     },
                                     {
-                                        name: "Hard",
+                                        name: "Chaos",
                                         isActive: false,
                                         type: "weekly",
                                         completion: {
@@ -653,7 +655,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                 isActive: false,
                                 difficulty: [
                                     {
-                                        name: "Chaos",
+                                        name: "Normal",
                                         isActive: false,
                                         type: "daily",
                                         completion: {
@@ -662,7 +664,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         },
                                     },
                                     {
-                                        name: "Hard",
+                                        name: "Chaos",
                                         isActive: false,
                                         type: "weekly",
                                         completion: {
