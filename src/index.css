@@ -76,13 +76,9 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+
 }
-button:hover {
-  border-color: #646cff;
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -239,6 +235,51 @@ gap: 4px;
 
 /* EDIT CHARACTER----------------------------- */
 
+.backButton{
+  background-color: transparent !important;
+  color: #2D2D2D;
+  display: flex;
+  font-size: 10pt;
+  align-items: center;
+  border-radius: 0px;
+  /* change type pointer */
+  cursor: pointer;
+}
+
+.backButton:hover{
+  background-color: transparent !important;
+border: none;
+color: blue;
+}
+
+.editCharHeader{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  text-align: left;
+  background-color: #EAC8AF;
+  border-radius: 8px;
+}
+
+.editCharInfo{
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: center;
+  gap: 8px;  
+  flex-grow: 2;
+ border: solid 1px var(--primary);
+  border-radius: 8px;
+  background-color: #fae4cf;
+
+}
+
+
+.editCharName{
+  font-weight: 600;
+}
+
 .regionContainer {
   display: grid;
   grid-template-columns: 1fr 1fr; /* Adjust as needed */
@@ -334,6 +375,7 @@ gap: 4px;
   margin: 16px;
   border-radius: 4px;
   box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.15);
+
 }
 
 

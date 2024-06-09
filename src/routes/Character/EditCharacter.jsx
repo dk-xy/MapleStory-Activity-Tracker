@@ -19,7 +19,7 @@ import gollux from '../../assets/quests/MapIcon_GiantVellud.webp';
 import shadowknight from '../../assets/quests/Etc_Shadowknight_Coin.webp';
 
 // import caret down full icon
-import { IconCaretDownFilled, IconCaretUpFilled } from '@tabler/icons-react';
+import { IconCaretDownFilled, IconCaretUpFilled, IconPencil, IconChevronsLeft } from '@tabler/icons-react';
 
 
 const questToImage = {
@@ -135,18 +135,30 @@ var i;
     return (
         
     <div> 
-      
-        <div>
-        EDITING {character.characterInfo.characterName}
+      <div className='editCharHeader'>
+      <button className='backButton' onClick={() => window.history.back()}><IconChevronsLeft />    Back</button>
+      <div className='editCharInfo'>
+      <IconPencil />
+        <div className='editCharInfoHeader'>
+        <div className='editCharTitle'>Editing</div> 
+        <div className='editCharName'>{character.characterInfo.characterName}</div> 
         </div>
-            <button onClick={() => window.history.back()}>Back</button>
+        
+        <div>
+
+        </div>
+      </div>
+
+      </div>
+       
+            
 
         <div className='tabNavContainer'>
             <div
                 className={`tabNav ${selectedTab === 'quests' ? 'active' : ''}`}
                 onClick={() => setSelectedTab('quests')}
             >
-                Quests
+                Progression
         </div>
             <div
                 className={`tabNav ${selectedTab === 'bosses' ? 'active' : ''}`}

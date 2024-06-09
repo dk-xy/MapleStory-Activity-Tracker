@@ -1588,12 +1588,14 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                     const completionDate = new Date(region.completion.weeklyDate);
                     if (completionDate < lastSunday) {
                         region.completion.weekly = false;
+                        region.completion.weeklyDate = null;
                     }
                 }
                 for (const region of Object.values(character.progression.symbols.grandis.regions)) {
                     const completionDate = new Date(region.completion.weeklyDate);
                     if (completionDate < lastSunday) {
                         region.completion.weekly = false;
+                        region.completion.weeklyDate = null;
                     }
                 }
             }
@@ -1605,12 +1607,15 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             // Get the current date and convert to UTC
             const nowDaily = new Date();
             const nowUTCDaily = new Date(Date.UTC(nowDaily.getFullYear(), nowDaily.getMonth(), nowDaily.getDate()));
-
+        
+            // Clone the state
+            const newStateDaily = JSON.parse(JSON.stringify(state));
+        
             // Reset daily.isCompleted for all quests where the completion date is not today
-            for (const character of Object.values(state.Characters)) {
+            for (const character of Object.values(newStateDaily.Characters)) {
                 for (const quest of Object.values(character.progression.dailies.quests)) {
                     const completionDate = new Date(quest.completion.dailyDate);
-
+        
                     if (completionDate.getUTCDate() !== nowUTCDaily.getDate() || completionDate.getUTCMonth() !== nowUTCDaily.getMonth() || completionDate.getUTCFullYear() !== nowUTCDaily.getFullYear()) {
                         console.log("RESET")
                         quest.completion.daily = false;
@@ -1618,8 +1623,8 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                     }
                 }
             }
-
-            return { ...state };
+        
+            return newStateDaily;
 
 
     }
