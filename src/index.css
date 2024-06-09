@@ -273,6 +273,12 @@ gap: 4px;
   min-width: 50px; /* Adjust as needed */
   max-width: 100px; /* Adjust as needed */
 }
+
+
+.symbolContainerTitle{
+  grid-column: 1 / -1; /* This will make the h4 take full width */
+
+}
 .regionSelector label{
   /* min-width: 77px; */
 }
@@ -390,6 +396,7 @@ gap: 4px;
   display: flex;
   align-items: center;
   align-content: center;
+  gap:8px;
 }
 
 /* .weeklyQuestsContainer{
@@ -435,3 +442,14 @@ gap: 4px;
       grid-template-columns: 1fr 1fr 1fr;
     }
 }}
+
+.dropDownContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 16px;
+}

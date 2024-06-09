@@ -92,6 +92,10 @@ const QuestCheckbox = ({ quest, questName, isActive, handleCheckboxChangeDailies
 
 const EditCharacter = () => {
 
+    const [isSymbolOpen, setIsSymbolOpen] = useState(false);
+    const [isDailyOpen, setIsDailyOpen] = useState(false);
+    const [isWeeklyOpen, setIsWeeklyOpen] = useState(false);
+
     const [isOpen, setIsOpen] = useState(false);
     const [isOpen2, setIsOpen2] = useState(false);
     const [isOpen3, setIsOpen3] = useState(false);
@@ -155,63 +159,72 @@ var i;
         {selectedTab === 'quests' && (
             <div className='questContainer'>
                 {/* Arcane river-------------------------------- */}
-            <div className='symbolContainer'>
-            <div className={`regionContainer arcaneRiver`}>
-                {Object.keys(arcaneRiver.regions).map(regionName => (
-                    <RegionCheckbox
-                        key={regionName}
-                        regionName={regionName}
-                        isActive={arcaneRiver.regions[regionName].isActive}
-                        handleCheckboxChange={handleCheckboxChange}
-                    />
-                ))}
-            </div>
             
-{/* Grandis-------------------------------- */}
-            <div className={`regionContainer grandis`}>
-                {Object.keys(grandis.regions).map(regionName => (
-                    <RegionCheckbox
-                        key={regionName}
-                        regionName={regionName}
-                        isActive={grandis.regions[regionName].isActive}
-                        handleCheckboxChange={handleCheckboxChange}
-                    />
-                ))}
-            </div>
-            </div>
-            <div className='dailiesContainer'>
+            <div className='dropDownContainer'  onClick={() => setIsSymbolOpen(!isSymbolOpen)}><h4> Symbols</h4>  {isSymbolOpen ? <IconCaretUpFilled /> : <IconCaretDownFilled />}</div>
+            {isSymbolOpen && (
+                <div className='symbolContainer'>
+                {/* <div className='symbolContainerTitle'> Symbols</div> */}
+                    <div className={`regionContainer arcaneRiver`}>
+                    {Object.keys(arcaneRiver.regions).map(regionName => (
+                <RegionCheckbox
+                    key={regionName}
+                    regionName={regionName}
+                    isActive={arcaneRiver.regions[regionName].isActive}
+                    handleCheckboxChange={handleCheckboxChange}
+                />
+            ))}
+</div>
 
-{/* DAILIES ---------------------------------- */}
-<h4>Dailies</h4>
+        {/* Grandis-------------------------------- */}
+        <div className={`regionContainer grandis`}>
+        {Object.keys(grandis.regions).map(regionName => (
+            <RegionCheckbox
+                key={regionName}
+                regionName={regionName}
+                isActive={grandis.regions[regionName].isActive}
+                handleCheckboxChange={handleCheckboxChange}
+            />
+        ))}
+        </div>
+</div>
+        )}
+           
+            <div className='dailiesContainer'>
+            <div className='dropDownContainer'  onClick={() => setIsDailyOpen(!isDailyOpen)}><h4> Dailies</h4>  {isDailyOpen ? <IconCaretUpFilled /> : <IconCaretDownFilled />}</div>
+            {isDailyOpen && (    
             <div className={`dailyContainer`}>
-                {Object.keys(dailies).map(quest => (
-                    console.log(quest),
-                    <QuestCheckbox
-                        quest={quest}
-                        questName={dailies[quest].questName}
-                        isActive={dailies[quest].isActive}
-                        handleCheckboxChangeDailies={handleCheckboxChangeDailies}
-                    />
-                ))}
-            </div>
+            {Object.keys(dailies).map(quest => (
+                console.log(quest),
+                <QuestCheckbox
+                    quest={quest}
+                    questName={dailies[quest].questName}
+                    isActive={dailies[quest].isActive}
+                    handleCheckboxChangeDailies={handleCheckboxChangeDailies}
+                />
+            ))}
+        </div>
+        )}
+{/* DAILIES ---------------------------------- */}
+
 
 {/* WEEKLIES ---------------------------------- */}
 {/* Weeklies -------------------------------- */}
-<h4>Weeklies</h4>
-<div className='weeklyQuestsContainer'>
-  
-    {Object.keys(character.progression.weeklies.quests).map(questName => (
-        console.log(questName),
-        // console.log(character.progression.weeklies.quests[questName]),
+<div className='dropDownContainer'  onClick={() => setIsWeeklyOpen(!isWeeklyOpen)}><h4> Weeklies</h4>  {isWeeklyOpen ? <IconCaretUpFilled /> : <IconCaretDownFilled />}</div>
+{isWeeklyOpen && (                <div className='weeklyQuestsContainer'>
+            
+            {Object.keys(character.progression.weeklies.quests).map(questName => (
+                console.log(questName),
+                // console.log(character.progression.weeklies.quests[questName]),
 
-        <WeeklyQuestCheckbox
-            // key={questName}
-            questName={questName}
-            isActive={character.progression.weeklies.quests[questName].isActive}
-            handleCheckboxChangeWeeklies={handleCheckboxChangeWeeklies}
-        />
-    ))}
-</div>
+                <WeeklyQuestCheckbox
+                    // key={questName}
+                    questName={questName}
+                    isActive={character.progression.weeklies.quests[questName].isActive}
+                    handleCheckboxChangeWeeklies={handleCheckboxChangeWeeklies}
+                />
+            ))}
+        </div>)}
+
             </div>
             </div>
         )}
