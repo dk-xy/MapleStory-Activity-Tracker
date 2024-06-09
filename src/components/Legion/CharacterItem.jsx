@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 //import legion css
 import './legion.css';
+import ShowMiniProgWeeklies from './legionCard/ShowMiniProgWeeklies';
 
 // Import shared icons
 import mageIcon from '../../assets/classes/icon-job-magician.gif';
@@ -13,7 +14,7 @@ import pirateIcon from '../../assets/classes/icon-job-pirate.gif';
 import bowmanIcon from '../../assets/classes/icon-job-bowman.gif';
 import warriorIcon from '../../assets/classes/icon-job-warrior.gif';
 
-import ShowMiniProg from './ShowMiniProg';
+import ShowMiniProg from './legionCard/ShowMiniProg';
 
 // import thiefIcon from '../assets/classes/icon-job-thief.gif';
 // import pirateIcon from '../assets/classes/icon-job-pirate.gif';
@@ -23,6 +24,8 @@ import ShowMiniProg from './ShowMiniProg';
 
 function CharacterItem({ character }) {
     const hasActiveDaily = character.progression.dailies.isActive;
+    const hasActiveWeekly = character.progression.weeklies.isActive;
+
 
 
     const classToIcon = {
@@ -78,6 +81,7 @@ function CharacterItem({ character }) {
             <h5>{character.characterInfo.characterName}</h5>
             <img src={classToIcon[character.characterInfo.characterClass]} alt={`${character.characterInfo.characterClass} icon`} />
             {hasActiveDaily && <ShowMiniProg character={character} />}
+            {hasActiveWeekly && <ShowMiniProgWeeklies character={character} />}
             <Link to={{
                 pathname: `/legion/${character.characterInfo.id}`,
             }}>
