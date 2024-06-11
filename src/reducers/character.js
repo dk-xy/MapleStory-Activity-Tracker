@@ -1338,28 +1338,36 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
         // }
         case 'TOGGLE_BOSS_DIFFICULTY_COMPLETION': {
             const { bossId, bossKey, difficultyName, completionType } = action.payload;
-
-            // Find the character and the boss
+        
+            // Find the character
             const character = state.Characters[bossId];
-            const boss = character.bosses.mapleWorld[bossKey];
-
+        
+            // Find the boss
+            let boss;
+            for (let region in character.bosses) {
+                if (character.bosses[region][bossKey]) {
+                    boss = character.bosses[region][bossKey];
+                    break;
+                }
+            }
+        
             // Find the difficulty
             const difficulty = boss.difficulty.find(diff => diff.name === difficultyName);
-
+        
             // Toggle the completion status
             difficulty.completion[completionType] = !difficulty.completion[completionType];
-
+        
             // Get the current date and convert to UTC
             const nowBoss = new Date();
             const nowBossUTC = new Date(Date.UTC(nowBoss.getFullYear(), nowBoss.getMonth(), nowBoss.getDate()));
-
+        
             // Set the completion date
             if (completionType === 'daily') {
                 difficulty.completion.dailyDate = nowBossUTC;
             } else if (completionType === 'weekly') {
                 difficulty.completion.weeklyDate = nowBossUTC;
             }
-
+        
             return { ...state };
         }
         // BOSS RESETS  ---------------------------------------------------------------------

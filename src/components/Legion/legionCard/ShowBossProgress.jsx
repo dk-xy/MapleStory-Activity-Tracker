@@ -1,3 +1,5 @@
+import { IconCheck } from '@tabler/icons-react';
+
 function ShowBossProgress({ character }) {
     let activeBosses = 0;
     let completedBosses = 0;
@@ -25,6 +27,11 @@ function ShowBossProgress({ character }) {
             <div className="miniIndicatorNb">
                 {completedBosses} / {activeBosses}
             </div>
+            {completedBosses === activeBosses && (
+                <div className="indicatorOverlay">
+                    <IconCheck />
+                </div>
+            )}
         </div>
     );
 }

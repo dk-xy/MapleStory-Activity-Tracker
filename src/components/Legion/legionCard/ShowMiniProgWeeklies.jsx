@@ -1,3 +1,5 @@
+import { IconCheck } from '@tabler/icons-react';
+
 function ShowMiniProgWeeklies ({ character }) {
     const quests = Object.values(character.progression.weeklies.quests);
     const activeQuests = quests.filter(quest => quest.isActive);
@@ -13,9 +15,12 @@ function ShowMiniProgWeeklies ({ character }) {
             <div className="miniIndicatorNb">
             {completedWeeklies} / {activeQuests.length}
             </div>
+            {completedWeeklies === activeQuests.length && (
+                <div className="indicatorOverlay">
+                    <IconCheck />
+                </div>
+            )}
         </div>
-
-
     );
 }
 

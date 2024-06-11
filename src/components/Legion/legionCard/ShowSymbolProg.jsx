@@ -1,3 +1,5 @@
+import { IconCheck } from '@tabler/icons-react';
+
 function ShowSymbolProg ({ character }) {
     const arcaneSymbols = Object.values(character.progression.symbols.arcaneRiver.regions);
     const grandisSymbols = Object.values(character.progression.symbols.grandis.regions);
@@ -12,8 +14,9 @@ function ShowSymbolProg ({ character }) {
     const completedGrandisSymbols = activeGrandisSymbols.reduce((count, symbol) => {
         return symbol.completion.daily || symbol.completion.weekly ? count + 1 : count;
     }, 0);
-    
 
+    const totalActiveSymbols = activeArcaneSymbols.length + activeGrandisSymbols.length;
+    const totalCompletedSymbols = completedArcaneSymbols + completedGrandisSymbols;
 
     return (
         <div className="miniIndicator">
@@ -21,8 +24,13 @@ function ShowSymbolProg ({ character }) {
             Symbols
             </div>
             <div className="miniIndicatorNb">
-            {(completedArcaneSymbols + completedGrandisSymbols)} / {(activeArcaneSymbols.length + activeGrandisSymbols.length)}
+            {totalCompletedSymbols} / {totalActiveSymbols}
             </div>
+            {totalCompletedSymbols === totalActiveSymbols && (
+                <div className="indicatorOverlay">
+                    <IconCheck />
+                </div>
+            )}
         </div>
     );
 }
