@@ -29,8 +29,8 @@ function CharacterItem({ character }) {
     const hasActiveDaily = character.progression.dailies.isActive;
     const hasActiveWeekly = character.progression.weeklies.isActive;
     // const hasActiveBoss = Object.values(character.bosses).flat().some(boss => boss.difficulties.some(difficulty => difficulty.isActive));
-    const hasActiveBoss = Object.values(character.bosses).some(bossRegion => 
-        Object.values(bossRegion).some(boss => 
+    const hasActiveBoss = Object.values(character.bosses).some(bossRegion =>
+        Object.values(bossRegion).some(boss =>
             boss.isActive && boss.difficulty.some(difficulty => difficulty.isActive)
         )
     );
@@ -87,17 +87,18 @@ function CharacterItem({ character }) {
     return (
         <div className='legionBlock'>
             <div className='legionBlockHeader'>
-            <img src={classToIcon[character.characterInfo.characterClass]} alt={`${character.characterInfo.characterClass} icon`} />
+                <img src={classToIcon[character.characterInfo.characterClass]} alt={`${character.characterInfo.characterClass} icon`} />
                 <h5>{character.characterInfo.characterName}</h5>
-                
+
             </div>
 
             <div className='miniIndicatorContainer'>
+                {(hasActiveSymbol || hasActiveGrandis) && <ShowSymbolProg character={character} />}
                 {hasActiveDaily && <ShowMiniProg character={character} />}
                 {hasActiveWeekly && <ShowMiniProgWeeklies character={character} />}
                 {/* <ShowBossProgress character={character} /> */}
                 {hasActiveBoss && <ShowBossProgress character={character} />}
-                {(hasActiveSymbol || hasActiveGrandis) && <ShowSymbolProg character={character} />}
+
             </div>
 
             <Link to={{

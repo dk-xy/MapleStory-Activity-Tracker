@@ -25,25 +25,25 @@ export default function Character() {
 
     const [selectedTab, setSelectedTab] = useState('progression');
     // const character = location.state.character;
-    useEffect(() => {
-        // Dispatch the actions immediately on component mount
-        dispatch(resetDailyCompletionStatuses());
-        dispatch(resetWeeklyCompletionStatuses());
-        dispatch(resetDailyQuestsCompletionStatuses());
-        dispatch(resetBossCompletionStatuses());
+    // useEffect(() => {
+    //     // Dispatch the actions immediately on component mount
+    //     dispatch(resetDailyCompletionStatuses());
+    //     dispatch(resetWeeklyCompletionStatuses());
+    //     dispatch(resetDailyQuestsCompletionStatuses());
+    //     dispatch(resetBossCompletionStatuses());
 
 
-        // Set up a timer to dispatch the actions every minute
-        const timer = setInterval(() => {
-            dispatch(resetDailyCompletionStatuses());
-            dispatch(resetWeeklyCompletionStatuses());
-            dispatch(resetDailyQuestsCompletionStatuses());
-            dispatch(resetBossCompletionStatuses());
-        }, 6000); // 60000 milliseconds = 1 minute
+    //     // Set up a timer to dispatch the actions every minute
+    //     const timer = setInterval(() => {
+    //         dispatch(resetDailyCompletionStatuses());
+    //         dispatch(resetWeeklyCompletionStatuses());
+    //         dispatch(resetDailyQuestsCompletionStatuses());
+    //         dispatch(resetBossCompletionStatuses());
+    //     }, 6000); // 60000 milliseconds = 1 minute
 
-        // Clean up function
-        return () => clearInterval(timer);
-    }, [dispatch, characters]);
+    //     // Clean up function
+    //     return () => clearInterval(timer);
+    // }, [dispatch, characters]);
 
 
     return (

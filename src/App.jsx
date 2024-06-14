@@ -9,15 +9,32 @@ import Checklists from './routes/Checklists';
 import Character from './routes/Character';
 import EditCharacter from './routes/Character/EditCharacter';
 import { IconUsers, IconChartPie, IconChecklist } from '@tabler/icons-react';
-import { useDispatch } from 'react-redux';
-import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses } from './redux/actions/characters';
 
+import { useDispatch } from 'react-redux';
+import { resetDailyCompletionStatuses, resetWeeklyCompletionStatuses, resetDailyQuestsCompletionStatuses, resetBossCompletionStatuses } from './redux/actions/characters';
 const App = () => {
   const [count, setCount] = useState(0)
+  const dispatch = useDispatch();
 
 
+  useEffect(() => {
+    // Dispatch the actions immediately on component mount
+    dispatch(resetDailyCompletionStatuses());
+    dispatch(resetWeeklyCompletionStatuses());
+    dispatch(resetDailyQuestsCompletionStatuses());
+    dispatch(resetBossCompletionStatuses());
 
-    ;
+    // Set up a timer to dispatch the actions every minute
+    const timer = setInterval(() => {
+      dispatch(resetDailyCompletionStatuses());
+      dispatch(resetWeeklyCompletionStatuses());
+      dispatch(resetDailyQuestsCompletionStatuses());
+      dispatch(resetBossCompletionStatuses());
+    }, 60000); // 60000 milliseconds = 1 minute
+
+    // Clean up function
+    return () => clearInterval(timer);
+  }, [dispatch]);
 
   return (
     <>
