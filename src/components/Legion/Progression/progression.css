@@ -60,9 +60,7 @@
     gap: 8px;
 }
 
-.regionProgression {
-    /* Your styles for .regionProgression */
-}
+
 
 .activityBox,
 .symbolsContainer {
@@ -145,11 +143,21 @@
     flex-shrink: 0;
     border-radius: 4px;
     flex-grow: 2;
+    position: relative;
 }
 
 .regionProgression h5 {
     text-align: left;
     margin: 6px;
+}
+
+.regionProgression img {
+    position: absolute;
+    top: -200px;
+    right: -10px;
+    width: 40px; /* 1.5 times bigger */
+    height: auto; /* keep aspect ratio */
+    z-index: -1; /* lower z-index */
 }
 
 .completionBoxes {
