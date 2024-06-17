@@ -23,6 +23,9 @@ export const RESET_DAILY_COMPLETION_STATUSES = 'RESET_DAILY_COMPLETION_STATUSES'
 export const RESET_WEEKLY_COMPLETION_STATUSES = 'RESET_WEEKLY_COMPLETION_STATUSES';
 export const RESET_DAILY_QUESTS_COMPLETION_STATUS = 'RESET_DAILY_QUESTS_COMPLETION_STATUS';
 export const RESET_WEEKLY_QUESTS_COMPLETION_STATUS = 'RESET_WEEKLY_QUESTS_COMPLETION_STATUS';
+export const RESET_BOSS_COMPLETION_STATUSES = 'RESET_BOSS_COMPLETION_STATUSES';
+
+
 
 export function resetDailyCompletionStatuses() {
     return { type: RESET_DAILY_COMPLETION_STATUSES };
@@ -41,9 +44,9 @@ export function resetWeeklyQuestsCompletionStatuses() {
   return { type: RESET_WEEKLY_QUESTS_COMPLETION_STATUS };
 }
 
-export const resetBossCompletionStatuses = () => ({
-  type: 'RESET_BOSS_COMPLETION_STATUSES'
-});
 
 
+export function resetBossCompletionStatuses() {
+  return { type: RESET_BOSS_COMPLETION_STATUSES };
+}
 

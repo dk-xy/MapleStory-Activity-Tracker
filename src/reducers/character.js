@@ -1408,7 +1408,6 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             return { ...state };
 
 
-
         // case 'RESET_BOSS_COMPLETION_STATUSES':
         //     // Get the current date and convert to UTC
         //     const nowBossDaily = new Date(Date.now());
@@ -1548,41 +1547,41 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
         case RESET_DAILY_COMPLETION_STATUSES:
             // Get the current date and convert to UTC
             const now = new Date();
-            const nowUTC = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
-
+            const nowUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+        
             // Clone the state
             const newState = JSON.parse(JSON.stringify(state));
-
+        
             // Reset daily.isCompleted for all regions where the completion date is not today
             for (const character of Object.values(newState.Characters)) {
                 for (const region of Object.values(character.progression.symbols.arcaneRiver.regions)) {
-
+        
                     if (region.completion.daily) {
                         const completionDate = new Date(region.completion.dailyDate);
                         console.log(completionDate)
                         console.log(completionDate.toUTCString())
-                        if (completionDate.getUTCDate() !== nowUTC.getDate() || completionDate.getUTCMonth() !== nowUTC.getMonth() || completionDate.getUTCFullYear() !== nowUTC.getFullYear()) {
+                        if (completionDate.getUTCDate() !== nowUTC.getUTCDate() || completionDate.getUTCMonth() !== nowUTC.getUTCMonth() || completionDate.getUTCFullYear() !== nowUTC.getUTCFullYear()) {
                             region.completion.daily = false;
                             region.completion.dailyDate = null;
                         }
                     }
-
+        
                 }
                 for (const region of Object.values(character.progression.symbols.grandis.regions)) {
-
+        
                     if (region.completion.daily) {
                         const completionDateConvert = new Date(region.completion.dailyDate);
-                        const completionDate = new Date(Date.UTC(completionDateConvert.getFullYear(), completionDateConvert.getMonth(), completionDateConvert.getDate()));
+                        const completionDate = new Date(Date.UTC(completionDateConvert.getUTCFullYear(), completionDateConvert.getUTCMonth(), completionDateConvert.getUTCDate()));
                         console.log(completionDate)
                         console.log(completionDate.toUTCString())
-                        if (completionDate.getDate() !== nowUTC.getDate() || completionDate.getMonth() !== nowUTC.getMonth() || completionDate.getFullYear() !== nowUTC.getFullYear()) {
+                        if (completionDate.getUTCDate() !== nowUTC.getUTCDate() || completionDate.getUTCMonth() !== nowUTC.getUTCMonth() || completionDate.getUTCFullYear() !== nowUTC.getUTCFullYear()) {
                             region.completion.daily = false;
                             region.completion.dailyDate = null;
                         }
                     }
                 }
             }
-
+        
             return newState;
 
         case RESET_WEEKLY_COMPLETION_STATUSES:
@@ -1614,7 +1613,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
         case RESET_DAILY_QUESTS_COMPLETION_STATUS:
             // Get the current date and convert to UTC
             const nowDaily = new Date();
-            const nowUTCDaily = new Date(Date.UTC(nowDaily.getFullYear(), nowDaily.getMonth(), nowDaily.getDate()));
+            const nowUTCDaily = new Date(Date.UTC(nowDaily.getUTCFullYear(), nowDaily.getUTCMonth(), nowDaily.getUTCDate()));
         
             // Clone the state
             const newStateDaily = JSON.parse(JSON.stringify(state));
@@ -1624,7 +1623,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                 for (const quest of Object.values(character.progression.dailies.quests)) {
                     const completionDate = new Date(quest.completion.dailyDate);
         
-                    if (completionDate.getUTCDate() !== nowUTCDaily.getDate() || completionDate.getUTCMonth() !== nowUTCDaily.getMonth() || completionDate.getUTCFullYear() !== nowUTCDaily.getFullYear()) {
+                    if (completionDate.getUTCDate() !== nowUTCDaily.getUTCDate() || completionDate.getUTCMonth() !== nowUTCDaily.getUTCMonth() || completionDate.getUTCFullYear() !== nowUTCDaily.getUTCFullYear()) {
                         console.log("RESET")
                         quest.completion.daily = false;
                         quest.completion.dailyDate = "null";
