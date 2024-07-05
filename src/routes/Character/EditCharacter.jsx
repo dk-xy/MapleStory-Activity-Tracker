@@ -242,7 +242,7 @@ var i;
                     // key={questName}
                     quest={quest}
                     questName={weeklies[quest].questName}
-                    isActive={weeklies[quest].questName.isActive}
+                    isActive={weeklies[quest].isActive}
                     handleCheckboxChangeWeeklies={handleCheckboxChangeWeeklies}
                 />
             ))}

@@ -1,15 +1,15 @@
-import { RESET_DAILY_COMPLETION_STATUSES, RESET_WEEKLY_COMPLETION_STATUSES, RESET_DAILY_QUESTS_COMPLETION_STATUS } from '../redux/actions/characters';
+import { RESET_DAILY_COMPLETION_STATUSES, RESET_WEEKLY_COMPLETION_STATUSES, RESET_DAILY_QUESTS_COMPLETION_STATUS, RESET_WEEKLY_QUESTS_COMPLETION_STATUS } from '../redux/actions/characters';
 
 
 
 const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
 
-    Date.prototype.getUTCWeekNumber = function() {
+    Date.prototype.getUTCWeekNumber = function () {
         const date = new Date(Date.UTC(this.getUTCFullYear(), this.getUTCMonth(), this.getUTCDate()));
         const dayNum = date.getUTCDay() || 7;
         date.setUTCDate(date.getUTCDate() + 4 - dayNum);
-        const yearStart = new Date(Date.UTC(date.getUTCFullYear(),0,1));
-        return Math.ceil((((date - yearStart) / 86400000) + 1)/7);
+        const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+        return Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
     };
 
 
@@ -1153,10 +1153,10 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             // If quest is found, toggle its isActive property
             if (quest) {
                 quest.isActive = !quest.isActive;
-        
+
                 // Check if any quest is active
                 const anyQuestActive = Object.values(character.progression.dailies.quests).some(quest => quest.isActive);
-        
+
                 // If any quest is active, set character.progression.dailies.isActive to true
                 if (anyQuestActive) {
                     character.progression.dailies.isActive = true;
@@ -1174,17 +1174,19 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
         case 'TOGGLE_WEEKLY_QUEST': {
             const { id, questNameW } = action.payload;
             const character = state.Characters[id];
-        
+
             // Check if quest exists in weeklies.quests
             let questW = character.progression.weeklies.quests[questNameW];
-        
+            console.log("WESH")
+            console.log(questW)
+
             // If quest is found, toggle its isActive property
             if (questW) {
                 questW.isActive = !questW.isActive;
-        
+
                 // Check if any quest is active
                 const anyQuestActive = Object.values(character.progression.weeklies.quests).some(quest => quest.isActive);
-        
+
                 // If any quest is active, set character.progression.weeklies.isActive to true
                 if (anyQuestActive) {
                     character.progression.weeklies.isActive = true;
@@ -1194,7 +1196,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             } else {
                 console.error(`Quest ${questNameW} not found for character ${id}`);
             }
-        
+
             return { ...state };
         }
 
@@ -1293,10 +1295,10 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
 
         case 'TOGGLE_BOSS_DIFFICULTY_ACTIVE': {
             const { bossId, bossKey, difficultyName } = action.payload;
-        
+
             // Find the character
             const character = state.Characters[bossId];
-        
+
             // Check if the boss exists in each key and select it
             let boss;
             if (character.bosses.mapleWorld && character.bosses.mapleWorld[bossKey]) {
@@ -1306,24 +1308,24 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             } else if (character.bosses.arcaneRiver && character.bosses.arcaneRiver[bossKey]) {
                 boss = character.bosses.arcaneRiver[bossKey];
             }
-        
+
             if (!boss) {
                 console.error(`Boss with key ${bossKey} not found`);
                 return { ...state };
             }
-        
+
             // Find the difficulty
             const difficulty = boss.difficulty.find(diff => diff.name === difficultyName);
-        
+
             // Toggle the active status
             difficulty.isActive = !difficulty.isActive;
-        
+
             // Check if any difficulty is active
             const anyActive = boss.difficulty.some(diff => diff.isActive);
-        
+
             // Toggle the boss active status
             boss.isActive = anyActive;
-        
+
             return { ...state };
         }
         // case 'TOGGLE_BOSS_DIFFICULTY_ACTIVE': {
@@ -1356,10 +1358,10 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
         // }
         case 'TOGGLE_BOSS_DIFFICULTY_COMPLETION': {
             const { bossId, bossKey, difficultyName, completionType } = action.payload;
-        
+
             // Find the character
             const character = state.Characters[bossId];
-        
+
             // Find the boss
             let boss;
             for (let region in character.bosses) {
@@ -1368,31 +1370,31 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                     break;
                 }
             }
-        
+
             // Find the difficulty
             const difficulty = boss.difficulty.find(diff => diff.name === difficultyName);
-        
+
             // Toggle the completion status
             difficulty.completion[completionType] = !difficulty.completion[completionType];
-        
+
             // Get the current date and convert to UTC
             const nowBoss = new Date();
             const nowBossUTC = new Date(Date.UTC(nowBoss.getFullYear(), nowBoss.getMonth(), nowBoss.getDate()));
-        
+
             // Set the completion date
             if (completionType === 'daily') {
                 difficulty.completion.dailyDate = nowBossUTC;
             } else if (completionType === 'weekly') {
                 difficulty.completion.weeklyDate = nowBossUTC;
             }
-        
+
             return { ...state };
         }
         // BOSS RESETS  ---------------------------------------------------------------------
         case 'RESET_BOSS_COMPLETION_STATUSES':
             const nowBossDaily = new Date(Date.now());
             nowBossDaily.setMinutes(nowBossDaily.getMinutes() - nowBossDaily.getTimezoneOffset());
-        
+
             for (const character of Object.values(state.Characters)) {
                 for (const world of Object.values(character.bosses)) {
                     for (const boss of Object.values(world)) {
@@ -1407,7 +1409,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         }
                                     }
                                 }
-        
+
                                 if (difficulty.type === 'weekly') {
                                     if (difficulty.completion.weekly) {
                                         const completionDate = new Date(difficulty.completion.weeklyDate);
@@ -1500,16 +1502,16 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                             if (difficulty.type === 'weekly') {
                                 const completionDate = new Date(difficulty.completion.weeklyDate);
                                 let resetDate = new Date(nowBossWeekly);
-            
-                                // Check if the current item is highMountain
-                                if (boss.key === "highMountain") {
-                                    // Calculate the reset date based on Thursday
-                                    resetDate.setDate(nowBossWeekly.getDate() - ((nowBossWeekly.getDay() + 3) % 7));
-                                } else {
-                                    // For other items, reset based on Sunday
-                                    resetDate.setDate(nowBossWeekly.getDate() - nowBossWeekly.getDay());
-                                }
-            
+
+                                // // Check if the current item is highMountain
+                                // if (boss.key === "highMountain") {
+                                //     // Calculate the reset date based on Thursday
+                                //     resetDate.setDate(nowBossWeekly.getDate() - ((nowBossWeekly.getDay() + 3) % 7));
+                                // } else {
+                                //     // For other items, reset based on Sunday
+                                resetDate.setDate(nowBossWeekly.getDate() - nowBossWeekly.getDay());
+                                // }
+
                                 // Check if completionDate is before the reset date
                                 if (completionDate < resetDate) {
                                     difficulty.completion.weekly = false;
@@ -1519,7 +1521,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                     }
                 }
             }
-            
+
             return { ...state };
 
 
@@ -1577,14 +1579,14 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             // Get the current date and convert to UTC
             const now = new Date();
             const nowUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
-        
+
             // Clone the state
             const newState = JSON.parse(JSON.stringify(state));
-        
+
             // Reset daily.isCompleted for all regions where the completion date is not today
             for (const character of Object.values(newState.Characters)) {
                 for (const region of Object.values(character.progression.symbols.arcaneRiver.regions)) {
-        
+
                     if (region.completion.daily) {
                         const completionDate = new Date(region.completion.dailyDate);
                         console.log(completionDate)
@@ -1594,10 +1596,10 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                             region.completion.dailyDate = null;
                         }
                     }
-        
+
                 }
                 for (const region of Object.values(character.progression.symbols.grandis.regions)) {
-        
+
                     if (region.completion.daily) {
                         const completionDateConvert = new Date(region.completion.dailyDate);
                         const completionDate = new Date(Date.UTC(completionDateConvert.getUTCFullYear(), completionDateConvert.getUTCMonth(), completionDateConvert.getUTCDate()));
@@ -1610,7 +1612,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                     }
                 }
             }
-        
+
             return newState;
 
         case RESET_WEEKLY_COMPLETION_STATUSES:
@@ -1643,15 +1645,15 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
             // Get the current date and convert to UTC
             const nowDaily = new Date();
             const nowUTCDaily = new Date(Date.UTC(nowDaily.getUTCFullYear(), nowDaily.getUTCMonth(), nowDaily.getUTCDate()));
-        
+
             // Clone the state
             const newStateDaily = JSON.parse(JSON.stringify(state));
-        
+
             // Reset daily.isCompleted for all quests where the completion date is not today
             for (const character of Object.values(newStateDaily.Characters)) {
                 for (const quest of Object.values(character.progression.dailies.quests)) {
                     const completionDate = new Date(quest.completion.dailyDate);
-        
+
                     if (completionDate.getUTCDate() !== nowUTCDaily.getUTCDate() || completionDate.getUTCMonth() !== nowUTCDaily.getUTCMonth() || completionDate.getUTCFullYear() !== nowUTCDaily.getUTCFullYear()) {
                         console.log("RESET")
                         quest.completion.daily = false;
@@ -1659,10 +1661,63 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                     }
                 }
             }
-        
+
             return newStateDaily;
 
+        case RESET_WEEKLY_QUESTS_COMPLETION_STATUS:
+            // Get the current date and convert to UTC
+            const nowWeeklyQuest = new Date();
+            const nowUTCWeeklyQuest = new Date(Date.UTC(nowWeeklyQuest.getUTCFullYear(), nowWeeklyQuest.getUTCMonth(), nowWeeklyQuest.getUTCDate()));
 
+            // Clone the state
+            const newStateWeekly = JSON.parse(JSON.stringify(state));
+
+            // Function to find the most recent Monday
+            const getMostRecentMonday = (date) => {
+                const day = date.getUTCDay();
+                const diff = (day >= 1) ? day - 1 : 6; // adjust when day is Sunday
+                const mostRecentMonday = new Date(date);
+                mostRecentMonday.setUTCDate(date.getUTCDate() - diff);
+                mostRecentMonday.setUTCHours(0, 0, 0, 0); // set to start of the day
+                return mostRecentMonday;
+            };
+
+            // Function to find the most recent Thursday
+            const getMostRecentThursday = (date) => {
+                const day = date.getUTCDay();
+                const diff = (day >= 4) ? day - 4 : 3 + day; // adjust when day is before Thursday
+                const mostRecentThursday = new Date(date);
+                mostRecentThursday.setUTCDate(date.getUTCDate() - diff);
+                mostRecentThursday.setUTCHours(0, 0, 0, 0); // set to start of the day
+                return mostRecentThursday;
+            };
+
+            const mostRecentMonday = getMostRecentMonday(nowUTCWeeklyQuest);
+            const mostRecentThursday = getMostRecentThursday(nowUTCWeeklyQuest);
+
+            // Reset weekly.isCompleted for all quests, using Thursday for High Mountain and Monday for others
+            for (const character of Object.values(newStateWeekly.Characters)) {
+                for (const quest of Object.values(character.progression.weeklies.quests)) {
+                    const completionDate = new Date(quest.completion.weeklyDate);
+                    let resetDate;
+
+                    // Check if the quest is High Mountain to decide the reset day
+                    if (quest.key === "highMountain") {
+                        resetDate = mostRecentThursday;
+                    } else {
+                        resetDate = mostRecentMonday;
+                    }
+
+                    // Reset the quest if the completion date is before the reset date
+                    if (completionDate < resetDate) {
+                        console.log("RESET WEEKLY");
+                        quest.completion.weekly = false;
+                        quest.completion.weeklyDate = "null";
+                    }
+                }
+            }
+
+            return newStateWeekly;
     }
 };
 
