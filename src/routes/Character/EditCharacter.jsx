@@ -15,8 +15,9 @@ import dojo from '../../assets/quests/MapIcon_MuruengRaid.webp';
 import mapleTour from '../../assets/quests/MapIcon_MTour.webp';
 import commerci from '../../assets/quests/MapIcon_CommerzBT.webp';
 import gollux from '../../assets/quests/MapIcon_GiantVellud.webp';
-
+import highMountainPic from '../../assets/quests/MapIcon_HighMountain.png';
 import shadowknight from '../../assets/quests/Etc_Shadowknight_Coin.webp';
+import frag from "../../assets/quests/Etc_Sol_Erda_Fragment.png";
 
 // import caret down full icon
 import { IconCaretDownFilled, IconCaretUpFilled, IconPencil, IconChevronsLeft } from '@tabler/icons-react';
@@ -34,7 +35,8 @@ const questToImage = {
     "gollux": gollux,
     "yuGarden": yuGarden,
     "phantomForest": shadowknight,
-   
+    "highMountain": highMountainPic,
+   "erdasRequest": frag,
     // ... other quests ...
 };
 
@@ -70,14 +72,14 @@ const QuestCheckbox = ({ quest, questName, isActive, handleCheckboxChangeDailies
     );
 
 
-    const WeeklyQuestCheckbox = ({ questName, isActive, handleCheckboxChangeWeeklies }) => (
+    const WeeklyQuestCheckbox = ({ quest, questName, isActive, handleCheckboxChangeWeeklies }) => (
         <div className='questActivation'>
-            <img src={questToImage[questName]} alt={`${questName} icon`} />
+            <img src={questToImage[quest]} alt={`${quest} icon`} />
             <label>{questName}</label>
                 <input
                     type="checkbox"
                     checked={isActive}
-                    onChange={() => handleCheckboxChangeWeeklies(questName)}
+                    onChange={() => handleCheckboxChangeWeeklies(quest)}
                 />
        
         </div>
@@ -107,6 +109,7 @@ const EditCharacter = () => {
 
     const { arcaneRiver, grandis } = character.progression.symbols;
     const dailies  = character.progression.dailies.quests
+    const weeklies = character.progression.weeklies.quests
     console.log(dailies);
 
     const [selectedTab, setSelectedTab] = useState('quests');
@@ -204,6 +207,9 @@ var i;
             </div>
            
            
+
+            
+{/* DAILIES ---------------------------------- */}
             <div className='dailiesContainer'>
             <div className='wholeDropDownContainer'>
             <div className='dropDownContainer'  onClick={() => setIsDailyOpen(!isDailyOpen)}><h4> Dailies</h4>  {isDailyOpen ? <IconCaretUpFilled /> : <IconCaretDownFilled />}</div>
@@ -221,9 +227,6 @@ var i;
         </div>
         )}
             </div>
-            
-{/* DAILIES ---------------------------------- */}
-
 
 {/* WEEKLIES ---------------------------------- */}
 {/* Weeklies -------------------------------- */}
@@ -231,14 +234,15 @@ var i;
 <div className='dropDownContainer'  onClick={() => setIsWeeklyOpen(!isWeeklyOpen)}><h4> Weeklies</h4>  {isWeeklyOpen ? <IconCaretUpFilled /> : <IconCaretDownFilled />}</div>
 {isWeeklyOpen && (                <div className='weeklyQuestsContainer'>
             
-            {Object.keys(character.progression.weeklies.quests).map(questName => (
-                console.log(questName),
+            {Object.keys(character.progression.weeklies.quests).map(quest => (
+                console.log(quest),
                 // console.log(character.progression.weeklies.quests[questName]),
 
                 <WeeklyQuestCheckbox
                     // key={questName}
-                    questName={questName}
-                    isActive={character.progression.weeklies.quests[questName].isActive}
+                    quest={quest}
+                    questName={weeklies[quest].questName}
+                    isActive={weeklies[quest].questName.isActive}
                     handleCheckboxChangeWeeklies={handleCheckboxChangeWeeklies}
                 />
             ))}

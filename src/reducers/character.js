@@ -170,6 +170,15 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                         dailies: {
                             isActive: false,
                             quests: {
+                                erdasRequest: {
+                                    key: "erdasRequest",
+                                    questName: "Erda's Request",
+                                    isActive: false,
+                                    completion: {
+                                        daily: false,
+                                        dailyDate: null,
+                                    },
+                                },
                                 monsterPark: {
                                     key: "monsterPark",
                                     questName: "Monster Park",
@@ -275,6 +284,15 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                         weeklyDate: null,
                                     },
                                 },
+                                highMountain: {
+                                    key: "highMountain",
+                                    questName: "High Mountain",
+                                    isActive: false,
+                                    completion: {
+                                        weekly: false,
+                                        weeklyDate: null,
+                                    },
+                                }
                             }
                         },
                         guild: {
@@ -582,7 +600,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                     {
                                         name: "Normal",
                                         isActive: false,
-                                        type: "daily",
+                                        type: "weekly",
                                         completion: {
                                             daily: false,
                                             dailyDate: null,
@@ -607,7 +625,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                     {
                                         name: "Normal",
                                         isActive: false,
-                                        type: "daily",
+                                        type: "weekly",
                                         completion: {
                                             daily: false,
                                             dailyDate: null,
@@ -630,9 +648,9 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                 isActive: false,
                                 difficulty: [
                                     {
-                                        name: "Easy",
+                                        name: "Normal",
                                         isActive: false,
-                                        type: "daily",
+                                        type: "weekly",
                                         completion: {
                                             daily: false,
                                             dailyDate: null,
@@ -657,7 +675,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                     {
                                         name: "Normal",
                                         isActive: false,
-                                        type: "daily",
+                                        type: "weekly",
                                         completion: {
                                             daily: false,
                                             dailyDate: null,
@@ -723,7 +741,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                     {
                                         name: "Normal",
                                         isActive: false,
-                                        type: "daily",
+                                        type: "weekly",
                                         completion: {
                                             daily: false,
                                             dailyDate: null,
@@ -748,7 +766,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                                     {
                                         name: "Normal",
                                         isActive: false,
-                                        type: "daily",
+                                        type: "weekly",
                                         completion: {
                                             daily: false,
                                             dailyDate: null,
@@ -1481,8 +1499,19 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                         for (const difficulty of boss.difficulty) {
                             if (difficulty.type === 'weekly') {
                                 const completionDate = new Date(difficulty.completion.weeklyDate);
-                                // Check if completionDate is before the start of this week
-                                if (completionDate < new Date(nowBossWeekly.setDate(nowBossWeekly.getDate() - nowBossWeekly.getDay()))) {
+                                let resetDate = new Date(nowBossWeekly);
+            
+                                // Check if the current item is highMountain
+                                if (boss.key === "highMountain") {
+                                    // Calculate the reset date based on Thursday
+                                    resetDate.setDate(nowBossWeekly.getDate() - ((nowBossWeekly.getDay() + 3) % 7));
+                                } else {
+                                    // For other items, reset based on Sunday
+                                    resetDate.setDate(nowBossWeekly.getDate() - nowBossWeekly.getDay());
+                                }
+            
+                                // Check if completionDate is before the reset date
+                                if (completionDate < resetDate) {
                                     difficulty.completion.weekly = false;
                                 }
                             }
@@ -1490,7 +1519,7 @@ const characterReducer = (state = { Characters: {}, maxId: 0 }, action) => {
                     }
                 }
             }
-
+            
             return { ...state };
 
 

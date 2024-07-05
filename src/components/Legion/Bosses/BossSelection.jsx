@@ -123,6 +123,12 @@ function BossSelection({ boss, characterId }) {
                     </>
                 )}
 
+
+                {/* Conditionally render the separator div if both Daily and Weekly difficulties are present */}
+                {boss.difficulty.some(difficulty => difficulty.type === 'daily') && boss.difficulty.some(difficulty => difficulty.type === 'weekly') && (
+                    <div className='diffContainerSeparator'></div>
+                )}
+
                 {boss.difficulty.some(difficulty => difficulty.type === 'weekly') && (
                     <>
                         <div className='diffContainer'>

@@ -374,11 +374,12 @@ color: blue;
 }
 
 .wholeDropDownContainer{
-  background-color: #fae4cf;
+  /* background-color: #fae4cf; */
   padding: 16px;
   margin: 16px;
   border-radius: 4px;
-  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.15);
+  min-width: 80%;
+  /* box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.15); */
 
 }
 

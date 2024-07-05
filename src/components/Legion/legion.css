@@ -38,6 +38,13 @@
     grid-column: 1 / -1; /* This will make the h2 take full width */
 }
 
+.screenMessage{
+    height: 100%;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+}
+
 .legionBlock {
     display: flex;
     /* min-width: 100px;
@@ -171,4 +178,73 @@ cursor: pointer;
     color: #3CBF39;
     stroke-width: 4;
 
+}
+
+.mapleButton{
+    
+    /* Add other necessary styles */
+
+    padding: 8px 16px;
+    display: flex;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    /* margin: auto; */
+    color: white;
+   /* border inside solid 1px white */
+   border: inset solid 4px white;
+   display: flex;
+   gap: 16px;
+}
+
+.addButton{
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.01) 7.87%, rgba(0, 0, 0, 0.16) 30.73%, rgba(0, 0, 0, 0.20) 45.34%, rgba(0, 0, 0, 0.16) 77.08%, rgba(0, 0, 0, 0.00) 100%), var(--BlueGraph, #3AB);
+}
+
+.warningButton{
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.01) 7.87%, rgba(0, 0, 0, 0.16) 30.73%, rgba(0, 0, 0, 0.20) 45.34%, rgba(0, 0, 0, 0.16) 77.08%, rgba(0, 0, 0, 0.00) 100%), var(--RedGraph, #E85365);
+
+}
+
+.buttonContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 40%;
+    margin: auto;
+
+}
+
+.addCharacterForm form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.formField{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+}
+
+.formField label{
+    font-weight: 500;
+    font-size: 10pt;
+}
+
+/* select formfield input type text */
+.formField input[type="text"], .formField select{
+    padding: 8px;
+    border-radius: 8px;
+    border: solid 1px var(--elevationZero);
+    background-color: #EAC8AF;
+    color: #2d2d2d;
+}
+
+.submitButton{
+    background-color: #A2C83A;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.01) 7.87%, rgba(0, 0, 0, 0.16) 30.73%, rgba(0, 0, 0, 0.20) 45.34%, rgba(0, 0, 0, 0.16) 77.08%, rgba(0, 0, 0, 0.00) 100%), var(--BlueGraph, #A2C83A);
+    border: 0px;
 }

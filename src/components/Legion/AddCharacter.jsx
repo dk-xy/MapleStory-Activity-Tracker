@@ -78,61 +78,39 @@ function AddCharacter() {
 
         dispatch(addCharacter(newCharacter));
 
-        // // Retrieve existing progression from localstorage
-        // const existingProgression = JSON.parse(localStorage.getItem('Progression')) || {};
-        // const newProgression = {
-        //     [newCharacter.id]: {
-        //         arcaneRiver: {
-        //             isActive: true,
-        //             regions: {
-        //                 vanishingJourney: {
-        //                     name:"Oblivion",
-        //                     class:"oblivion",
-        //                     isActive: false,
-        //                     completion: {
-        //                         daily: false,
-        //                         weekly: false
-        //                     }
-        //                 },
-        //                 chuChuIsland: {
-        //                     name:"Chu Chu",
-        //                     class:"chuchu",
-        //                     isActive: false,
-        //                     completion: {
-        //                         daily: false,
-        //                         weekly: false
-        //                     }
-        //                 },
-        //             }
-        //         },
-        //     },
-        // };
-        // // Merge existing progression with new progression
-        // const updatedProgression = {
-        //     ...existingProgression,
-        //     ...newProgression
-        // };
-
-        // // Store updated progression back to localstorage
-        // localStorage.setItem('Progression', JSON.stringify(updatedProgression));
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            {/* register your input into the hook by invoking the "register" function */}
-            <input defaultValue="" {...register("characterName", { required: true })} />
+        <div className='addCharacterForm'>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                {/* register your input into the hook by invoking the "register" function */}
+                {/* label Character Name */}
 
-            {/* include validation with required or other standard HTML validation rules */}
-            <select {...register("characterClass")}>
-                {classes.map((characterClass, index) => (
-                    <option key={index} value={characterClass}>{characterClass}</option>
-                ))}
-            </select>
-            {/* errors will return when field validation fails 
+                {/* include validation with required or other standard HTML validation rules */}
+                <div className='formField'>
+                    <label >Character Name</label>
+                    <input type='text' defaultValue="" {...register("characterName", { required: true, minLength: 4 })} />
+                </div>
+
+                <div className='formField'>
+                    <label>Character class</label>
+                <select {...register("characterClass")}>
+                    {classes.map((characterClass, index) => (
+                        <option key={index} value={characterClass}>{characterClass}</option>
+                    ))}
+                </select>
+                </div>
+                
+
+                {/* include validation with required or other standard HTML validation rules */}
+          
+                {/* errors will return when field validation fails 
             {errors.exampleRequired && <span>This field is required</span>} */}
 
-            <input type="submit" />
-        </form>
+                <input className='submitButton mapleButton' type="submit" />
+            </form>
+        </div>
+
     );
 }
 

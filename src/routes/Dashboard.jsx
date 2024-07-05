@@ -8,12 +8,7 @@ function Dashboard() {
         <div>
             <h1>Dashboard</h1>
             <div>
-                <h2>Character List</h2>
-                <ul>
-                    <li>Character 1</li>
-                    <li>Character 2</li>
-                    <li>Character 3</li>
-                </ul>	
+                <h2>TBA</h2>
             </div>
         </div>
     )

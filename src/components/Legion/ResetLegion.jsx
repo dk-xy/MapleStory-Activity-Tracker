@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 //import legion css
 import './legion.css';
+import { IconTrash } from '@tabler/icons-react';
 
 
 function ResetLegion({ character }) {
@@ -14,8 +15,8 @@ function ResetLegion({ character }) {
       };
     
       return (
-        <button onClick={handleClick}>
-          Reset Characters
+        <button className='mapleButton warningButton' onClick={handleClick}>
+          <IconTrash />
         </button>
       );
 }

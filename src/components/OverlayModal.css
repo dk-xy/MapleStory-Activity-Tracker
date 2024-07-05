@@ -1,0 +1,36 @@
+/* src/components/Legion/AddCharacterModal.css */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalWrapper {
+ display: flex;
+ justify-content: center;
+ flex-direction: column;
+}
+
+
+.modalClose{
+    display: flex;
+    justify-content: right;
+}
+.modalContent {
+    background-color: #f5d9be;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* align first item of flex (modalClose */

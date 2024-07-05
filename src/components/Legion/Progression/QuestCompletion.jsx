@@ -10,6 +10,9 @@ import dojo from '../../../assets/quests/MapIcon_MuruengRaid.webp';
 import mapleTour from '../../../assets/quests/MapIcon_MTour.webp';
 import commerci from '../../../assets/quests/MapIcon_CommerzBT.webp';
 import gollux from '../../../assets/quests/MapIcon_GiantVellud.webp';
+import highMountainPic from '../../../assets/quests/MapIcon_HighMountain.png';
+import frag from '../../../assets/quests/Etc_Sol_Erda_Fragment.png';
+
 
 import shadowknight from '../../../assets/quests/Etc_Shadowknight_Coin.webp';
 
@@ -26,6 +29,8 @@ const questToImage = {
     "gollux": gollux,
     "yuGarden": yuGarden,
     "phantomForest": shadowknight,
+    "highMountain": highMountainPic,
+    "erdasRequest": frag,
    
     // ... other quests ...
 };
