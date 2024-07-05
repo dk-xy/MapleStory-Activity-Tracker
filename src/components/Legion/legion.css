@@ -209,9 +209,10 @@ cursor: pointer;
 .buttonContainer{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    width: 40%;
+    justify-content: center;
+    width: 20%;
     margin: auto;
+    gap: 16px;
 
 }
 
