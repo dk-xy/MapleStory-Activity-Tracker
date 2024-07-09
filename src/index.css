@@ -8,6 +8,8 @@
 
 :root {
   height: auto;
+  max-width: 1280px;
+  margin: 0 auto;
   font-family: 'Open Sans', sans-serif;
   line-height: 1.5;
   font-weight: 400;

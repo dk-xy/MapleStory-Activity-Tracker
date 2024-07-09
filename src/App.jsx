@@ -73,7 +73,7 @@ const Navigation = () => {
                           height="25px"
                           width="25px"
                       /> */}
-            <NavLink to="/legion" >
+            <NavLink to="/" >
               <IconUsers />
               <div className='menuLabel'>Legion</div>
             </NavLink>
@@ -96,7 +96,7 @@ const Navigation = () => {
 
       <Routes>
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="legion" element={<Legion />} ></Route>
+        <Route path="" element={<Legion />} ></Route>
         <Route path="legion/:id" element={<Character />} />
         <Route path="legion/:id/edit" element={<EditCharacter />} />
         <Route path="checklists" element={<Checklists />} />
